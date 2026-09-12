@@ -1,41 +1,37 @@
 {
-  "name": "site_progressor",
-  "version": "1.0.0",
-  "description": "Создания файловой структуры и настройка вебпака по видеокурсу по webpack от ITdoctor\r Это 2 попытка настройки вебпака. Есть 1 версия созданная по курсу Владилена но там я не могу подключить sass из иа нехватик понимания о чем идет реч и какие действия на что вляиют. Прнято решение пройти полный курс настройке веб паркак по курсу ITdoctor.",
-  "main": "index.js",
+  "name": "don-avtoholod",
+  "version": "0.0.0",
   "scripts": {
-    "dev": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production",
-    "watch": "webpack --mode development --watch"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ToriHever/Site_progressor.git"
-  },
-  "author": "VI",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ToriHever/Site_progressor/issues"
-  },
-  "homepage": "https://github.com/ToriHever/Site_progressor#readme",
-  "devDependencies": {
-    "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.3",
-    "csv-loader": "^3.0.5",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.5.0",
-    "less-loader": "^11.1.0",
-    "mini-css-extract-plugin": "^2.7.5",
-    "path": "^0.12.7",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.11.1",
-    "xml-loader": "^1.2.1"
-  },
+  "private": true,
   "dependencies": {
-    "jquery": "^3.6.4",
-    "normalize.css": "^8.0.1"
+    "@angular/common": "^19.2.0",
+    "@angular/compiler": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "@angular/forms": "^19.2.0",
+    "@angular/platform-browser": "^19.2.0",
+    "@angular/platform-browser-dynamic": "^19.2.0",
+    "@angular/router": "^19.2.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^19.2.27",
+    "@angular/cli": "^19.2.27",
+    "@angular/compiler-cli": "^19.2.0",
+    "@types/jasmine": "~5.1.0",
+    "jasmine-core": "~5.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.7.2"
   }
 }
