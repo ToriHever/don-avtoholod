@@ -66,13 +66,14 @@
 .hero__media-photo {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3.4;
   background: var(--color-blue-light);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 40%;
   }
 }
 
