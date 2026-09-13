@@ -23,6 +23,12 @@ interface Stat {
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  readonly heroStats: Stat[] = [
+    { value: '20+', label: 'лет на рынке' },
+    { value: '100%', label: 'новый фреон и масла' },
+    { value: '1', label: 'собственный стенд диагностики' },
+  ];
+
   readonly features: Feature[] = [
     {
       icon: '💰',

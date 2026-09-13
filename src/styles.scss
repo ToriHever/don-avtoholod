@@ -1,16 +1,17 @@
 :root {
-  --color-blue: #1b7cc9;
-  --color-blue-dark: #135a94;
-  --color-blue-light: #eaf6fd;
-  --color-yellow: #f5b800;
-  --color-yellow-dark: #d99f00;
+  --color-blue: #0f4c81;
+  --color-blue-dark: #0a355c;
+  --color-blue-light: #f4f7fa;
+  --color-yellow: #c9972a;
+  --color-yellow-dark: #a97c1e;
   --color-white: #ffffff;
-  --color-text: #21303f;
+  --color-text: #16212c;
   --color-text-muted: #5b6b7a;
   --color-danger: #c62828;
-  --color-border: #e0edf5;
-  --radius: 12px;
-  --shadow: 0 8px 24px rgba(27, 124, 201, 0.08);
+  --color-border: #e7ebef;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow: 0 12px 32px rgba(15, 76, 129, 0.1);
   --container-width: 1180px;
 }
 
@@ -77,12 +78,13 @@ button {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
-  border-radius: 999px;
-  font-weight: 700;
+  padding: 15px 30px;
+  border-radius: var(--radius);
+  font-weight: 600;
   font-size: 16px;
-  border: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease,
+    border-color 0.15s ease;
   white-space: nowrap;
 }
 
@@ -91,18 +93,18 @@ button {
 }
 
 .btn--primary {
-  background: var(--color-yellow);
-  color: var(--color-text);
-  box-shadow: 0 6px 18px rgba(245, 184, 0, 0.35);
+  background: var(--color-blue);
+  color: var(--color-white);
+  box-shadow: 0 10px 24px rgba(15, 76, 129, 0.25);
 }
 
 .btn--primary:hover {
-  background: var(--color-yellow-dark);
+  background: var(--color-blue-dark);
 }
 
 .btn--outline {
   background: transparent;
-  border: 2px solid var(--color-white);
+  border-color: var(--color-white);
   color: var(--color-white);
 }
 
@@ -110,10 +112,21 @@ button {
   background: rgba(255, 255, 255, 0.12);
 }
 
+.btn--secondary {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
 .btn--blue {
   background: var(--color-blue);
   color: var(--color-white);
-  box-shadow: 0 6px 18px rgba(27, 124, 201, 0.35);
+  box-shadow: 0 10px 24px rgba(15, 76, 129, 0.25);
 }
 
 .btn--blue:hover {
