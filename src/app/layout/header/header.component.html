@@ -1,0 +1,38 @@
+<header class="header" id="top">
+  <div class="header__top">
+    <div class="container header__top-inner">
+      <a class="header__logo" href="#top">
+        <span class="header__logo-icon">❄️</span>
+        <span class="header__logo-text">
+          Дон Авто Холод
+          <small>Ремонт и установка кондиционеров и рефрижераторов</small>
+        </span>
+      </a>
+
+      <div class="header__contacts">
+        <a class="header__phone" href="tel:+78632265846">8 (863) 226-58-46</a>
+        <a class="header__phone" href="tel:+79287753852">8-928-775-38-52</a>
+        <a class="header__email" href="mailto:info@donavtoholod.ru">info&#64;donavtoholod.ru</a>
+      </div>
+
+      <a class="btn btn--primary header__cta" href="tel:+79287753852">Заказать звонок</a>
+
+      <button class="header__burger" type="button" (click)="toggleMenu()" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="header__nav" [class.header__nav--open]="menuOpen()">
+    <div class="container header__nav-inner">
+      <ul class="header__nav-list">
+        @for (item of navItems; track item.fragment) {
+          <li>
+            <a [href]="'#' + item.fragment" (click)="closeMenu()">{{ item.label }}</a>
+          </li>
+        }
+      </ul>
+      <div class="header__nav-address">г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3</div>
+    </div>
+  </nav>
+</header>
