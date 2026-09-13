@@ -1,0 +1,281 @@
+.hero {
+  background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-dark) 100%);
+  color: var(--color-white);
+  padding: 72px 0;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero__badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.hero__lead {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 560px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 28px 0 20px;
+}
+
+.hero__phones {
+  display: flex;
+  gap: 20px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.hero__media-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.hero__media-icon {
+  font-size: 48px;
+}
+
+.features {
+  padding: 40px 0;
+  margin-top: -40px;
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 26px 22px;
+  border: 1px solid var(--color-border);
+}
+
+.feature-card__icon {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.services__groups {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 36px;
+}
+
+.services__group {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+
+.services__group h3 {
+  color: var(--color-blue-dark);
+  font-size: 18px;
+}
+
+.services__list li {
+  position: relative;
+  padding: 8px 0 8px 24px;
+  border-bottom: 1px dashed var(--color-border);
+  font-size: 15px;
+}
+
+.services__list li:last-child {
+  border-bottom: none;
+}
+
+.services__list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-yellow-dark);
+  font-weight: 700;
+}
+
+.heaters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.heaters__brands {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.heaters__brands li {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-blue-dark);
+}
+
+.heaters__details {
+  background: var(--color-white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.heaters__details h3 {
+  color: var(--color-blue-dark);
+  font-size: 16px;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.about__text p {
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+.about__stats {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 120px;
+}
+
+.stat-card {
+  background: var(--color-blue-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.stat-card__value {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--color-blue-dark);
+}
+
+.stat-card__label {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.price-note {
+  background: #fdecea;
+  border-top: 1px solid #f5c6cb;
+  border-bottom: 1px solid #f5c6cb;
+  color: var(--color-danger);
+  padding: 20px 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.price-note strong {
+  margin-right: 6px;
+}
+
+.cta {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.cta .section__eyebrow {
+  color: var(--color-yellow);
+}
+
+.cta__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+}
+
+.cta__list li {
+  margin-bottom: 8px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cta__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+@media (max-width: 960px) {
+  .hero__inner,
+  .about,
+  .heaters {
+    grid-template-columns: 1fr;
+  }
+
+  .features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services__groups {
+    grid-template-columns: 1fr;
+  }
+
+  .about__stats {
+    position: static;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .features__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__stats {
+    grid-template-columns: 1fr;
+  }
+}
