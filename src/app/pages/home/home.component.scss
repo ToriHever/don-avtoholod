@@ -108,16 +108,55 @@
 }
 
 .hero__media-badge-icon {
+  position: relative;
   width: 32px;
   height: 32px;
   flex-shrink: 0;
+  color: transparent;
+}
+
+.hero__media-badge-icon::before {
+  content: '✓';
+  color: var(--color-white);
+  background: var(--color-yellow);
+}
+
+.hero__media-badge-icon::after {
+  background-color: var(--color-yellow);
+}
+
+.hero__media-badge-icon::before,
+.about-intro__badge-icon::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--color-yellow);
-  color: var(--color-white);
   font-weight: 800;
+}
+
+.hero__media-badge-icon::after,
+.about-intro__badge-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 50%;
+  animation: badge-pulse 1.8s ease-out infinite;
+}
+
+@keyframes badge-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
 }
 
 .features {
@@ -293,16 +332,21 @@
 }
 
 .about-intro__badge-icon {
+  position: relative;
   width: 32px;
   height: 32px;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--color-blue);
+  color: transparent;
+}
+
+.about-intro__badge-icon::before {
+  content: '❄';
   color: var(--color-white);
-  font-weight: 800;
+  background: var(--color-blue);
+}
+
+.about-intro__badge-icon::after {
+  background-color: var(--color-blue);
 }
 
 .about-intro__stats {
@@ -338,8 +382,8 @@
 
 .price-note {
   background: #fdecea;
-  border-top: 1px solid #f5c6cb;
-  border-bottom: 1px solid #f5c6cb;
+  box-shadow: inset 0 6px 10px -8px rgba(0, 0, 0, 0.25),
+    inset 0 -6px 10px -8px rgba(0, 0, 0, 0.25);
   color: var(--color-danger);
   padding: 20px 0;
   font-size: 14px;
