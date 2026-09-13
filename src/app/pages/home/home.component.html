@@ -45,7 +45,7 @@
   <div class="container features__grid">
     @for (feature of features; track feature.title) {
       <div class="feature-card">
-        <div class="feature-card__icon">{{ feature.icon }}</div>
+        <div class="feature-card__icon" [style.-webkit-mask-image]="'url(' + feature.icon + ')'" [style.mask-image]="'url(' + feature.icon + ')'"></div>
         <h3>{{ feature.title }}</h3>
         <p>{{ feature.text }}</p>
       </div>
