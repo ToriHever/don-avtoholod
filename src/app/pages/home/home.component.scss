@@ -5,10 +5,16 @@
 }
 
 .hero__inner {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 24px;
+  position: relative;
+  min-height: 560px;
+  display: flex;
   align-items: center;
+}
+
+.hero__content {
+  max-width: 620px;
+  position: relative;
+  z-index: 2;
 }
 
 .hero__badge {
@@ -61,22 +67,26 @@
 }
 
 .hero__media {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  right: -8%;
+  transform: translateY(-50%);
+  width: 62%;
+  z-index: 1;
 }
 
 .hero__media-photo {
   img {
     display: block;
-    width: 132%;
-    max-width: 132%;
-    margin-left: -18%;
+    width: 100%;
+    height: auto;
   }
 }
 
 .hero__media-badge {
   position: absolute;
-  left: 0;
-  bottom: 12px;
+  left: 4%;
+  bottom: 4%;
   background: var(--color-white);
   box-shadow: var(--shadow);
   border-radius: var(--radius);
@@ -303,7 +313,6 @@
 }
 
 @media (max-width: 960px) {
-  .hero__inner,
   .about,
   .heaters {
     grid-template-columns: 1fr;
@@ -322,8 +331,22 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
   .hero__media {
+    position: static;
+    transform: none;
+    width: 100%;
     order: -1;
+    margin-bottom: 28px;
   }
 
   .hero__media-photo img {
@@ -334,6 +357,7 @@
 
   .hero__media-badge {
     left: 16px;
+    bottom: 12px;
   }
 
   .hero__stats {
