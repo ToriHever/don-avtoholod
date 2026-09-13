@@ -242,20 +242,25 @@
 
 .about-intro__media {
   position: relative;
-  min-height: 380px;
 }
 
-.about-intro__photo {
-  position: absolute;
-  top: 50%;
-  right: 6%;
-  width: 145%;
-  transform: translateY(-50%);
+.about-intro__photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
+@media (min-width: 1200px) {
+  .about-intro__media {
+    min-height: 380px;
+  }
+
+  .about-intro__photo {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    width: 145%;
+    transform: translateY(-50%);
   }
 }
 
