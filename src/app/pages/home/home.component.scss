@@ -138,13 +138,16 @@
 .feature-card__icon {
   width: 48px;
   height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 50%;
   border: 1.5px solid var(--color-border);
-  font-size: 20px;
   margin-bottom: 16px;
+  background-color: var(--color-blue);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 22px 22px;
+  mask-size: 22px 22px;
 }
 
 .feature-card h3 {
