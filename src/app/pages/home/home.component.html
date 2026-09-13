@@ -3,7 +3,7 @@
     <div class="hero__content">
       <span class="hero__badge">Ростов-на-Дону и область</span>
       <h1>
-        Автокондиционеры в Ростове-на-Дону: ремонт, заправка, установка
+        Автокондиционеры: ремонт, заправка, установка
         и обслуживание
       </h1>
       <p class="hero__lead">
@@ -12,20 +12,30 @@
         грузовиками, автобусами и спецтехникой.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="tel:+79287753852">Заказать звонок</a>
-        <a class="btn btn--outline" href="#services">Смотреть услуги</a>
+        <a class="btn btn--primary" href="#contacts">Оставить заявку</a>
+        <a class="btn btn--secondary" href="#services">Смотреть услуги</a>
       </div>
-      <div class="hero__phones">
-        <a href="tel:+79287753852">+7-928-775-38-52</a>
-        <a href="tel:+79282265846">+7-928-226-58-46</a>
+
+      <div class="hero__stats">
+        @for (stat of heroStats; track stat.label) {
+          <div class="hero__stat">
+            <div class="hero__stat-value">{{ stat.value }}</div>
+            <div class="hero__stat-label">{{ stat.label }}</div>
+          </div>
+        }
       </div>
     </div>
 
     <div class="hero__media">
-      <div class="hero__media-card">
-        <span class="hero__media-icon">🛠️</span>
-        <strong>Стенд проверки компрессора</strong>
-        <span>Собственная разработка для точной и быстрой диагностики</span>
+      <div class="hero__media-photo">
+        <img src="assets/hero-car.svg" alt="Автомобиль на сервисе Дон Авто Холод" />
+      </div>
+      <div class="hero__media-badge">
+        <span class="hero__media-badge-icon">✓</span>
+        <div>
+          <strong>Гарантия качества</strong>
+          <span>На все работы и запчасти</span>
+        </div>
       </div>
     </div>
   </div>
