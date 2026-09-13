@@ -351,36 +351,68 @@
 }
 
 .cta {
-  background: var(--color-blue);
-  color: var(--color-white);
+  background: var(--color-white);
 }
 
-.cta .section__eyebrow {
-  color: var(--color-yellow);
+.cta-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
 }
 
-.cta__inner {
+.cta-layout__list {
+  margin: 24px 0 32px;
+}
+
+.cta-layout__list li {
+  margin-bottom: 8px;
+  color: var(--color-text-muted);
+}
+
+.cta-layout__actions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px;
+  gap: 16px;
 }
 
-.cta__list li {
-  margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.9);
+.cta-layout__media {
+  position: relative;
 }
 
-.cta__actions {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.cta-layout__photo {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cta-layout__media {
+    overflow: visible;
+  }
+
+  .cta-layout__photo {
+    width: 115%;
+    margin-left: -8%;
+  }
 }
 
 @media (max-width: 960px) {
   .heaters {
     grid-template-columns: 1fr;
+  }
+
+  .cta-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-layout__media {
+    order: -1;
   }
 
   .about-intro {

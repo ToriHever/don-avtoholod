@@ -122,6 +122,15 @@
 }
 
 @media (max-width: 860px) {
+  .header__logo {
+    flex-shrink: 1;
+    min-width: 0;
+  }
+
+  .header__logo-text {
+    min-width: 0;
+  }
+
   .header__contacts {
     display: none;
   }
