@@ -133,6 +133,10 @@ button {
   background: var(--color-blue-dark);
 }
 
+[id] {
+  scroll-margin-top: 160px;
+}
+
 .section {
   padding: 72px 0;
 }
