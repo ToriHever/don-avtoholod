@@ -123,9 +123,16 @@
 }
 
 .header__nav-address {
+  display: block;
   color: rgba(255, 255, 255, 0.85);
   font-size: 13px;
   padding: 8px 0;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+.header__nav-address:hover {
+  color: var(--color-white);
 }
 
 .header__nav-question {

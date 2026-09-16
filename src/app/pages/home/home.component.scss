@@ -608,6 +608,17 @@
   font-size: 15px;
 }
 
+.about__text p a {
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+}
+
+.about__text p a:hover {
+  color: var(--color-blue);
+  text-decoration-color: var(--color-blue);
+}
+
 .price-note {
   background: #fdecea;
   box-shadow: inset 0 6px 10px -8px rgba(0, 0, 0, 0.25),
