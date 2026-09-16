@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { QuestionModalService } from '../../shared/question-modal/question-modal.service';
+import { QuestionFormComponent } from '../../shared/question-form/question-form.component';
 
 interface Feature {
   icon: string;
@@ -35,6 +36,7 @@ interface FaqItem {
 @Component({
   selector: 'app-home',
   standalone: true,
+  imports: [QuestionFormComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
