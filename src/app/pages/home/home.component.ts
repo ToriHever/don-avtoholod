@@ -46,7 +46,6 @@ export class HomeComponent {
   readonly heroStats: Stat[] = [
     { value: '20+', label: 'лет на рынке' },
     { value: '100%', label: 'новый фреон и масла' },
-    { value: '1', label: 'собственный стенд диагностики' },
   ];
 
   readonly features: Feature[] = [
@@ -109,7 +108,6 @@ export class HomeComponent {
     { value: '2006', label: 'год основания компании' },
     { value: '20+', label: 'лет опыта работы' },
     { value: '100%', label: 'новый фреон и масла' },
-    { value: '1', label: 'собственный стенд диагностики компрессоров' },
   ];
 
   readonly companyFacts: CompanyFact[] = [
