@@ -273,6 +273,12 @@
   align-items: start;
 }
 
+.cooling-issues__content {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
 .cooling-issues__content .btn {
   margin-top: 12px;
 }
@@ -387,13 +393,17 @@
   align-items: start;
 }
 
+.faq-layout__questions {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+}
+
 .faq-layout__form {
   background: var(--color-blue-light);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 28px;
-  position: sticky;
-  top: 100px;
 }
 
 .faq-layout__form h3 {
@@ -685,13 +695,17 @@
     grid-template-columns: 1fr;
   }
 
-  .faq-layout__form {
+  .faq-layout__questions {
     position: static;
   }
 
   .cooling-issues {
     grid-template-columns: 1fr;
     gap: 28px;
+  }
+
+  .cooling-issues__content {
+    position: static;
   }
 
   .refill-steps {
