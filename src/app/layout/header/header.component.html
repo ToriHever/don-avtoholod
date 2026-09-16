@@ -15,7 +15,12 @@
         <a class="header__email" href="mailto:info@donavtoholod.ru">info&#64;donavtoholod.ru</a>
       </div>
 
-      <a class="btn btn--primary header__cta" href="tel:+79287753852">Заказать звонок</a>
+      <div class="header__cta-group">
+        <button type="button" class="btn btn--secondary header__cta" (click)="questionModal.open()">
+          Задать вопрос
+        </button>
+        <a class="btn btn--primary header__cta" href="tel:+79287753852">Заказать звонок</a>
+      </div>
 
       <button class="header__burger" type="button" (click)="toggleMenu()" aria-label="Меню">
         <span></span><span></span><span></span>
@@ -33,6 +38,13 @@
         }
       </ul>
       <div class="header__nav-address">г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3</div>
+      <button
+        type="button"
+        class="btn btn--primary header__nav-question"
+        (click)="questionModal.open(); closeMenu()"
+      >
+        Задать вопрос
+      </button>
     </div>
   </nav>
 </header>

@@ -11,7 +11,9 @@
         бригада и официальная гарантия на работы.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#contacts">Оставить заявку</a>
+        <button type="button" class="btn btn--primary" (click)="questionModal.open()">
+          Оставить заявку
+        </button>
         <a class="btn btn--secondary" href="#services">Смотреть услуги</a>
       </div>
 
@@ -73,6 +75,49 @@
               <li>{{ item }}</li>
             }
           </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="cooling-issues">
+  <div class="container cooling-issues">
+    <div class="cooling-issues__content">
+      <span class="section__eyebrow">Диагностика</span>
+      <h2 class="section__title">Почему кондиционер не охлаждает</h2>
+      <p class="section__lead">
+        Слабое охлаждение — это симптом, а не диагноз. Вот самые частые
+        причины, которые находят наши мастера на диагностике.
+      </p>
+      <button type="button" class="btn btn--primary" (click)="questionModal.open()">
+        Спросить мастера
+      </button>
+    </div>
+
+    <ul class="cooling-issues__list">
+      @for (issue of coolingIssues; track issue) {
+        <li>{{ issue }}</li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="refill-steps">
+  <div class="container">
+    <span class="section__eyebrow">Как мы работаем</span>
+    <h2 class="section__title">Как происходит заправка кондиционера</h2>
+    <p class="section__lead">
+      Заправка — это не просто «долить фреон». Вот как выглядит правильная
+      процедура у нас на станции.
+    </p>
+
+    <div class="refill-steps">
+      @for (step of refillSteps; track step.title; let i = $index) {
+        <div class="refill-step">
+          <div class="refill-step__number">{{ i + 1 }}</div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
         </div>
       }
     </div>
@@ -175,6 +220,23 @@
   </div>
 </section>
 
+<section class="section section--alt" id="facts">
+  <div class="container">
+    <span class="section__eyebrow">Почему выбирают нас</span>
+    <h2 class="section__title">Факты и преимущества компании</h2>
+
+    <div class="facts__grid">
+      @for (fact of companyFacts; track fact.title; let i = $index) {
+        <div class="fact-card">
+          <div class="fact-card__number">{{ i + 1 }}</div>
+          <h3>{{ fact.title }}</h3>
+          <p>{{ fact.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
 <section class="price-note">
   <div class="container">
     <strong>Важно!</strong>
@@ -182,6 +244,29 @@
     информационный характер. Указанные цены не являются публичной офертой и
     могут быть изменены в зависимости от дополнительных характеристик товаров,
     услуг и иных условий.
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <span class="section__eyebrow">Вопросы и ответы</span>
+    <h2 class="section__title">Частые вопросы</h2>
+
+    <div class="faq__list">
+      @for (item of faqItems; track item.question) {
+        <details class="faq-item">
+          <summary>{{ item.question }}</summary>
+          <p>{{ item.answer }}</p>
+        </details>
+      }
+    </div>
+
+    <p class="faq__cta-text">
+      Не нашли ответ на свой вопрос?
+      <button type="button" class="faq__cta-link" (click)="questionModal.open()">
+        Задайте его нам напрямую
+      </button>
+    </p>
   </div>
 </section>
 
@@ -204,6 +289,9 @@
       <div class="cta-layout__actions">
         <a class="btn btn--primary" href="tel:+79287753852">+7-928-775-38-52</a>
         <a class="btn btn--secondary" href="tel:+79282265846">+7-928-226-58-46</a>
+        <button type="button" class="btn btn--secondary" (click)="questionModal.open()">
+          Задать вопрос
+        </button>
       </div>
     </div>
 
