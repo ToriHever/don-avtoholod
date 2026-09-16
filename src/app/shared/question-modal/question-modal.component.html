@@ -1,0 +1,9 @@
+@if (modal.isOpen()) {
+  <div class="modal-backdrop" (click)="onBackdropClick($event)">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="question-modal-title">
+      <button type="button" class="modal__close" (click)="close()" aria-label="Закрыть">✕</button>
+      <h3 id="question-modal-title">Задать вопрос</h3>
+      <app-question-form />
+    </div>
+  </div>
+}

@@ -48,9 +48,37 @@
 
 .hero__stats {
   display: flex;
-  gap: 36px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 36px;
   padding-top: 28px;
   border-top: 1px solid var(--color-border);
+}
+
+.hero__own-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--color-blue-light);
+  color: var(--color-blue-dark);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hero__own-badge-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero__stat-value {
@@ -175,8 +203,8 @@
 }
 
 .feature-card__icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   border: 1.5px solid var(--color-border);
   margin-bottom: 16px;
@@ -185,8 +213,8 @@
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
-  -webkit-mask-size: 22px 22px;
-  mask-size: 22px 22px;
+  -webkit-mask-size: 34px 34px;
+  mask-size: 34px 34px;
 }
 
 .feature-card h3 {
@@ -236,6 +264,202 @@
   left: 0;
   color: var(--color-yellow-dark);
   font-weight: 700;
+}
+
+.cooling-issues {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.cooling-issues__content {
+  position: sticky;
+  top: 160px;
+  align-self: start;
+}
+
+.cooling-issues__content .btn {
+  margin-top: 12px;
+}
+
+.cooling-issues__list {
+  display: grid;
+  gap: 14px;
+}
+
+.cooling-issues__list li {
+  position: relative;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 18px 16px 44px;
+  font-size: 15px;
+}
+
+.cooling-issues__list li::before {
+  content: '!';
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  color: var(--color-white);
+  font-weight: 800;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refill-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.refill-step__number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.refill-step h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.refill-step p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.facts__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.fact-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.fact-card__number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-blue);
+  color: var(--color-blue);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 14px;
+}
+
+.fact-card h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.fact-card p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.faq-layout__questions {
+  position: sticky;
+  top: 160px;
+  align-self: start;
+}
+
+.faq-layout__form {
+  background: var(--color-blue-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+}
+
+.faq-layout__form h3 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.faq__list {
+  display: grid;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.faq-item {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  color: var(--color-blue);
+}
+
+.faq-item[open] summary::after {
+  content: '−';
+}
+
+.faq-item p {
+  margin: 14px 0 0;
+  color: var(--color-text-muted);
+  font-size: 15px;
 }
 
 .heaters {
@@ -357,6 +581,10 @@
   border-top: 1px solid var(--color-border);
 }
 
+.about-intro__own-badge {
+  margin-top: 20px;
+}
+
 .about-intro__stat-value {
   font-size: 26px;
   font-weight: 800;
@@ -414,6 +642,17 @@
   color: var(--color-text-muted);
 }
 
+.cta-layout__list li a {
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+}
+
+.cta-layout__list li a:hover {
+  color: var(--color-blue);
+  text-decoration-color: var(--color-blue);
+}
+
 .cta-layout__actions {
   display: flex;
   flex-wrap: wrap;
@@ -424,31 +663,57 @@
   position: relative;
 }
 
-.cta-layout__photo {
-  border-radius: var(--radius-lg);
+.cta-layout__map {
+  position: relative;
   overflow: hidden;
+  border-radius: var(--radius-lg);
+  aspect-ratio: 4 / 3;
 
-  img {
+  iframe {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
+    border: none;
   }
 }
 
-@media (min-width: 1200px) {
-  .cta-layout__media {
-    overflow: visible;
-  }
-
-  .cta-layout__photo {
-    width: 115%;
-    margin-left: -8%;
-  }
+.cta-layout__map-attribution {
+  position: absolute;
+  left: 8px;
+  color: #eee;
+  font-size: 12px;
+  z-index: 1;
 }
 
 @media (max-width: 960px) {
   .heaters {
     grid-template-columns: 1fr;
+  }
+
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-layout__questions {
+    position: static;
+  }
+
+  .cooling-issues {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .cooling-issues__content {
+    position: static;
+  }
+
+  .refill-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .facts__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .cta-layout {
@@ -531,6 +796,14 @@
   }
 
   .about__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .refill-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .facts__grid {
     grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,44 @@
+@if (!sent()) {
+  <p class="question-form__lead">
+    Ответим в ближайшее рабочее время по телефону или почте.
+  </p>
+
+  <form (ngSubmit)="submit()">
+    <label class="question-form__field">
+      <span>Имя</span>
+      <input type="text" name="name" [(ngModel)]="name" placeholder="Как к вам обращаться" />
+    </label>
+
+    <label class="question-form__field">
+      <span>Телефон *</span>
+      <input type="tel" name="phone" [(ngModel)]="phone" required placeholder="+7 (___) ___-__-__" />
+    </label>
+
+    <label class="question-form__field">
+      <span>Email</span>
+      <input type="email" name="email" [(ngModel)]="email" placeholder="you@mail.ru" />
+    </label>
+
+    <label class="question-form__field">
+      <span>Вопрос *</span>
+      <textarea
+        name="question"
+        [(ngModel)]="question"
+        required
+        rows="4"
+        placeholder="Опишите, что случилось с кондиционером"
+      ></textarea>
+    </label>
+
+    <button type="submit" class="btn btn--primary question-form__submit">Отправить вопрос</button>
+  </form>
+} @else {
+  <p class="question-form__lead">
+    Мы открыли для вас письмо с вопросом — отправьте его, и мы ответим как
+    можно скорее. Если почта не открылась, позвоните нам напрямую:
+    <a href="tel:+79287753852">+7-928-775-38-52</a>.
+  </p>
+  <button type="button" class="btn btn--secondary question-form__submit" (click)="reset()">
+    Задать ещё один вопрос
+  </button>
+}

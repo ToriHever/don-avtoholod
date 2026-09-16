@@ -66,9 +66,16 @@
   color: var(--color-text-muted);
 }
 
+.header__cta-group {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 .header__cta {
   padding: 12px 22px;
   font-size: 14px;
+  white-space: nowrap;
 }
 
 .header__burger {
@@ -121,6 +128,10 @@
   padding: 8px 0;
 }
 
+.header__nav-question {
+  display: none;
+}
+
 @media (max-width: 860px) {
   .header__logo {
     flex-shrink: 1;
@@ -135,7 +146,7 @@
     display: none;
   }
 
-  .header__cta {
+  .header__cta-group {
     display: none;
   }
 
@@ -164,5 +175,10 @@
 
   .header__nav-address {
     padding-bottom: 14px;
+  }
+
+  .header__nav-question {
+    display: inline-flex;
+    margin-bottom: 14px;
   }
 }

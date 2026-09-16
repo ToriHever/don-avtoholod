@@ -11,7 +11,9 @@
         бригада и официальная гарантия на работы.
       </p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#contacts">Оставить заявку</a>
+        <button type="button" class="btn btn--primary" (click)="questionModal.open()">
+          Оставить заявку
+        </button>
         <a class="btn btn--secondary" href="#services">Смотреть услуги</a>
       </div>
 
@@ -22,6 +24,10 @@
             <div class="hero__stat-label">{{ stat.label }}</div>
           </div>
         }
+        <div class="hero__own-badge">
+          <span class="hero__own-badge-icon">✓</span>
+          Собственный стенд диагностики
+        </div>
       </div>
     </div>
 
@@ -56,8 +62,8 @@
   <div class="container">
     <span class="section__eyebrow">Услуги</span>
     <h2 class="section__title">
-      Компания «Дон Авто Холод» осуществляет в Ростове-на-Дону и Ростовской
-      области
+      Компания «Дон Авто Холод» предоставляет услуги в Ростове-на-Дону и
+      Ростовской области
     </h2>
     <p class="section__lead">
       Полный цикл работ по автокондиционерам и рефрижераторам — от диагностики
@@ -73,6 +79,49 @@
               <li>{{ item }}</li>
             }
           </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="cooling-issues">
+  <div class="container cooling-issues">
+    <div class="cooling-issues__content">
+      <span class="section__eyebrow">Диагностика</span>
+      <h2 class="section__title">Почему кондиционер не охлаждает</h2>
+      <p class="section__lead">
+        Слабое охлаждение — это симптом, а не диагноз. Вот самые частые
+        причины, которые находят наши мастера на диагностике.
+      </p>
+      <button type="button" class="btn btn--primary" (click)="questionModal.open()">
+        Спросить мастера
+      </button>
+    </div>
+
+    <ul class="cooling-issues__list">
+      @for (issue of coolingIssues; track issue) {
+        <li>{{ issue }}</li>
+      }
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="refill-steps">
+  <div class="container">
+    <span class="section__eyebrow">Как мы работаем</span>
+    <h2 class="section__title">Как происходит заправка кондиционера</h2>
+    <p class="section__lead">
+      Заправка — это не просто «долить фреон». Вот как выглядит правильная
+      процедура у нас на станции.
+    </p>
+
+    <div class="refill-steps">
+      @for (step of refillSteps; track step.title; let i = $index) {
+        <div class="refill-step">
+          <div class="refill-step__number">{{ i + 1 }}</div>
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.text }}</p>
         </div>
       }
     </div>
@@ -154,6 +203,11 @@
             </div>
           }
         </div>
+
+        <div class="hero__own-badge about-intro__own-badge">
+          <span class="hero__own-badge-icon">✓</span>
+          Собственный стенд диагностики компрессоров
+        </div>
       </div>
     </div>
 
@@ -171,6 +225,23 @@
         фирменный магазин профильного оборудования. Удобный выезд с улицы
         Вавилова.
       </p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="facts">
+  <div class="container">
+    <span class="section__eyebrow">Почему выбирают нас</span>
+    <h2 class="section__title">Факты и преимущества компании</h2>
+
+    <div class="facts__grid">
+      @for (fact of companyFacts; track fact.title; let i = $index) {
+        <div class="fact-card">
+          <div class="fact-card__number">{{ i + 1 }}</div>
+          <h3>{{ fact.title }}</h3>
+          <p>{{ fact.text }}</p>
+        </div>
+      }
     </div>
   </div>
 </section>
@@ -196,7 +267,11 @@
       </p>
 
       <ul class="cta-layout__list">
-        <li>г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3</li>
+        <li>
+          <a href="https://yandex.ru/maps/-/CTxSIHkb" target="_blank" rel="noopener">
+            г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3
+          </a>
+        </li>
         <li>Режим работы: Пн–Пт 8:00–17:00, Сб 9:00–15:00, Вс — выходной</li>
         <li><a href="mailto:info@donavtoholod.ru">info&#64;donavtoholod.ru</a></li>
       </ul>
@@ -204,13 +279,63 @@
       <div class="cta-layout__actions">
         <a class="btn btn--primary" href="tel:+79287753852">+7-928-775-38-52</a>
         <a class="btn btn--secondary" href="tel:+79282265846">+7-928-226-58-46</a>
+        <button type="button" class="btn btn--secondary" (click)="questionModal.open()">
+          Задать вопрос
+        </button>
       </div>
     </div>
 
     <div class="cta-layout__media">
-      <div class="cta-layout__photo">
-        <img src="assets/cta-mechanic.png" alt="Мастер выполняет заправку автокондиционера" />
+      <div class="cta-layout__map">
+        <a
+          href="https://yandex.ru/maps/org/atp_3/186384265217/?utm_medium=mapframe&utm_source=maps"
+          class="cta-layout__map-attribution"
+          style="top: 0"
+          target="_blank"
+          rel="noopener"
+          >АТП № 3</a
+        >
+        <a
+          href="https://yandex.ru/maps/39/rostov-na-donu/category/garage_cooperative/184107575/?utm_medium=mapframe&utm_source=maps"
+          class="cta-layout__map-attribution"
+          style="top: 14px"
+          target="_blank"
+          rel="noopener"
+          >Гаражный кооператив в Ростове‑на‑Дону</a
+        >
+        <iframe
+          src="https://yandex.ru/map-widget/v1/org/atp_3/186384265217/?ll=39.684581%2C47.269509&z=17.4"
+          width="560"
+          height="400"
+          frameborder="1"
+          allowfullscreen="true"
+          loading="lazy"
+          title="Дон Авто Холод на карте"
+        ></iframe>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container faq-layout">
+    <div class="faq-layout__questions">
+      <span class="section__eyebrow">Вопросы и ответы</span>
+      <h2 class="section__title">Частые вопросы</h2>
+
+      <div class="faq__list">
+        @for (item of faqItems; track item.question) {
+          <details class="faq-item">
+            <summary>{{ item.question }}</summary>
+            <p>{{ item.answer }}</p>
+          </details>
+        }
+      </div>
+    </div>
+
+    <div class="faq-layout__form">
+      <h3>Не нашли ответ?</h3>
+      <app-question-form />
     </div>
   </div>
 </section>
