@@ -203,8 +203,8 @@
 }
 
 .feature-card__icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   border: 1.5px solid var(--color-border);
   margin-bottom: 16px;
@@ -213,8 +213,8 @@
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
-  -webkit-mask-size: 22px 22px;
-  mask-size: 22px 22px;
+  -webkit-mask-size: 34px 34px;
+  mask-size: 34px 34px;
 }
 
 .feature-card h3 {
