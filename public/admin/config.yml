@@ -1,0 +1,171 @@
+backend:
+  name: github
+  repo: ToriHever/don-avtoholod
+  branch: main
+  # Заменить на адрес вашего OAuth-прокси на Netlify после того, как он будет создан.
+  base_url: https://YOUR-OAUTH-PROXY.netlify.app
+  auth_endpoint: auth
+
+publish_mode: simple
+media_folder: "public/assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "home"
+    label: "Главная страница"
+    files:
+      - name: "home"
+        label: "Содержимое главной"
+        file: "src/assets/content/home.json"
+        fields:
+          - label: "Первый экран (Hero)"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Бейдж над заголовком", name: "badge", widget: "string" }
+              - { label: "Заголовок (H1)", name: "title", widget: "string" }
+              - { label: "Подзаголовок", name: "lead", widget: "text" }
+              - { label: "Текст основной кнопки", name: "primaryButton", widget: "string" }
+              - { label: "Текст второй кнопки", name: "secondaryButton", widget: "string" }
+              - label: "Статистика"
+                name: "stats"
+                widget: "list"
+                fields:
+                  - { label: "Значение", name: "value", widget: "string" }
+                  - { label: "Подпись", name: "label", widget: "string" }
+              - { label: "Текст плашки \"свой стенд\"", name: "ownBadge", widget: "string" }
+              - { label: "Заголовок плашки на фото", name: "mediaBadgeTitle", widget: "string" }
+              - { label: "Текст плашки на фото", name: "mediaBadgeText", widget: "string" }
+
+          - label: "Преимущества (4 карточки)"
+            name: "features"
+            widget: "list"
+            fields:
+              - { label: "Иконка (путь к файлу)", name: "icon", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "string" }
+              - { label: "Текст", name: "text", widget: "text" }
+
+          - label: "Услуги"
+            name: "services"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "text" }
+              - { label: "Подзаголовок", name: "lead", widget: "text" }
+              - label: "Группы услуг"
+                name: "groups"
+                widget: "list"
+                fields:
+                  - { label: "Название группы", name: "title", widget: "string" }
+                  - { label: "Пункты списка", name: "items", widget: "list", field: { label: "Пункт", name: "item", widget: "string" } }
+
+          - label: "Блок \"Почему не охлаждает\""
+            name: "coolingIssues"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "string" }
+              - { label: "Подзаголовок", name: "lead", widget: "text" }
+              - { label: "Текст кнопки", name: "button", widget: "string" }
+              - { label: "Причины (список)", name: "issues", widget: "list", field: { label: "Причина", name: "issue", widget: "text" } }
+
+          - label: "Блок \"Как проходит заправка\""
+            name: "refillSteps"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "string" }
+              - { label: "Подзаголовок", name: "lead", widget: "text" }
+              - label: "Шаги"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "Заголовок шага", name: "title", widget: "string" }
+                  - { label: "Текст шага", name: "text", widget: "text" }
+
+          - label: "Автономные отопители"
+            name: "heaters"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "string" }
+              - { label: "Подзаголовок", name: "lead", widget: "text" }
+              - { label: "Бренды (список)", name: "brands", widget: "list", field: { label: "Бренд", name: "brand", widget: "string" } }
+              - label: "Подробные блоки"
+                name: "details"
+                widget: "list"
+                fields:
+                  - { label: "Заголовок", name: "title", widget: "string" }
+                  - { label: "Текст", name: "text", widget: "text" }
+
+          - label: "О компании"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "text" }
+              - { label: "Подзаголовок", name: "lead", widget: "text" }
+              - { label: "Заголовок плашки на фото", name: "badgeTitle", widget: "string" }
+              - { label: "Текст плашки на фото", name: "badgeText", widget: "string" }
+              - { label: "Текст плашки \"свой стенд\"", name: "ownBadge", widget: "string" }
+              - label: "Статистика"
+                name: "stats"
+                widget: "list"
+                fields:
+                  - { label: "Значение", name: "value", widget: "string" }
+                  - { label: "Подпись", name: "label", widget: "string" }
+              - { label: "Первый абзац текста", name: "paragraph1", widget: "text" }
+              - { label: "Второй абзац (до ссылки на адрес)", name: "paragraph2Before", widget: "text" }
+
+          - label: "Факты о компании"
+            name: "facts"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "string" }
+              - label: "Пункты"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Заголовок", name: "title", widget: "string" }
+                  - { label: "Текст", name: "text", widget: "text" }
+
+          - { label: "Дисклеймер о ценах", name: "priceNote", widget: "text" }
+
+          - label: "Контакты"
+            name: "contacts"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "string" }
+              - { label: "Подзаголовок", name: "lead", widget: "text" }
+              - { label: "Адрес", name: "address", widget: "string" }
+              - { label: "Ссылка на Яндекс.Карты", name: "mapUrl", widget: "string" }
+              - { label: "Режим работы", name: "hours", widget: "string" }
+              - { label: "Email", name: "email", widget: "string" }
+              - { label: "Телефон 1", name: "phone1", widget: "string" }
+              - { label: "Телефон 2", name: "phone2", widget: "string" }
+              - { label: "Текст кнопки \"Задать вопрос\"", name: "questionButton", widget: "string" }
+
+          - label: "FAQ"
+            name: "faq"
+            widget: "object"
+            fields:
+              - { label: "Надпись над заголовком", name: "eyebrow", widget: "string" }
+              - { label: "Заголовок", name: "title", widget: "string" }
+              - { label: "Заголовок формы", name: "formTitle", widget: "string" }
+              - label: "Вопросы"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Вопрос", name: "question", widget: "string" }
+                  - { label: "Ответ", name: "answer", widget: "text" }
+
+  - name: "pages"
+    label: "Новые страницы"
+    folder: "public/content/pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Текст (абзацы разделяйте пустой строкой)", name: "body", widget: "text" }

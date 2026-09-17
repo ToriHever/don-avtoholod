@@ -1,24 +1,18 @@
 <section class="hero">
   <div class="container hero__inner">
     <div class="hero__content">
-      <span class="hero__badge">Ростов-на-Дону и область</span>
-      <h1>
-        Профессиональный ремонт, заправка и обслуживание автокондиционеров
-      </h1>
-      <p class="hero__lead">
-        Полный комплекс климатических услуг для легковых авто, коммерческого
-        транспорта и спецтехники. Собственный склад запчастей, мобильная
-        бригада и официальная гарантия на работы.
-      </p>
+      <span class="hero__badge">{{ content.hero.badge }}</span>
+      <h1>{{ content.hero.title }}</h1>
+      <p class="hero__lead">{{ content.hero.lead }}</p>
       <div class="hero__actions">
         <button type="button" class="btn btn--primary" (click)="questionModal.open()">
-          Оставить заявку
+          {{ content.hero.primaryButton }}
         </button>
-        <a class="btn btn--secondary" href="#services">Смотреть услуги</a>
+        <a class="btn btn--secondary" href="#services">{{ content.hero.secondaryButton }}</a>
       </div>
 
       <div class="hero__stats">
-        @for (stat of heroStats; track stat.label) {
+        @for (stat of content.hero.stats; track stat.label) {
           <div class="hero__stat">
             <div class="hero__stat-value">{{ stat.value }}</div>
             <div class="hero__stat-label">{{ stat.label }}</div>
@@ -26,7 +20,7 @@
         }
         <div class="hero__own-badge">
           <span class="hero__own-badge-icon">✓</span>
-          Собственный стенд диагностики
+          {{ content.hero.ownBadge }}
         </div>
       </div>
     </div>
@@ -38,8 +32,8 @@
       <div class="hero__media-badge">
         <span class="hero__media-badge-icon">✓</span>
         <div>
-          <strong>Гарантия качества</strong>
-          <span>На все работы и запчасти</span>
+          <strong>{{ content.hero.mediaBadgeTitle }}</strong>
+          <span>{{ content.hero.mediaBadgeText }}</span>
         </div>
       </div>
     </div>
@@ -48,7 +42,7 @@
 
 <section class="features">
   <div class="container features__grid">
-    @for (feature of features; track feature.title) {
+    @for (feature of content.features; track feature.title) {
       <div class="feature-card">
         <div class="feature-card__icon" [style.-webkit-mask-image]="'url(' + feature.icon + ')'" [style.mask-image]="'url(' + feature.icon + ')'"></div>
         <h3>{{ feature.title }}</h3>
@@ -60,18 +54,12 @@
 
 <section class="section" id="services">
   <div class="container">
-    <span class="section__eyebrow">Услуги</span>
-    <h2 class="section__title">
-      Компания «Дон Авто Холод» предоставляет услуги в Ростове-на-Дону и
-      Ростовской области
-    </h2>
-    <p class="section__lead">
-      Полный цикл работ по автокондиционерам и рефрижераторам — от диагностики
-      до установки и обучения персонала автосервисов.
-    </p>
+    <span class="section__eyebrow">{{ content.services.eyebrow }}</span>
+    <h2 class="section__title">{{ content.services.title }}</h2>
+    <p class="section__lead">{{ content.services.lead }}</p>
 
     <div class="services__groups">
-      @for (group of serviceGroups; track group.title) {
+      @for (group of content.services.groups; track group.title) {
         <div class="services__group">
           <h3>{{ group.title }}</h3>
           <ul class="services__list">
@@ -88,19 +76,16 @@
 <section class="section section--alt" id="cooling-issues">
   <div class="container cooling-issues">
     <div class="cooling-issues__content">
-      <span class="section__eyebrow">Диагностика</span>
-      <h2 class="section__title">Почему кондиционер не охлаждает</h2>
-      <p class="section__lead">
-        Слабое охлаждение — это симптом, а не диагноз. Вот самые частые
-        причины, которые находят наши мастера на диагностике.
-      </p>
+      <span class="section__eyebrow">{{ content.coolingIssues.eyebrow }}</span>
+      <h2 class="section__title">{{ content.coolingIssues.title }}</h2>
+      <p class="section__lead">{{ content.coolingIssues.lead }}</p>
       <button type="button" class="btn btn--primary" (click)="questionModal.open()">
-        Спросить мастера
+        {{ content.coolingIssues.button }}
       </button>
     </div>
 
     <ul class="cooling-issues__list">
-      @for (issue of coolingIssues; track issue) {
+      @for (issue of content.coolingIssues.issues; track issue) {
         <li>{{ issue }}</li>
       }
     </ul>
@@ -109,15 +94,12 @@
 
 <section class="section" id="refill-steps">
   <div class="container">
-    <span class="section__eyebrow">Как мы работаем</span>
-    <h2 class="section__title">Как происходит заправка кондиционера</h2>
-    <p class="section__lead">
-      Заправка — это не просто «долить фреон». Вот как выглядит правильная
-      процедура у нас на станции.
-    </p>
+    <span class="section__eyebrow">{{ content.refillSteps.eyebrow }}</span>
+    <h2 class="section__title">{{ content.refillSteps.title }}</h2>
+    <p class="section__lead">{{ content.refillSteps.lead }}</p>
 
     <div class="refill-steps">
-      @for (step of refillSteps; track step.title; let i = $index) {
+      @for (step of content.refillSteps.steps; track step.title; let i = $index) {
         <div class="refill-step">
           <div class="refill-step__number">{{ i + 1 }}</div>
           <h3>{{ step.title }}</h3>
@@ -131,38 +113,22 @@
 <section class="section section--alt" id="heaters">
   <div class="container heaters">
     <div>
-      <span class="section__eyebrow">Автономные отопители</span>
-      <h2 class="section__title">
-        Установка, диагностика и ремонт автономных отопителей
-      </h2>
-      <p class="section__lead">
-        Обслуживаем предпусковые подогреватели и салонные «фены» от ведущих
-        брендов: Webasto, Eberspacher, Планар, Теплостар, Бинар, Термотранс, а
-        также надёжные китайские аналоги.
-      </p>
+      <span class="section__eyebrow">{{ content.heaters.eyebrow }}</span>
+      <h2 class="section__title">{{ content.heaters.title }}</h2>
+      <p class="section__lead">{{ content.heaters.lead }}</p>
 
       <ul class="heaters__brands">
-        @for (brand of heaterBrands; track brand) {
+        @for (brand of content.heaters.brands; track brand) {
           <li>{{ brand }}</li>
         }
       </ul>
     </div>
 
     <div class="heaters__details">
-      <h3>Запчасти всегда в наличии</h3>
-      <p>
-        Держим на складе всё необходимое для быстрого ремонта отопителей
-        грузовиков и фургонов: оригинальные горелки, свечи накаливания, сетки
-        и топливные насосы. Выполняем монтаж оборудования «под ключ».
-      </p>
-
-      <h3>Компьютерная диагностика и ремонт</h3>
-      <p>
-        Быстро находим причину неисправности, сбрасываем ошибки и снимаем
-        блокировки с систем Webasto и Eberspacher. Устанавливаем
-        предпусковые подогреватели двигателя (в том числе 220В) и
-        дополнительные отопители салона.
-      </p>
+      @for (detail of content.heaters.details; track detail.title) {
+        <h3>{{ detail.title }}</h3>
+        <p>{{ detail.text }}</p>
+      }
     </div>
   </div>
 </section>
@@ -177,26 +143,19 @@
         <div class="about-intro__badge">
           <span class="about-intro__badge-icon">❄</span>
           <div>
-            <strong>С 2006 года</strong>
-            <span>на рынке Ростова-на-Дону</span>
+            <strong>{{ content.about.badgeTitle }}</strong>
+            <span>{{ content.about.badgeText }}</span>
           </div>
         </div>
       </div>
 
       <div class="about-intro__content">
-        <span class="section__eyebrow">О компании</span>
-        <h2 class="section__title">
-          Дон Авто Холод — ваш надёжный партнёр в обслуживании климата автомобиля
-        </h2>
-        <p class="section__lead">
-          С 2006 года «Дон Авто Холод» профессионально решает проблемы с
-          климатом в любых транспортных средствах — от легковых седанов до
-          тяжёлой спецтехники. Прежде чем менять узлы, мы проводим глубокую
-          диагностику и находим первопричину поломки.
-        </p>
+        <span class="section__eyebrow">{{ content.about.eyebrow }}</span>
+        <h2 class="section__title">{{ content.about.title }}</h2>
+        <p class="section__lead">{{ content.about.lead }}</p>
 
         <div class="about-intro__stats">
-          @for (stat of stats; track stat.label) {
+          @for (stat of content.about.stats; track stat.label) {
             <div class="about-intro__stat">
               <div class="about-intro__stat-value">{{ stat.value }}</div>
               <div class="about-intro__stat-label">{{ stat.label }}</div>
@@ -206,25 +165,16 @@
 
         <div class="hero__own-badge about-intro__own-badge">
           <span class="hero__own-badge-icon">✓</span>
-          Собственный стенд диагностики компрессоров
+          {{ content.about.ownBadge }}
         </div>
       </div>
     </div>
 
     <div class="about__text">
+      <p>{{ content.about.paragraph1 }}</p>
       <p>
-        За годы работы мы сформировали собственный склад комплектующих, что
-        позволяет выполнять обслуживание без долгих ожиданий. В нашем арсенале
-        есть уникальный стенд для проверки компрессоров, аппараты для
-        аргоновой сварки и станции для промывки систем. Работаем со всеми
-        современными стандартами хладагентов (R134a, R1234yf, R404a, R744,
-        R12 и др.).
-      </p>
-      <p>
-        Пока автомобиль в работе, ждать можно с комфортом: на территории
-        станции есть комната отдыха с телевизором, три кафе с разным меню и
-        фирменный магазин профильного оборудования. Удобный выезд с
-        <a href="https://yandex.ru/maps/-/CTxSIHkb" target="_blank" rel="noopener">улицы Вавилова</a>.
+        {{ content.about.paragraph2Before }}
+        <a href="{{ content.contacts.mapUrl }}" target="_blank" rel="noopener">улицы Вавилова</a>.
       </p>
     </div>
   </div>
@@ -232,11 +182,11 @@
 
 <section class="section section--alt" id="facts">
   <div class="container">
-    <span class="section__eyebrow">Почему выбирают нас</span>
-    <h2 class="section__title">Факты и преимущества компании</h2>
+    <span class="section__eyebrow">{{ content.facts.eyebrow }}</span>
+    <h2 class="section__title">{{ content.facts.title }}</h2>
 
     <div class="facts__grid">
-      @for (fact of companyFacts; track fact.title; let i = $index) {
+      @for (fact of content.facts.items; track fact.title; let i = $index) {
         <div class="fact-card">
           <div class="fact-card__number">{{ i + 1 }}</div>
           <h3>{{ fact.title }}</h3>
@@ -250,38 +200,32 @@
 <section class="price-note">
   <div class="container">
     <strong>Важно!</strong>
-    Сведения о ценах, содержащиеся на сайте, носят исключительно
-    информационный характер. Указанные цены не являются публичной офертой и
-    могут быть изменены в зависимости от дополнительных характеристик товаров,
-    услуг и иных условий.
+    {{ content.priceNote }}
   </div>
 </section>
 
 <section class="section cta" id="contacts">
   <div class="container cta-layout">
     <div class="cta-layout__content">
-      <span class="section__eyebrow">Контакты</span>
-      <h2 class="section__title">Приезжайте к нам или вызовите мобильную бригаду</h2>
-      <p class="section__lead">
-        Работаем без выходных по будням, принимаем автомобили любых марок и
-        выезжаем на объект с мобильной бригадой, если ремонт нельзя отложить.
-      </p>
+      <span class="section__eyebrow">{{ content.contacts.eyebrow }}</span>
+      <h2 class="section__title">{{ content.contacts.title }}</h2>
+      <p class="section__lead">{{ content.contacts.lead }}</p>
 
       <ul class="cta-layout__list">
         <li>
-          <a href="https://yandex.ru/maps/-/CTxSIHkb" target="_blank" rel="noopener">
-            г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3
+          <a [href]="content.contacts.mapUrl" target="_blank" rel="noopener">
+            {{ content.contacts.address }}
           </a>
         </li>
-        <li>Режим работы: Пн–Пт 8:00–17:00, Сб 9:00–15:00, Вс — выходной</li>
-        <li><a href="mailto:info@donavtoholod.ru">info&#64;donavtoholod.ru</a></li>
+        <li>{{ content.contacts.hours }}</li>
+        <li><a [href]="'mailto:' + content.contacts.email">{{ content.contacts.email }}</a></li>
       </ul>
 
       <div class="cta-layout__actions">
-        <a class="btn btn--primary" href="tel:+79287753852">+7-928-775-38-52</a>
-        <a class="btn btn--secondary" href="tel:+79282265846">+7-928-226-58-46</a>
+        <a class="btn btn--primary" [href]="'tel:' + content.contacts.phone1">{{ content.contacts.phone1 }}</a>
+        <a class="btn btn--secondary" [href]="'tel:' + content.contacts.phone2">{{ content.contacts.phone2 }}</a>
         <button type="button" class="btn btn--secondary" (click)="questionModal.open()">
-          Задать вопрос
+          {{ content.contacts.questionButton }}
         </button>
       </div>
     </div>
@@ -321,11 +265,11 @@
 <section class="section" id="faq">
   <div class="container faq-layout">
     <div class="faq-layout__questions">
-      <span class="section__eyebrow">Вопросы и ответы</span>
-      <h2 class="section__title">Частые вопросы</h2>
+      <span class="section__eyebrow">{{ content.faq.eyebrow }}</span>
+      <h2 class="section__title">{{ content.faq.title }}</h2>
 
       <div class="faq__list">
-        @for (item of faqItems; track item.question) {
+        @for (item of content.faq.items; track item.question) {
           <details class="faq-item">
             <summary>{{ item.question }}</summary>
             <p>{{ item.answer }}</p>
@@ -335,7 +279,7 @@
     </div>
 
     <div class="faq-layout__form">
-      <h3>Не нашли ответ?</h3>
+      <h3>{{ content.faq.formTitle }}</h3>
       <app-question-form />
     </div>
   </div>
