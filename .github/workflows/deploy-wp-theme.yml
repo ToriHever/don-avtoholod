@@ -1,0 +1,25 @@
+name: Deploy WordPress theme to test subdomain
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wp-theme/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.WP_TEST_FTP_SERVER }}
+          username: ${{ secrets.WP_TEST_FTP_USERNAME }}
+          password: ${{ secrets.WP_TEST_FTP_PASSWORD }}
+          protocol: ftp
+          local-dir: ./wp-theme/don-avtoholod/
+          server-dir: ${{ secrets.WP_TEST_FTP_DIR }}
