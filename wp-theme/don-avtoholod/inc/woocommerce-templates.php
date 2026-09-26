@@ -70,6 +70,33 @@ function dah_wc_category_sidebar(): void {
 }
 
 /**
+ * Фильтр по марке автомобиля (атрибут pa_marka) над сеткой каталога.
+ */
+function dah_wc_brand_filter(): void {
+    if (!taxonomy_exists('pa_marka')) {
+        return;
+    }
+    $terms = get_terms(['taxonomy' => 'pa_marka', 'hide_empty' => true]);
+    if (empty($terms) || is_wp_error($terms)) {
+        return;
+    }
+    $current = isset($_GET['filter_marka']) ? sanitize_title(wp_unslash($_GET['filter_marka'])) : '';
+    ?>
+    <form class="dah-brand-filter" method="get">
+        <label for="dah-brand-filter-select">Марка автомобиля</label>
+        <select name="filter_marka" id="dah-brand-filter-select" onchange="this.form.submit()">
+            <option value="">Все марки</option>
+            <?php foreach ($terms as $term): ?>
+                <option value="<?php echo esc_attr($term->slug); ?>" <?php selected($current, $term->slug); ?>>
+                    <?php echo esc_html($term->name); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </form>
+    <?php
+}
+
+/**
  * Первая (самая специфичная) категория товара — для бейджа на карточке.
  */
 function dah_wc_product_primary_category(WC_Product $product): ?WP_Term {

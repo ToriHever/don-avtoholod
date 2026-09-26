@@ -23,6 +23,8 @@ get_header();
 
         <?php do_action('woocommerce_archive_description'); ?>
 
+        <?php dah_wc_brand_filter(); ?>
+
         <?php if (woocommerce_product_loop()): ?>
             <?php do_action('woocommerce_before_shop_loop'); ?>
 

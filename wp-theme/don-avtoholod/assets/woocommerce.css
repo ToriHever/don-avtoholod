@@ -324,6 +324,28 @@
   }
 }
 
+/* -- фильтр по марке -- */
+.dah-brand-filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dah-brand-filter label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.dah-brand-filter select {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-size: 14px;
+  background: var(--color-white);
+}
+
 /* -- карточка товара: бейдж категории + артикул -- */
 .dah-product-card__link {
   display: block;
