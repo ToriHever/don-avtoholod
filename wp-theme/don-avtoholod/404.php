@@ -12,6 +12,13 @@ foreach ($segments as $segment) {
     $accumulated .= '/' . $segment;
     $url = home_url($accumulated . '/');
 
+    $shop_page_id = function_exists('wc_get_page_id') ? wc_get_page_id('shop') : 0;
+
+    if ($shop_page_id > 0 && $segment === get_post_field('post_name', $shop_page_id)) {
+        $crumbs[] = ['label' => get_the_title($shop_page_id), 'url' => $url];
+        continue;
+    }
+
     $term = get_term_by('slug', $segment, 'product_cat');
     if ($term) {
         $label = $term->name;
