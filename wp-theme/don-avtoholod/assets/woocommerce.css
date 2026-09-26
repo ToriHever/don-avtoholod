@@ -450,36 +450,50 @@
 }
 
 #reviews .comment-form-author,
-#reviews .comment-form-email {
-  display: inline-block;
-  width: calc(50% - 8px);
-  vertical-align: top;
+#reviews .comment-form-email,
+#reviews .comment-form-comment,
+#reviews .comment-form-rating {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
 }
 
-#reviews .comment-form-author {
-  margin-right: 16px;
+#reviews .comment-form-comment {
+  align-items: flex-start;
 }
 
 #reviews .comment-form-author label,
 #reviews .comment-form-email label,
 #reviews .comment-form-comment label,
 #reviews .comment-form-rating label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  flex: 0 0 140px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+#reviews .comment-form-comment label {
+  padding-top: 10px;
 }
 
 #reviews .comment-form-author input,
 #reviews .comment-form-email input,
 #reviews .comment-form-comment textarea {
-  width: 100%;
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 15px;
   box-sizing: border-box;
 }
 
-#reviews .comment-form-rating {
-  margin-bottom: 16px;
+#reviews .comment-form-author input:focus,
+#reviews .comment-form-email input:focus,
+#reviews .comment-form-comment textarea:focus {
+  outline: none;
+  border-color: var(--color-blue);
 }
 
 #reviews .stars {
@@ -501,11 +515,14 @@
   line-height: 24px;
 }
 
-#reviews .stars a.active {
+/* подсветка текущей и всех предыдущих звёзд при наведении/выборе */
+#reviews .stars a:hover,
+#reviews .stars a:has(~ a:hover),
+#reviews .stars a.active,
+#reviews .stars a.active:has(~ a.active) {
   color: var(--color-yellow);
 }
 
-#reviews .comment-form-comment,
 #reviews .form-submit {
   max-width: 640px;
 }
