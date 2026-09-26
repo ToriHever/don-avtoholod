@@ -8,6 +8,8 @@ defined('ABSPATH') || exit;
 if (empty($related_products)) {
     return;
 }
+
+$heading = apply_filters('woocommerce_product_related_products_heading', 'Похожие товары');
 ?>
 <section class="related products dah-carousel-section">
     <h2><?php echo esc_html($heading); ?></h2>

@@ -11,8 +11,6 @@ get_header();
 <main>
 <section class="section">
 <div class="container page-content woocommerce-page">
-<a href="/" class="page-content__back">← На главную</a>
-
 <?php dah_wc_breadcrumb(); ?>
 
 <div class="shop-layout">
