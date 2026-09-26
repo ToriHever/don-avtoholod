@@ -69,6 +69,23 @@
       });
     });
   })();
+
+  document.querySelectorAll('.dah-carousel').forEach(function (carousel) {
+    var track = carousel.querySelector('.dah-carousel__track');
+    var prev = carousel.querySelector('.dah-carousel__nav--prev');
+    var next = carousel.querySelector('.dah-carousel__nav--next');
+    if (!track || !prev || !next) return;
+    var scrollByAmount = function () {
+      var card = track.querySelector('li');
+      return card ? card.getBoundingClientRect().width + 20 : 260;
+    };
+    prev.addEventListener('click', function () {
+      track.scrollBy({ left: -scrollByAmount(), behavior: 'smooth' });
+    });
+    next.addEventListener('click', function () {
+      track.scrollBy({ left: scrollByAmount(), behavior: 'smooth' });
+    });
+  });
 </script>
 
 <?php wp_footer(); ?>

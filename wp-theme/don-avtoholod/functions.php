@@ -56,3 +56,4 @@ add_action('init', 'dah_handle_question_form');
 
 require_once get_template_directory() . '/inc/acf-fields.php';
 require_once get_template_directory() . '/inc/woocommerce.php';
+require_once get_template_directory() . '/inc/woocommerce-templates.php';
