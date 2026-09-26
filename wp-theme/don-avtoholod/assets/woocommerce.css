@@ -37,7 +37,8 @@
   border-radius: var(--radius);
   margin-bottom: 12px;
   aspect-ratio: 1 / 1;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   background: var(--color-white);
 }
 
