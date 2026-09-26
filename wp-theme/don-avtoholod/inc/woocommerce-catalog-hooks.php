@@ -164,6 +164,11 @@ function dah_wc_slug_from_sku(int $post_id, WP_Post $post, bool $update): void {
     add_action('save_post_product', 'dah_wc_slug_from_sku', 20, 3);
 }
 
+// Форма отзыва скрыта за кнопкой «Оставить отзыв» — раскрывается по клику (см. footer.php).
+add_action('comment_form_before', function (): void {
+    echo '<button type="button" class="btn btn--secondary" id="dah-toggle-review-form">Оставить отзыв</button>';
+});
+
 // Свои хлебные крошки вместо стандартных, с нашей вёрсткой.
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 add_action('woocommerce_before_main_content', 'dah_wc_breadcrumb', 20);

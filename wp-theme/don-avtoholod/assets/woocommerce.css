@@ -1,7 +1,7 @@
 /* ==== WooCommerce: каталог запчастей ==== */
 
 .woocommerce-page {
-  max-width: none;
+  max-width: var(--container-width);
 }
 
 .woocommerce-page h1.entry-title,
@@ -52,14 +52,16 @@
 }
 
 .woocommerce ul.products li.product .price {
+  display: block;
   color: var(--color-blue);
   font-weight: 700;
   font-size: 18px;
+  margin-bottom: 14px;
 }
 
 .woocommerce ul.products li.product .button {
   display: inline-flex;
-  margin-top: 10px;
+  margin-top: 0;
   padding: 10px 18px;
   border-radius: var(--radius);
   background: var(--color-blue);
@@ -295,6 +297,51 @@
   }
 }
 
+/* -- пагинация каталога -- */
+.woocommerce nav.woocommerce-pagination {
+  margin-top: 32px;
+}
+
+.woocommerce nav.woocommerce-pagination ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.woocommerce nav.woocommerce-pagination ul li {
+  border: none;
+  float: none;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a,
+.woocommerce nav.woocommerce-pagination ul li span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.woocommerce nav.woocommerce-pagination ul li a:hover {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+.woocommerce nav.woocommerce-pagination ul li span.current {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-white);
+}
+
 /* -- хлебные крошки -- */
 .dah-breadcrumb {
   color: var(--color-text-muted);
@@ -528,6 +575,46 @@
 
 #reviews .form-submit {
   max-width: 640px;
+}
+
+/* -- форма отзыва скрыта за кнопкой -- */
+#respond .comment-reply-title,
+#respond #commentform {
+  display: none;
+}
+
+#respond.dah-open .comment-reply-title,
+#respond.dah-open #commentform {
+  display: block;
+}
+
+#respond.dah-open #dah-toggle-review-form {
+  display: none;
+}
+
+#dah-toggle-review-form {
+  margin-bottom: 20px;
+}
+
+/* -- пустое состояние "нет отзывов" -- */
+.dah-no-reviews {
+  background: var(--color-blue-light);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.dah-no-reviews__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 8px;
+}
+
+.dah-no-reviews__text {
+  color: var(--color-text-muted);
+  margin: 0;
 }
 
 #reviews ol.commentlist {

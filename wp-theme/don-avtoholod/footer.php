@@ -133,6 +133,25 @@
     });
   });
 
+  (function () {
+    var toggle = document.getElementById('dah-toggle-review-form');
+    var respond = document.getElementById('respond');
+    if (!toggle || !respond) return;
+    toggle.addEventListener('click', function () {
+      respond.classList.toggle('dah-open');
+    });
+  })();
+
+  (function () {
+    var noReviews = document.querySelector('.woocommerce-noreviews');
+    if (!noReviews) return;
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dah-no-reviews';
+    wrapper.innerHTML = '<p class="dah-no-reviews__title">Отзывов пока нет</p>' +
+      '<p class="dah-no-reviews__text">Будьте первым, кто поделится мнением об этом товаре — это поможет другим покупателям.</p>';
+    noReviews.replaceWith(wrapper);
+  })();
+
   document.querySelectorAll('.dah-carousel').forEach(function (carousel) {
     var track = carousel.querySelector('.dah-carousel__track');
     var prev = carousel.querySelector('.dah-carousel__nav--prev');
