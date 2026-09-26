@@ -1,11 +1,11 @@
 /* ==== WooCommerce: каталог запчастей ==== */
 
-.woocommerce-page {
+.dah-shop-page {
   max-width: var(--container-width);
 }
 
-.woocommerce-page h1.entry-title,
-.woocommerce-page h1.page-title {
+.dah-shop-page h1.entry-title,
+.dah-shop-page h1.page-title {
   font-size: 32px;
   margin-bottom: 24px;
 }

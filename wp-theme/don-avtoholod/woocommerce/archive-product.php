@@ -10,7 +10,7 @@ get_header();
 
 <main>
 <section class="section">
-<div class="container page-content woocommerce-page">
+<div class="container page-content dah-shop-page">
 <?php dah_wc_breadcrumb(); ?>
 
 <div class="shop-layout">
