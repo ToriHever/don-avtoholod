@@ -150,6 +150,11 @@
     wrapper.innerHTML = '<p class="dah-no-reviews__title">Отзывов пока нет</p>' +
       '<p class="dah-no-reviews__text">Будьте первым, кто поделится мнением об этом товаре — это поможет другим покупателям.</p>';
     noReviews.replaceWith(wrapper);
+
+    var toggle = document.getElementById('dah-toggle-review-form');
+    if (toggle) {
+      wrapper.appendChild(toggle);
+    }
   })();
 
   document.querySelectorAll('.dah-carousel').forEach(function (carousel) {
