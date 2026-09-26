@@ -13,6 +13,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<div style="background:lime;color:#000;font-size:24px;padding:20px;text-align:center;">МЕТКА В HEADER.PHP — ВИДНА?</div>
 <div id="top"></div>
 
 <header class="header">
