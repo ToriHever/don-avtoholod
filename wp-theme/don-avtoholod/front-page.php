@@ -31,7 +31,7 @@ $question_sent = isset($_GET['question_sent']);
       <h1><?php echo esc_html(get_field('hero_title')); ?></h1>
       <p class="hero__lead"><?php echo esc_html(get_field('hero_lead')); ?></p>
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#question-form"><?php echo esc_html(get_field('hero_primary_button')); ?></a>
+        <button type="button" class="btn btn--primary" data-modal-open="dah-question-modal"><?php echo esc_html(get_field('hero_primary_button')); ?></button>
         <a class="btn btn--secondary" href="#services"><?php echo esc_html(get_field('hero_secondary_button')); ?></a>
       </div>
 
@@ -103,7 +103,7 @@ $question_sent = isset($_GET['question_sent']);
       <span class="section__eyebrow"><?php echo esc_html(get_field('cooling_eyebrow')); ?></span>
       <h2 class="section__title"><?php echo esc_html(get_field('cooling_title')); ?></h2>
       <p class="section__lead"><?php echo esc_html(get_field('cooling_lead')); ?></p>
-      <a class="btn btn--primary" href="#question-form"><?php echo esc_html(get_field('cooling_button')); ?></a>
+      <button type="button" class="btn btn--primary" data-modal-open="dah-question-modal"><?php echo esc_html(get_field('cooling_button')); ?></button>
     </div>
 
     <ul class="cooling-issues__list">
@@ -246,7 +246,7 @@ $question_sent = isset($_GET['question_sent']);
       <div class="cta-layout__actions">
         <a class="btn btn--primary" href="tel:<?php echo esc_attr(get_field('contacts_phone1')); ?>"><?php echo esc_html(get_field('contacts_phone1')); ?></a>
         <a class="btn btn--secondary" href="tel:<?php echo esc_attr(get_field('contacts_phone2')); ?>"><?php echo esc_html(get_field('contacts_phone2')); ?></a>
-        <a class="btn btn--secondary" href="#question-form"><?php echo esc_html(get_field('contacts_question_button')); ?></a>
+        <button type="button" class="btn btn--secondary" data-modal-open="dah-question-modal"><?php echo esc_html(get_field('contacts_question_button')); ?></button>
       </div>
     </div>
 

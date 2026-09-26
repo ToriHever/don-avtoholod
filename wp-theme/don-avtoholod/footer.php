@@ -55,6 +55,8 @@
   </div>
 </footer>
 
+<?php get_template_part('template-parts/question-modal'); ?>
+
 <script>
   (function () {
     var burger = document.getElementById('dah-burger');
@@ -69,6 +71,67 @@
       });
     });
   })();
+
+  (function () {
+    var modal = document.getElementById('dah-question-modal');
+    if (!modal) return;
+    var openModal = function () {
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+    };
+    var closeModal = function () {
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    };
+    document.querySelectorAll('[data-modal-open="dah-question-modal"]').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+    modal.querySelectorAll('[data-modal-close]').forEach(function (btn) {
+      btn.addEventListener('click', closeModal);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+    if (window.location.search.indexOf('question_sent=1') !== -1) {
+      openModal();
+    }
+  })();
+
+  document.querySelectorAll('.quantity').forEach(function (wrap) {
+    var input = wrap.querySelector('input.qty');
+    if (!input || wrap.classList.contains('dah-qty-ready')) return;
+    wrap.classList.add('dah-qty-ready');
+
+    var minus = document.createElement('button');
+    minus.type = 'button';
+    minus.className = 'dah-qty-btn dah-qty-btn--minus';
+    minus.textContent = '−';
+
+    var plus = document.createElement('button');
+    plus.type = 'button';
+    plus.className = 'dah-qty-btn dah-qty-btn--plus';
+    plus.textContent = '+';
+
+    wrap.insertBefore(minus, input);
+    wrap.appendChild(plus);
+
+    var step = parseFloat(input.step) || 1;
+    var min = parseFloat(input.min) || 1;
+
+    minus.addEventListener('click', function () {
+      var value = Math.max(min, (parseFloat(input.value) || min) - step);
+      input.value = value;
+      input.dispatchEvent(new Event('change'));
+    });
+    plus.addEventListener('click', function () {
+      var value = (parseFloat(input.value) || min) + step;
+      input.value = value;
+      input.dispatchEvent(new Event('change'));
+    });
+  });
 
   document.querySelectorAll('.dah-carousel').forEach(function (carousel) {
     var track = carousel.querySelector('.dah-carousel__track');

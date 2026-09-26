@@ -111,6 +111,8 @@ function dah_wc_product_primary_category(WC_Product $product): ?WP_Term {
 // Артикул вместо рейтинга на карточке товара в каталоге.
 remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 add_action('woocommerce_after_shop_loop_item_title', 'dah_wc_loop_sku', 5);
+// Цену выводим один раз, отдельно от заголовка (см. content-product.php) — убираем из-под ссылки.
+remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
 function dah_wc_loop_sku(): void {
     global $product;
     if (!$product instanceof WC_Product) {
@@ -122,10 +124,9 @@ function dah_wc_loop_sku(): void {
     }
 }
 
-// Кнопка «Задать вопрос» на странице товара.
-add_action('woocommerce_single_product_summary', 'dah_wc_single_ask_question_button', 35);
+// Кнопка «Задать вопрос» на странице товара (вызывается напрямую из content-single-product.php).
 function dah_wc_single_ask_question_button(): void {
-    echo '<a href="' . esc_url(home_url('/#question-form')) . '" class="btn btn--secondary dah-product-ask">Задать вопрос</a>';
+    echo '<button type="button" class="btn btn--secondary dah-product-ask" data-modal-open="dah-question-modal">Задать вопрос</button>';
 }
 
 /**
@@ -162,6 +163,20 @@ function dah_wc_slug_from_sku(int $post_id, WP_Post $post, bool $update): void {
     }
     add_action('save_post_product', 'dah_wc_slug_from_sku', 20, 3);
 }
+
+// Плейсхолдеры вместо подписей у полей формы отзыва (имя/email/текст).
+add_filter('comment_form_default_fields', function (array $fields): array {
+    if (isset($fields['author'])) {
+        $fields['author'] = str_replace('<input', '<input placeholder="Ваше имя"', $fields['author']);
+    }
+    if (isset($fields['email'])) {
+        $fields['email'] = str_replace('<input', '<input placeholder="Email"', $fields['email']);
+    }
+    return $fields;
+});
+add_filter('comment_form_field_comment', function (string $field): string {
+    return str_replace('<textarea', '<textarea placeholder="Ваш отзыв"', $field);
+});
 
 // Свои хлебные крошки вместо стандартных, с нашей вёрсткой.
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);

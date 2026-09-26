@@ -13,7 +13,6 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<div style="background:lime;color:#000;font-size:24px;padding:20px;text-align:center;">МЕТКА В HEADER.PHP — ВИДНА?</div>
 <div id="top"></div>
 
 <header class="header">
@@ -34,7 +33,7 @@
       </div>
 
       <div class="header__cta-group">
-        <a class="btn btn--secondary header__cta" href="<?php echo esc_url(home_url('/#question-form')); ?>">Задать вопрос</a>
+        <button type="button" class="btn btn--secondary header__cta" data-modal-open="dah-question-modal">Задать вопрос</button>
         <a class="btn btn--primary header__cta" href="tel:+79287753852">Заказать звонок</a>
       </div>
 
@@ -60,7 +59,7 @@
         target="_blank"
         rel="noopener"
       >г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3</a>
-      <a class="btn btn--primary header__nav-question" href="<?php echo esc_url(home_url('/#question-form')); ?>">Задать вопрос</a>
+      <button type="button" class="btn btn--primary header__nav-question" data-modal-open="dah-question-modal">Задать вопрос</button>
     </div>
   </nav>
 </header>

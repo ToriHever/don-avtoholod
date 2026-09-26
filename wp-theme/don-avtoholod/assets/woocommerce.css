@@ -38,7 +38,7 @@
   margin-bottom: 12px;
   aspect-ratio: 1 / 1;
   object-fit: contain;
-  background: var(--color-blue-light);
+  background: var(--color-white);
 }
 
 .woocommerce ul.products li.product .woocommerce-loop-product__title {
@@ -89,9 +89,74 @@
   align-items: start;
 }
 
-.woocommerce div.product .woocommerce-product-gallery img {
+.woocommerce div.product .woocommerce-product-gallery {
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
   border-radius: var(--radius-lg);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+}
+
+.woocommerce div.product .woocommerce-product-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.woocommerce div.product .woocommerce-product-gallery__trigger {
+  display: none;
+}
+
+.dah-product-sku {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 4px 0 12px;
+}
+
+.dah-product-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.dah-product-actions form.cart {
+  margin: 0;
+}
+
+.dah-product-actions .dah-product-ask {
+  margin: 0;
+}
+
+/* -- степпер количества -- */
+.quantity {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.quantity input.qty {
+  border: none;
+  width: 48px;
+  text-align: center;
+  padding: 0;
+}
+
+.dah-qty-btn {
   background: var(--color-blue-light);
+  border: none;
+  color: var(--color-blue);
+  width: 36px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.dah-qty-btn:hover {
+  background: var(--color-border);
 }
 
 .woocommerce div.product .summary {
@@ -380,10 +445,69 @@
 }
 
 /* -- отзывы -- */
-#reviews .comment-form-rating,
+#reviews #respond {
+  max-width: 640px;
+}
+
+#reviews .comment-form-author,
+#reviews .comment-form-email {
+  display: inline-block;
+  width: calc(50% - 8px);
+  vertical-align: top;
+}
+
+#reviews .comment-form-author {
+  margin-right: 16px;
+}
+
+#reviews .comment-form-author label,
+#reviews .comment-form-email label,
+#reviews .comment-form-comment label,
+#reviews .comment-form-rating label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+#reviews .comment-form-author input,
+#reviews .comment-form-email input,
+#reviews .comment-form-comment textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#reviews .comment-form-rating {
+  margin-bottom: 16px;
+}
+
+#reviews .stars {
+  margin: 0;
+}
+
+#reviews .stars a {
+  display: inline-block;
+  font-size: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-border);
+  text-decoration: none;
+}
+
+#reviews .stars a::before {
+  content: "★";
+  font-size: 22px;
+  line-height: 24px;
+}
+
+#reviews .stars a.active {
+  color: var(--color-yellow);
+}
+
 #reviews .comment-form-comment,
 #reviews .form-submit {
-  max-width: 480px;
+  max-width: 640px;
 }
 
 #reviews ol.commentlist {

@@ -7,8 +7,6 @@ defined('ABSPATH') || exit;
 
 get_header();
 ?>
-<div style="background:red;color:#fff;font-size:24px;padding:20px;text-align:center;">ТЕСТОВАЯ МЕТКА — ВИДНА?</div>
-
 
 <main>
 <section class="section">
