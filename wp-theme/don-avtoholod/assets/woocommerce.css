@@ -449,6 +449,70 @@
   }
 }
 
+/* -- главная страница магазина: сетка разделов -- */
+.dah-shop-section-title {
+  font-size: 22px;
+  margin: 24px 0 16px;
+}
+
+.dah-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.dah-cat-grid__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 20px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+}
+
+.dah-cat-grid__item:hover {
+  border-color: var(--color-blue);
+  box-shadow: var(--shadow);
+}
+
+.dah-cat-grid__image {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--color-blue-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dah-cat-grid__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dah-cat-grid__placeholder {
+  color: var(--color-blue);
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.dah-cat-grid__name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.dah-cat-grid__count {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
 /* -- шапка страницы категории (хаб) -- */
 .dah-category-hub {
   display: flex;

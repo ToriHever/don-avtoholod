@@ -153,6 +153,60 @@ function dah_wc_category_subcategories(): void {
 }
 
 /**
+ * Главная страница магазина: сетка карточек всех верхнеуровневых категорий.
+ */
+function dah_wc_shop_category_grid(): void {
+    $terms = get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => false,
+        'parent' => 0,
+    ]);
+    if (empty($terms) || is_wp_error($terms)) {
+        return;
+    }
+    echo '<h2 class="dah-shop-section-title">Разделы каталога</h2>';
+    echo '<div class="dah-cat-grid">';
+    foreach ($terms as $term) {
+        $thumbnail_id = get_term_meta($term->term_id, 'thumbnail_id', true);
+        echo '<a class="dah-cat-grid__item" href="' . esc_url(get_term_link($term)) . '">';
+        echo '<span class="dah-cat-grid__image">';
+        if ($thumbnail_id) {
+            echo wp_get_attachment_image($thumbnail_id, 'medium');
+        } else {
+            echo '<span class="dah-cat-grid__placeholder">' . esc_html(mb_substr($term->name, 0, 1)) . '</span>';
+        }
+        echo '</span>';
+        echo '<span class="dah-cat-grid__name">' . esc_html($term->name) . '</span>';
+        echo '<span class="dah-cat-grid__count">' . (int) $term->count . ' товаров</span>';
+        echo '</a>';
+    }
+    echo '</div>';
+}
+
+/**
+ * Главная страница магазина: подборка популярных/рекомендуемых товаров.
+ */
+function dah_wc_shop_featured_products(): void {
+    $products = wc_get_products(['status' => 'publish', 'featured' => true, 'limit' => 8]);
+    if (empty($products)) {
+        $products = wc_get_products(['status' => 'publish', 'orderby' => 'date', 'order' => 'DESC', 'limit' => 8]);
+    }
+    if (empty($products)) {
+        return;
+    }
+    echo '<h2 class="dah-shop-section-title">Популярные товары</h2>';
+    echo '<ul class="products">';
+    foreach ($products as $product) {
+        global $post;
+        $post = get_post($product->get_id());
+        setup_postdata($post);
+        wc_get_template_part('content', 'product');
+    }
+    wp_reset_postdata();
+    echo '</ul>';
+}
+
+/**
  * Первая (самая специфичная) категория товара — для бейджа на карточке.
  */
 function dah_wc_product_primary_category(WC_Product $product): ?WP_Term {
