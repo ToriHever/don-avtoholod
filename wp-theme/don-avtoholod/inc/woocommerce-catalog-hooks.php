@@ -127,18 +127,32 @@ function dah_wc_brand_filter(): void {
         return;
     }
     $current = isset($_GET['filter_marka']) ? sanitize_title(wp_unslash($_GET['filter_marka'])) : '';
+    $current_label = 'Все марки';
+    foreach ($terms as $term) {
+        if ($term->slug === $current) {
+            $current_label = $term->name;
+            break;
+        }
+    }
     ?>
-    <form class="dah-brand-filter" method="get">
-        <label for="dah-brand-filter-select">Марка автомобиля</label>
-        <select name="filter_marka" id="dah-brand-filter-select" onchange="this.form.submit()">
-            <option value="">Все марки</option>
-            <?php foreach ($terms as $term): ?>
-                <option value="<?php echo esc_attr($term->slug); ?>" <?php selected($current, $term->slug); ?>>
-                    <?php echo esc_html($term->name); ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </form>
+    <div class="dah-brand-filter">
+        <span class="dah-brand-filter__label">Марка автомобиля</span>
+        <div class="dah-select" data-dah-select data-param="filter_marka">
+            <button type="button" class="dah-select__button" aria-haspopup="listbox" aria-expanded="false">
+                <span class="dah-select__value"><?php echo esc_html($current_label); ?></span>
+                <span class="dah-select__chevron" aria-hidden="true"></span>
+            </button>
+            <ul class="dah-select__list" role="listbox" hidden>
+                <li role="option" tabindex="0" data-value="" class="<?php echo $current === '' ? 'is-selected' : ''; ?>">Все марки</li>
+                <?php foreach ($terms as $term): ?>
+                    <li role="option" tabindex="0" data-value="<?php echo esc_attr($term->slug); ?>"
+                        class="<?php echo $current === $term->slug ? 'is-selected' : ''; ?>">
+                        <?php echo esc_html($term->name); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
     <?php
 }
 

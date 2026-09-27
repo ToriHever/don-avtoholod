@@ -796,30 +796,93 @@
   margin-bottom: 0;
 }
 
-.dah-brand-filter label {
+.dah-brand-filter__label {
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text-muted);
 }
 
-.dah-brand-filter select {
-  appearance: none;
+/* -- кастомный выпадающий список (замена нативного select, чтобы стилизовать и сам список опций) -- */
+.dah-select {
+  position: relative;
+}
+
+.dah-select__button {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-width: 160px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 8px 34px 8px 12px;
+  padding: 8px 12px;
   font-size: 14px;
   font-family: inherit;
   color: var(--color-text);
-  background: var(--color-white)
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%235b6b7a' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")
-    no-repeat right 12px center;
+  background: var(--color-white);
   cursor: pointer;
 }
 
-.dah-brand-filter select:hover,
-.dah-brand-filter select:focus {
+.dah-select__value {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dah-select__button:hover,
+.dah-select__button[aria-expanded="true"] {
   border-color: var(--color-blue);
-  outline: none;
+}
+
+.dah-select__chevron {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-right: 1.6px solid var(--color-text-muted);
+  border-bottom: 1.6px solid var(--color-text-muted);
+  transform: rotate(45deg);
+  transition: transform 0.15s ease;
+  margin-top: -4px;
+}
+
+.dah-select__button[aria-expanded="true"] .dah-select__chevron {
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+
+.dah-select__list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.dah-select__list li {
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.dah-select__list li:hover {
+  background: var(--color-blue-light);
+}
+
+.dah-select__list li.is-selected {
+  background: var(--color-blue);
+  color: var(--color-white);
 }
 
 /* -- сортировка каталога -- */

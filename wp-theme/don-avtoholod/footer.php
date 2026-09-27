@@ -166,6 +166,61 @@
     });
   });
 
+  document.querySelectorAll('[data-dah-select]').forEach(function (wrap) {
+    var button = wrap.querySelector('.dah-select__button');
+    var list = wrap.querySelector('.dah-select__list');
+    var param = wrap.dataset.param;
+    if (!button || !list || !param) return;
+
+    var closeList = function () {
+      list.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+    };
+
+    button.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = !list.hidden;
+      document.querySelectorAll('.dah-select__list').forEach(function (l) { l.hidden = true; });
+      list.hidden = isOpen;
+      button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    });
+
+    var selectOption = function (option) {
+      var url = new URL(window.location.href);
+      var value = option.dataset.value;
+      if (value) {
+        url.searchParams.set(param, value);
+      } else {
+        url.searchParams.delete(param);
+      }
+      url.searchParams.delete('paged');
+      window.location.href = url.toString();
+    };
+
+    list.querySelectorAll('[role="option"]').forEach(function (option) {
+      option.addEventListener('click', function () {
+        selectOption(option);
+      });
+      option.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectOption(option);
+        }
+      });
+    });
+
+    button.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeList();
+      }
+    });
+  });
+
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.dah-select__list').forEach(function (l) { l.hidden = true; });
+    document.querySelectorAll('.dah-select__button').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
+  });
+
   (function () {
     var noReviews = document.querySelector('.woocommerce-noreviews');
     if (!noReviews) return;
