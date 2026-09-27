@@ -14,6 +14,9 @@
     <div>
       <h4>Разделы</h4>
       <ul class="footer__links">
+        <?php if (function_exists('wc_get_page_id')): ?>
+          <li><a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>">Магазин</a></li>
+        <?php endif; ?>
         <li><a href="<?php echo esc_url(home_url('/#services')); ?>">Ремонт и заправка</a></li>
         <li><a href="<?php echo esc_url(home_url('/#heaters')); ?>">Автономные отопители</a></li>
         <li><a href="<?php echo esc_url(home_url('/#about')); ?>">О нас</a></li>

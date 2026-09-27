@@ -259,6 +259,41 @@ button {
   color: var(--color-text-muted);
 }
 
+.header__cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  color: var(--color-text);
+  flex-shrink: 0;
+}
+
+.header__cart:hover {
+  background: var(--color-blue-light);
+  color: var(--color-blue);
+}
+
+.header__cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-blue);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 .header__cta-group {
   display: flex;
   gap: 10px;

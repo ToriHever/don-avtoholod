@@ -32,6 +32,20 @@
         <a class="header__email" href="mailto:info@donavtoholod.ru">info&#64;donavtoholod.ru</a>
       </div>
 
+      <?php if (function_exists('WC')): ?>
+        <a class="header__cart" href="<?php echo esc_url(wc_get_cart_url()); ?>" aria-label="Корзина">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="10" cy="21" r="1.4" fill="currentColor"/>
+            <circle cx="18" cy="21" r="1.4" fill="currentColor"/>
+          </svg>
+          <?php $dah_cart_count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
+          <?php if ($dah_cart_count > 0): ?>
+            <span class="header__cart-count"><?php echo esc_html($dah_cart_count); ?></span>
+          <?php endif; ?>
+        </a>
+      <?php endif; ?>
+
       <div class="header__cta-group">
         <button type="button" class="btn btn--secondary header__cta" data-modal-open="dah-question-modal">Задать вопрос</button>
         <a class="btn btn--primary header__cta" href="tel:+79287753852">Заказать звонок</a>
@@ -47,6 +61,9 @@
     <div class="container header__nav-inner">
       <ul class="header__nav-list">
         <li><a href="<?php echo esc_url(home_url('/')); ?>">Главная</a></li>
+        <?php if (function_exists('wc_get_page_id')): ?>
+          <li><a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>">Магазин</a></li>
+        <?php endif; ?>
         <li><a href="<?php echo esc_url(home_url('/#services')); ?>">Услуги</a></li>
         <li><a href="<?php echo esc_url(home_url('/#heaters')); ?>">Автономные отопители</a></li>
         <li><a href="<?php echo esc_url(home_url('/#about')); ?>">О компании</a></li>
