@@ -86,6 +86,21 @@
   background: var(--color-blue-dark);
 }
 
+/* Ссылка "Просмотр корзины", которую WooCommerce сам добавляет
+   рядом с кнопкой после добавления товара через AJAX. */
+.woocommerce ul.products li.product a.added_to_cart {
+  display: block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-blue);
+  text-decoration: underline;
+}
+
+.woocommerce ul.products li.product a.added_to_cart:hover {
+  color: var(--color-blue-dark);
+}
+
 /* -- категории каталога -- */
 .woocommerce ul.products li.product-category {
   text-align: center;
