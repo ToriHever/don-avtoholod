@@ -377,6 +377,9 @@
   background: var(--color-white);
   border-radius: var(--radius-lg);
   padding: 20px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .shop-sidebar__title {
@@ -526,11 +529,15 @@
 }
 
 .shop-sidebar__sublist > li::before {
+  /* Позиция считается от левого края самого <li>, а он уже сдвинут
+     вправо на padding-left родительского <ul> (20px) — поэтому здесь
+     минус этот отступ, чтобы уголок совпал по X со стволом линии
+     (у которого left:7px отсчитывается от края самого <ul>). */
   content: '';
   position: absolute;
   top: 0;
-  left: 7px;
-  width: 12px;
+  left: calc(-20px + 7px);
+  width: 13px;
   height: 17px;
   border-left: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
