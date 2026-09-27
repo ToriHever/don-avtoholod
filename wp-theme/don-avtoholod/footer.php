@@ -59,6 +59,17 @@
 
 <script>
   (function () {
+    var header = document.querySelector('.header');
+    if (!header) return;
+    var setHeaderHeight = function () {
+      document.documentElement.style.setProperty('--dah-header-h', header.offsetHeight + 'px');
+    };
+    setHeaderHeight();
+    window.addEventListener('resize', setHeaderHeight);
+    window.addEventListener('load', setHeaderHeight);
+  })();
+
+  (function () {
     var burger = document.getElementById('dah-burger');
     var nav = document.getElementById('dah-nav');
     if (!burger || !nav) return;

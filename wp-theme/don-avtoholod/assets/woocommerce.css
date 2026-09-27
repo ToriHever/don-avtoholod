@@ -354,6 +354,10 @@
 
 /* -- хлебные крошки -- */
 .dah-breadcrumb {
+  position: sticky;
+  top: var(--dah-header-h, 90px);
+  z-index: 10;
+  background: var(--color-white);
   color: var(--color-text-muted);
   font-size: 14px;
   margin: 20px;
@@ -378,12 +382,12 @@
 
 .shop-sidebar {
   position: sticky;
-  top: 24px;
+  top: calc(var(--dah-header-h, 90px) + 12px);
   display: flex;
   flex-direction: column;
   background: var(--color-white);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 0 20px 20px;
   max-height: 70vh;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -416,12 +420,11 @@
   z-index: 1;
   background: var(--color-white);
   font-size: 15px;
-  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-muted);
-  margin: 0 0 14px;
-  padding-bottom: 2px;
+  margin: 0 -20px 14px;
+  padding: 20px 20px 16px;
   flex-shrink: 0;
 }
 
@@ -457,7 +460,7 @@
   border-radius: var(--radius);
   color: var(--color-text);
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   background: none;
   border: none;
   font-family: inherit;
@@ -580,7 +583,7 @@
   top: 0;
   left: calc(-20px + 7px);
   width: 13px;
-  height: calc(var(--row-h, 46px) / 2);
+  height: calc(var(--row-h, 46px) / 2 - 6px);
   border-left: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
   border-bottom-left-radius: 8px;
