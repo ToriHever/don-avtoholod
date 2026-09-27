@@ -352,7 +352,12 @@
   color: var(--color-white);
 }
 
-/* -- хлебные крошки -- */
+/* -- хлебные крошки --
+ * padding вместо margin: у sticky-элемента верхний margin непредсказуемо
+ * учитывается в момент, когда он "прилипает" — из-за этого при скролле
+ * был рывок/сдвиг. padding входит в собственный блок элемента и не
+ * зависит от этого поведения.
+ */
 .dah-breadcrumb {
   position: sticky;
   top: var(--dah-header-h, 90px);
@@ -360,7 +365,8 @@
   background: var(--color-white);
   color: var(--color-text-muted);
   font-size: 14px;
-  margin: 20px;
+  margin: 0;
+  padding: 20px;
 }
 
 /* Страница магазина/каталога начинается сразу под шапкой, без верхнего отступа секции. */
@@ -375,7 +381,7 @@
 /* -- макет каталога: фиксированный сайдбар + сетка -- */
 .shop-layout {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 272px 1fr;
   gap: 32px;
   align-items: start;
 }
@@ -387,9 +393,10 @@
   flex-direction: column;
   background: var(--color-white);
   border-radius: var(--radius-lg);
-  padding: 0 20px 20px;
+  padding: 0 5px 0px;
   max-height: 70vh;
   overflow-y: auto;
+  overflow-x: hidden;
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--color-blue-light) transparent;
@@ -423,8 +430,8 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-muted);
-  margin: 0 -20px 14px;
-  padding: 20px 20px 16px;
+  margin: 0 -5px 14px;
+  padding: 20px 5px 16px;
   flex-shrink: 0;
 }
 
@@ -444,7 +451,7 @@
   --row-h: 46px;
   display: flex;
   align-items: center;
-  min-height: var(--row-h);
+  height: var(--row-h);
   gap: 2px;
 }
 
@@ -556,28 +563,33 @@
   max-height: 800px;
 }
 
-.shop-sidebar__sublist::before {
-  /* Ствол доходит ровно до начала уголка последнего пункта
-     (верхний край его строки), а не до её середины. */
+.shop-sidebar__sublist > li {
+  position: relative;
+}
+
+/*
+ * Линия ствола больше не считается одной сплошной полосой на весь
+ * список (это ломалось при разном числе пунктов — сумма отступов
+ * между строками накапливала погрешность). Вместо этого у каждого
+ * пункта — свой отрезок: полный (на всю высоту строки) у всех, кроме
+ * последнего, и половинный (только до середины, дальше уголок) у
+ * последнего. Так линия всегда правильной длины независимо от
+ * количества подкатегорий.
+ */
+.shop-sidebar__sublist > li:not(:last-child)::after {
   content: '';
   position: absolute;
   top: 0;
-  bottom: var(--row-h, 46px);
-  left: 7px;
+  bottom: 0;
+  left: calc(-20px + 7px);
   width: 1px;
   background: var(--color-border);
-}
-
-.shop-sidebar__sublist > li {
-  position: relative;
-  margin-bottom: 1px;
 }
 
 .shop-sidebar__sublist > li::before {
   /* Позиция считается от левого края самого <li>, а он уже сдвинут
      вправо на padding-left родительского <ul> (20px) — поэтому здесь
-     минус этот отступ, чтобы уголок совпал по X со стволом линии
-     (у которого left:7px отсчитывается от края самого <ul>). */
+     минус этот отступ, чтобы уголок совпал по X со стволом линии. */
   content: '';
   position: absolute;
   top: 0;
