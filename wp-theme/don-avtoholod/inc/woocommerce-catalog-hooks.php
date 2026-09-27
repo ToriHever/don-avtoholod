@@ -97,6 +97,62 @@ function dah_wc_brand_filter(): void {
 }
 
 /**
+ * Хаб-шапка страницы категории: фото категории + описание.
+ */
+function dah_wc_category_hub_header(): void {
+    if (!is_product_category()) {
+        return;
+    }
+    $term = get_queried_object();
+    if (!$term instanceof WP_Term) {
+        return;
+    }
+    $thumbnail_id = get_term_meta($term->term_id, 'thumbnail_id', true);
+    if (!$thumbnail_id) {
+        return;
+    }
+    echo '<div class="dah-category-hub__image">';
+    echo wp_get_attachment_image($thumbnail_id, 'medium');
+    echo '</div>';
+}
+
+/**
+ * Карточки подкатегорий на странице категории — до сетки товаров.
+ */
+function dah_wc_category_subcategories(): void {
+    if (!is_product_category()) {
+        return;
+    }
+    $term = get_queried_object();
+    if (!$term instanceof WP_Term) {
+        return;
+    }
+    $children = get_terms([
+        'taxonomy' => 'product_cat',
+        'parent' => $term->term_id,
+        'hide_empty' => false,
+    ]);
+    if (empty($children) || is_wp_error($children)) {
+        return;
+    }
+    echo '<div class="dah-subcats">';
+    foreach ($children as $child) {
+        $thumbnail_id = get_term_meta($child->term_id, 'thumbnail_id', true);
+        echo '<a class="dah-subcats__item" href="' . esc_url(get_term_link($child)) . '">';
+        echo '<span class="dah-subcats__image">';
+        if ($thumbnail_id) {
+            echo wp_get_attachment_image($thumbnail_id, 'thumbnail');
+        } else {
+            echo '<span class="dah-subcats__placeholder">' . esc_html(mb_substr($child->name, 0, 1)) . '</span>';
+        }
+        echo '</span>';
+        echo '<span class="dah-subcats__name">' . esc_html($child->name) . '</span>';
+        echo '</a>';
+    }
+    echo '</div>';
+}
+
+/**
  * Первая (самая специфичная) категория товара — для бейджа на карточке.
  */
 function dah_wc_product_primary_category(WC_Product $product): ?WP_Term {

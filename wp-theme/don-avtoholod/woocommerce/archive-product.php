@@ -17,11 +17,18 @@ get_header();
     <?php dah_wc_category_sidebar(); ?>
 
     <div class="shop-content">
-        <?php if (apply_filters('woocommerce_show_page_title', true)): ?>
-            <h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
-        <?php endif; ?>
+        <div class="dah-category-hub">
+            <?php dah_wc_category_hub_header(); ?>
+            <div class="dah-category-hub__body">
+                <?php if (apply_filters('woocommerce_show_page_title', true)): ?>
+                    <h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
+                <?php endif; ?>
 
-        <?php do_action('woocommerce_archive_description'); ?>
+                <?php do_action('woocommerce_archive_description'); ?>
+            </div>
+        </div>
+
+        <?php dah_wc_category_subcategories(); ?>
 
         <?php dah_wc_brand_filter(); ?>
 
