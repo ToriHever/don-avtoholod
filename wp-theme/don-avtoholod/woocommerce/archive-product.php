@@ -28,14 +28,20 @@ get_header();
             </div>
         </div>
 
+        <?php if (!is_shop()): ?>
+            <?php woocommerce_result_count(); ?>
+            <div class="dah-catalog-filters">
+                <?php dah_wc_brand_filter(); ?>
+                <?php woocommerce_catalog_ordering(); ?>
+            </div>
+        <?php endif; ?>
+
         <?php dah_wc_category_subcategories(); ?>
 
         <?php if (is_shop()): ?>
             <?php dah_wc_shop_category_grid(); ?>
             <?php dah_wc_shop_featured_products(); ?>
         <?php else: ?>
-            <?php dah_wc_brand_filter(); ?>
-
             <?php if (woocommerce_product_loop()): ?>
                 <?php do_action('woocommerce_before_shop_loop'); ?>
 

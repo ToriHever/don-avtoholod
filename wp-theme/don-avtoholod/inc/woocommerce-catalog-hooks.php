@@ -12,6 +12,19 @@ if (!class_exists('WooCommerce')) {
 }
 
 /**
+ * Пагинация каталога должна оставаться параметром ?paged=N в адресе,
+ * а не отдельным «путём» /page/N/ — WordPress по умолчанию сам
+ * переписывает такие адреса в канонический /page/N/ вид, здесь это
+ * отключаем именно для страниц магазина/категорий.
+ */
+add_filter('redirect_canonical', function ($redirect_url, $requested_url) {
+    if ((is_shop() || is_product_category()) && get_query_var('paged')) {
+        return false;
+    }
+    return $redirect_url;
+}, 10, 2);
+
+/**
  * Дерево категорий товаров для бокового меню каталога.
  */
 function dah_wc_category_sidebar(): void {
@@ -250,6 +263,12 @@ function dah_wc_product_primary_category(WC_Product $product): ?WP_Term {
     usort($terms, fn($a, $b) => $b->parent <=> $a->parent);
     return $terms[0];
 }
+
+// Счётчик товаров и сортировку теперь выводим вручную в archive-product.php
+// (сразу под заголовком, в одну строку с фильтром по марке), а не через
+// стандартный хук woocommerce_before_shop_loop — иначе они выводились бы дважды.
+remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
 
 // Артикул вместо рейтинга на карточке товара в каталоге.
 remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
