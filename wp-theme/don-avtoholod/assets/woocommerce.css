@@ -379,10 +379,12 @@
 .shop-sidebar {
   position: sticky;
   top: 24px;
+  display: flex;
+  flex-direction: column;
   background: var(--color-white);
   border-radius: var(--radius-lg);
   padding: 20px;
-  max-height: calc(100vh - 48px);
+  max-height: 70vh;
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -409,11 +411,18 @@
 }
 
 .shop-sidebar__title {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--color-white);
   font-size: 15px;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text-muted);
   margin: 0 0 14px;
+  padding-bottom: 2px;
+  flex-shrink: 0;
 }
 
 .shop-sidebar__list,
@@ -424,11 +433,12 @@
 }
 
 .shop-sidebar__list > li {
-  margin-bottom: 2px;
+  margin: 6px 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .shop-sidebar__row {
-  --row-h: 34px;
+  --row-h: 46px;
   display: flex;
   align-items: center;
   min-height: var(--row-h);
@@ -440,10 +450,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
+  gap: 11px;
   flex: 1;
   min-width: 0;
-  padding: 7px 10px;
+  padding: 13px 10px;
   border-radius: var(--radius);
   color: var(--color-text);
   font-size: 14px;
@@ -490,10 +500,10 @@
 /* -- стрелка сворачивания/разворачивания -- */
 .shop-sidebar__chevron {
   flex-shrink: 0;
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid var(--color-text-muted);
-  border-bottom: 2px solid var(--color-text-muted);
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid var(--color-text-muted);
+  border-bottom: 1px solid var(--color-text-muted);
   transform: rotate(-45deg);
   transition: transform 0.2s ease;
   margin-right: 2px;
@@ -525,6 +535,10 @@
   color: var(--color-white);
 }
 
+.shop-sidebar__goto-icon {
+  opacity: 0.8;
+}
+
 /* -- вложенный список: отступ + линии иерархии как в дереве файлов -- */
 .shop-sidebar__sublist {
   position: relative;
@@ -540,10 +554,12 @@
 }
 
 .shop-sidebar__sublist::before {
+  /* Ствол доходит ровно до начала уголка последнего пункта
+     (верхний край его строки), а не до её середины. */
   content: '';
   position: absolute;
   top: 0;
-  bottom: calc(var(--row-h, 34px) / 2);
+  bottom: var(--row-h, 46px);
   left: 7px;
   width: 1px;
   background: var(--color-border);
@@ -564,7 +580,7 @@
   top: 0;
   left: calc(-20px + 7px);
   width: 13px;
-  height: 17px;
+  height: calc(var(--row-h, 46px) / 2);
   border-left: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
   border-bottom-left-radius: 8px;
