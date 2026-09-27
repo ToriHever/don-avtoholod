@@ -13,6 +13,13 @@ get_header();
 <div class="container page-content dah-shop-page">
 <?php dah_wc_breadcrumb(); ?>
 
+<?php if (!empty($_GET['filter_marka'])): ?>
+    <pre style="background:#fee;border:2px solid red;padding:12px;white-space:pre-wrap;font-size:12px;overflow:auto;max-height:400px;">DEBUG filter_marka=<?php echo esc_html($_GET['filter_marka']); ?>
+tax_query object: <?php echo esc_html(print_r($GLOBALS['wp_query']->tax_query->queries ?? 'NONE', true)); ?>
+SQL request: <?php echo esc_html($GLOBALS['wp_query']->request ?? 'NONE'); ?>
+found_posts: <?php echo esc_html($GLOBALS['wp_query']->found_posts ?? 'n/a'); ?></pre>
+<?php endif; ?>
+
 <div class="shop-layout">
     <?php dah_wc_category_sidebar(); ?>
 
