@@ -2,6 +2,11 @@
 /**
  * Кнопка "В корзину" в каталоге + поле количества (по просьбе — можно
  * выбрать количество прямо на карточке, не заходя в товар).
+ *
+ * Не полагаемся на точную структуру $args, которую передаёт
+ * woocommerce_template_loop_add_to_cart() — в разных версиях WooCommerce
+ * она может отличаться. Вместо этого считаем всё сами из $product,
+ * с теми же значениями по умолчанию, что использует сам WooCommerce.
  */
 
 defined('ABSPATH') || exit;
@@ -15,6 +20,20 @@ echo wc_get_stock_html($product);
 if (!$product->is_in_stock()) {
     return;
 }
+
+$dah_quantity = $args['quantity'] ?? 1;
+$dah_class = $args['class'] ?? implode(' ', array_filter([
+    'button',
+    'product_type_' . $product->get_type(),
+    'add_to_cart_button',
+    $product->supports('ajax_add_to_cart') ? 'ajax_add_to_cart' : '',
+]));
+$dah_attributes = $args['attributes'] ?? [
+    'data-product_id' => $product->get_id(),
+    'data-product_sku' => $product->get_sku(),
+    'aria-label' => $product->add_to_cart_description(),
+    'rel' => 'nofollow',
+];
 ?>
 <div class="dah-card-cart-row">
     <?php
@@ -34,13 +53,13 @@ if (!$product->is_in_stock()) {
         sprintf(
             '<a href="%s" data-quantity="%s" class="%s" %s>%s</a>',
             esc_url($product->add_to_cart_url()),
-            esc_attr($args['quantity']),
-            esc_attr($args['class']),
-            wc_implode_html_attributes($args['attributes']),
+            esc_attr($dah_quantity),
+            esc_attr($dah_class),
+            wc_implode_html_attributes($dah_attributes),
             esc_html($product->add_to_cart_text())
         ),
         $product,
-        $args
+        ['quantity' => $dah_quantity, 'class' => $dah_class, 'attributes' => $dah_attributes]
     );
     ?>
 </div>
