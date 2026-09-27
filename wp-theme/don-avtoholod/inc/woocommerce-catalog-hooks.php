@@ -26,7 +26,15 @@ function dah_wc_category_sidebar(): void {
         return;
     }
 
-    $current = is_tax('product_cat') ? get_queried_object() : null;
+    $current = null;
+    if (is_tax('product_cat')) {
+        $current = get_queried_object();
+    } elseif (is_product()) {
+        $viewed_product = wc_get_product(get_queried_object_id());
+        if ($viewed_product instanceof WC_Product) {
+            $current = dah_wc_product_primary_category($viewed_product);
+        }
+    }
     $goto_icon = '<svg class="shop-sidebar__goto-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     ?>
     <nav class="shop-sidebar">

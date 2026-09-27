@@ -19,9 +19,20 @@ get_header();
 <main>
   <section class="section">
     <div class="container page-content dah-shop-page">
-      <?php do_action('woocommerce_before_main_content'); ?>
-      <?php woocommerce_content(); ?>
-      <?php do_action('woocommerce_after_main_content'); ?>
+      <?php if (is_product()): ?>
+        <?php do_action('woocommerce_before_main_content'); ?>
+        <div class="shop-layout">
+          <?php dah_wc_category_sidebar(); ?>
+          <div class="shop-content">
+            <?php woocommerce_content(); ?>
+          </div>
+        </div>
+        <?php do_action('woocommerce_after_main_content'); ?>
+      <?php else: ?>
+        <?php do_action('woocommerce_before_main_content'); ?>
+        <?php woocommerce_content(); ?>
+        <?php do_action('woocommerce_after_main_content'); ?>
+      <?php endif; ?>
     </div>
   </section>
 </main>
