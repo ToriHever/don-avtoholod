@@ -30,7 +30,6 @@ get_header();
 
         <?php dah_wc_category_subcategories(); ?>
 
-        <p style="background:yellow;padding:10px;">DEBUG: is_shop() = <?php var_dump(is_shop()); ?> | is_product_category() = <?php var_dump(is_product_category()); ?> | wc_get_page_id('shop') = <?php echo wc_get_page_id('shop'); ?> | current queried_object_id = <?php echo get_queried_object_id(); ?></p>
         <?php if (is_shop()): ?>
             <?php dah_wc_shop_category_grid(); ?>
             <?php dah_wc_shop_featured_products(); ?>
