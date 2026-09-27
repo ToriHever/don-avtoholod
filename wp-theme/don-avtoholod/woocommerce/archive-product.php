@@ -7,7 +7,7 @@ defined('ABSPATH') || exit;
 
 get_header();
 ?>
-<h1 style="background:red;color:#fff;padding:20px;font-size:20px;">DEBUG: archive-product.php ЗАГРУЖЕН. is_shop()=<?php var_dump(is_shop()); ?> is_product_category()=<?php var_dump(is_product_category()); ?> queried_object=<?php $qo = get_queried_object(); echo $qo instanceof WP_Term ? $qo->slug . ' (id ' . $qo->term_id . ')' : gettype($qo); ?></h1>
+
 <main>
 <section class="section">
 <div class="container page-content dah-shop-page">
