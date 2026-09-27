@@ -31,8 +31,20 @@ get_header();
         </div>
         <?php do_action('woocommerce_after_main_content'); ?>
       <?php else: ?>
+        <?php
+        /**
+         * woocommerce_content() написана только для магазина/архива и
+         * одиночного товара — для остальных WC-страниц (корзина, заявка,
+         * личный кабинет) она не знает, что рисовать, и ошибочно выводит
+         * заголовок магазина с пустым содержимым. Для них нужен обычный
+         * контент страницы (там лежит шорткод [woocommerce_cart] и т.п.),
+         * как и в стандартном page.php.
+         */
+        ?>
         <?php do_action('woocommerce_before_main_content'); ?>
-        <?php woocommerce_content(); ?>
+        <?php while (have_posts()): the_post(); ?>
+          <?php the_content(); ?>
+        <?php endwhile; ?>
         <?php do_action('woocommerce_after_main_content'); ?>
       <?php endif; ?>
     </div>

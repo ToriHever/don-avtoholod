@@ -11,6 +11,8 @@
 
 defined('ABSPATH') || exit;
 
+echo '<span style="background:red;color:#fff;font-size:10px;display:block;">DEBUG: product=' . (empty($product) ? 'EMPTY' : $product->get_id()) . ' purchasable=' . (empty($product) ? '-' : var_export($product->is_purchasable(), true)) . ' in_stock=' . (empty($product) ? '-' : var_export($product->is_in_stock(), true)) . '</span>';
+
 if (empty($product) || !$product->is_purchasable()) {
     return;
 }
