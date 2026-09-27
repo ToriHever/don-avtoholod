@@ -18,6 +18,21 @@ function dah_woocommerce_setup(): void {
     add_theme_support('wc-product-gallery-lightbox');
     add_theme_support('wc-product-gallery-slider');
 }
+
+/**
+ * Счётчик товаров в иконке корзины в шапке обновляется через AJAX
+ * (без перезагрузки страницы) — WooCommerce сам подставит эту разметку
+ * везде, где на странице есть элемент .header__cart-count.
+ */
+add_filter('woocommerce_add_to_cart_fragments', function (array $fragments): array {
+    $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
+    ob_start();
+    ?>
+    <span class="header__cart-count"><?php echo $count > 0 ? esc_html($count) : ''; ?></span>
+    <?php
+    $fragments['.header__cart-count'] = ob_get_clean();
+    return $fragments;
+});
 add_action('after_setup_theme', 'dah_woocommerce_setup');
 
 // Свою вёрстку каталога/карточек пишем сами — стандартные стили WooCommerce не подключаем.

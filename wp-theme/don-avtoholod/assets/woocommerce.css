@@ -82,6 +82,23 @@
   text-decoration: none;
 }
 
+/* -- кол-во + кнопка на карточке товара -- */
+.dah-card-cart-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.dah-card-cart-row .quantity {
+  align-self: flex-start;
+}
+
+.dah-card-cart-row .button {
+  width: 100%;
+  justify-content: center;
+}
+
 .woocommerce ul.products li.product .button:hover {
   background: var(--color-blue-dark);
 }

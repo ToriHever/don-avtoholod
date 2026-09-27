@@ -46,9 +46,7 @@
             <circle cx="18" cy="21" r="1.4" fill="currentColor"/>
           </svg>
           <?php $dah_cart_count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
-          <?php if ($dah_cart_count > 0): ?>
-            <span class="header__cart-count"><?php echo esc_html($dah_cart_count); ?></span>
-          <?php endif; ?>
+          <span class="header__cart-count"><?php echo $dah_cart_count > 0 ? esc_html($dah_cart_count) : ''; ?></span>
         </a>
       <?php endif; ?>
 
