@@ -33,6 +33,12 @@
       </div>
 
       <?php if (function_exists('WC')): ?>
+        <a class="header__cart" href="<?php echo esc_url(wc_get_page_permalink('myaccount')); ?>" aria-label="<?php echo is_user_logged_in() ? 'Личный кабинет' : 'Войти'; ?>">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.6" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M4.5 20c1.2-3.6 4-5.5 7.5-5.5s6.3 1.9 7.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </a>
         <a class="header__cart" href="<?php echo esc_url(wc_get_cart_url()); ?>" aria-label="Корзина">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>

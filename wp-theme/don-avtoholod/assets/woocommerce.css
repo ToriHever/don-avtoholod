@@ -1168,3 +1168,218 @@
 .dah-carousel__nav:hover {
   background: var(--color-blue-light);
 }
+
+/* ==== Личный кабинет ==== */
+
+/* -- сообщения (ошибки входа, уведомления и т.п.) -- */
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error,
+.woocommerce-noreviews {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--color-blue-light);
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.woocommerce-error {
+  background: #fdecea;
+  color: #a4222c;
+}
+
+.woocommerce-error li,
+.woocommerce-message li {
+  list-style: none;
+}
+
+/* -- вход / регистрация -- */
+.woocommerce-form-login,
+.woocommerce-form-register,
+.woocommerce-ResetPassword,
+.woocommerce-EditAccountForm,
+.woocommerce-address-fields {
+  max-width: 480px;
+}
+
+.u-columns.col2-set {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.u-columns.col2-set .woocommerce-form-login,
+.u-columns.col2-set .woocommerce-form-register {
+  max-width: none;
+}
+
+.u-columns.col2-set h2 {
+  font-size: 20px;
+  margin: 0 0 16px;
+}
+
+.woocommerce-form-login__rememberme {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.woocommerce-LostPassword {
+  display: block;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.woocommerce-privacy-policy-text {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 12px 0;
+}
+
+@media (max-width: 720px) {
+  .u-columns.col2-set {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* -- сетка сайдбар + контент (аккаунт после входа) -- */
+.dah-account-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-top: 16px;
+}
+
+.woocommerce-MyAccount-navigation {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+}
+
+.woocommerce-MyAccount-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.woocommerce-MyAccount-navigation-link {
+  margin-bottom: 2px;
+}
+
+.woocommerce-MyAccount-navigation-link a {
+  display: block;
+  padding: 11px 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.woocommerce-MyAccount-navigation-link a:hover {
+  background: var(--color-blue-light);
+}
+
+.woocommerce-MyAccount-navigation-link--customer-logout a {
+  color: #a4222c;
+}
+
+.woocommerce-MyAccount-navigation-link.is-active a {
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.dah-account-content {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.dah-account-content h1,
+.dah-account-content h2,
+.dah-account-content h3 {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .dah-account-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -- история заказов -- */
+.woocommerce-orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.woocommerce-orders-table thead th {
+  text-align: left;
+  padding: 10px 12px;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 600;
+}
+
+.woocommerce-orders-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.woocommerce-orders-table .button {
+  padding: 8px 14px !important;
+  font-size: 13px !important;
+}
+
+.woocommerce-order-details,
+.woocommerce-customer-details {
+  margin-top: 24px;
+}
+
+.woocommerce-table--order-details {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.woocommerce-table--order-details th,
+.woocommerce-table--order-details td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+/* -- адреса -- */
+.woocommerce-Addresses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.woocommerce-Address-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.woocommerce-Address-title .edit {
+  font-size: 13px;
+}
+
+address {
+  font-style: normal;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .woocommerce-Addresses {
+    grid-template-columns: 1fr;
+  }
+}
