@@ -60,13 +60,17 @@
 <script>
   (function () {
     var header = document.querySelector('.header');
+    var breadcrumb = document.querySelector('.dah-breadcrumb');
     if (!header) return;
-    var setHeaderHeight = function () {
+    var setStickyOffsets = function () {
       document.documentElement.style.setProperty('--dah-header-h', header.offsetHeight + 'px');
+      if (breadcrumb) {
+        document.documentElement.style.setProperty('--dah-breadcrumb-h', breadcrumb.offsetHeight + 'px');
+      }
     };
-    setHeaderHeight();
-    window.addEventListener('resize', setHeaderHeight);
-    window.addEventListener('load', setHeaderHeight);
+    setStickyOffsets();
+    window.addEventListener('resize', setStickyOffsets);
+    window.addEventListener('load', setStickyOffsets);
   })();
 
   (function () {

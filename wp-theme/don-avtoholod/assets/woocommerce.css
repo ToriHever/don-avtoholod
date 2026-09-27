@@ -388,7 +388,7 @@
 
 .shop-sidebar {
   position: sticky;
-  top: calc(var(--dah-header-h, 90px) + 12px);
+  top: calc(var(--dah-header-h, 90px) + var(--dah-breadcrumb-h, 0px) + 12px);
   display: flex;
   flex-direction: column;
   background: var(--color-white);
@@ -451,7 +451,7 @@
   --row-h: 46px;
   display: flex;
   align-items: center;
-  height: var(--row-h);
+  min-height: var(--row-h);
   gap: 2px;
 }
 
