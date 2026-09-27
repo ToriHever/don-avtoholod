@@ -25,6 +25,34 @@ add_filter('redirect_canonical', function ($redirect_url, $requested_url) {
 }, 10, 2);
 
 /**
+ * Применяет фильтр по марке автомобиля (?filter_marka=slug) к запросу
+ * товаров каталога — сам dah_wc_brand_filter() только рисует выпадающий
+ * список, а не меняет выборку.
+ */
+add_action('pre_get_posts', function (WP_Query $query): void {
+    if (is_admin() || !$query->is_main_query()) {
+        return;
+    }
+    if (!(is_shop() || is_product_category())) {
+        return;
+    }
+    if (empty($_GET['filter_marka'])) {
+        return;
+    }
+    $slug = sanitize_title(wp_unslash($_GET['filter_marka']));
+    if (!$slug) {
+        return;
+    }
+    $tax_query = (array) $query->get('tax_query');
+    $tax_query[] = [
+        'taxonomy' => 'pa_marka',
+        'field' => 'slug',
+        'terms' => $slug,
+    ];
+    $query->set('tax_query', $tax_query);
+});
+
+/**
  * Дерево категорий товаров для бокового меню каталога.
  */
 function dah_wc_category_sidebar(): void {
