@@ -142,12 +142,12 @@
     minus.addEventListener('click', function () {
       var value = Math.max(min, (parseFloat(input.value) || min) - step);
       input.value = value;
-      input.dispatchEvent(new Event('change'));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
     });
     plus.addEventListener('click', function () {
       var value = (parseFloat(input.value) || min) + step;
       input.value = value;
-      input.dispatchEvent(new Event('change'));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
     });
   });
 
