@@ -122,7 +122,29 @@ function dah_wc_brand_filter(): void {
     if (!taxonomy_exists('pa_marka')) {
         return;
     }
-    $terms = get_terms(['taxonomy' => 'pa_marka', 'hide_empty' => true]);
+
+    $terms_args = ['taxonomy' => 'pa_marka', 'hide_empty' => true];
+
+    // На странице конкретной категории список марок должен ограничиваться
+    // товарами именно этой категории (и её подкатегорий), а не всем магазином —
+    // иначе можно выбрать марку, для которой в этой категории нет ни одного товара.
+    if (is_product_category()) {
+        $category = get_queried_object();
+        if ($category instanceof WP_Term) {
+            $category_ids = [$category->term_id];
+            $children = get_term_children($category->term_id, 'product_cat');
+            if (!is_wp_error($children)) {
+                $category_ids = array_merge($category_ids, $children);
+            }
+            $product_ids = get_objects_in_term($category_ids, 'product_cat');
+            if (empty($product_ids) || is_wp_error($product_ids)) {
+                return;
+            }
+            $terms_args['object_ids'] = $product_ids;
+        }
+    }
+
+    $terms = get_terms($terms_args);
     if (empty($terms) || is_wp_error($terms)) {
         return;
     }
