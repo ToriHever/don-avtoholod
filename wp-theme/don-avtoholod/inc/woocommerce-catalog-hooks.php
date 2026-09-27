@@ -27,37 +27,62 @@ function dah_wc_category_sidebar(): void {
     }
 
     $current = is_tax('product_cat') ? get_queried_object() : null;
+    $goto_icon = '<svg class="shop-sidebar__goto-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     ?>
     <nav class="shop-sidebar">
         <h3 class="shop-sidebar__title">Категории</h3>
         <ul class="shop-sidebar__list">
-            <li>
-                <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>"
-                   class="<?php echo (!$current) ? 'is-active' : ''; ?>">Все товары</a>
-            </li>
-            <?php foreach ($terms as $term): ?>
-                <li>
-                    <a href="<?php echo esc_url(get_term_link($term)); ?>"
-                       class="<?php echo ($current && $current->term_id === $term->term_id) ? 'is-active' : ''; ?>">
-                        <?php echo esc_html($term->name); ?>
-                        <span class="shop-sidebar__count"><?php echo (int) $term->count; ?></span>
+            <li class="shop-sidebar__item">
+                <div class="shop-sidebar__row shop-sidebar__row--leaf">
+                    <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>"
+                       class="shop-sidebar__link <?php echo (!$current) ? 'is-active' : ''; ?>">
+                        <span class="shop-sidebar__name">Все товары</span>
                     </a>
-                    <?php
-                    $children = get_terms([
-                        'taxonomy' => 'product_cat',
-                        'hide_empty' => false,
-                        'parent' => $term->term_id,
-                    ]);
-                    if (!empty($children) && !is_wp_error($children)):
-                        ?>
+                </div>
+            </li>
+            <?php foreach ($terms as $term):
+                $children = get_terms([
+                    'taxonomy' => 'product_cat',
+                    'hide_empty' => false,
+                    'parent' => $term->term_id,
+                ]);
+                $has_children = !empty($children) && !is_wp_error($children);
+                $is_current = $current && $current->term_id === $term->term_id;
+                $has_active_child = $has_children && $current && in_array($current->term_id, wp_list_pluck($children, 'term_id'), true);
+                $is_open = $is_current || $has_active_child;
+                ?>
+                <li class="shop-sidebar__item <?php echo $has_children ? 'has-children' : ''; ?> <?php echo $is_open ? 'is-open' : ''; ?>">
+                    <div class="shop-sidebar__row">
+                        <?php if ($has_children): ?>
+                            <button type="button" class="shop-sidebar__toggle" aria-expanded="<?php echo $is_open ? 'true' : 'false'; ?>">
+                                <span class="shop-sidebar__chevron" aria-hidden="true"></span>
+                                <span class="shop-sidebar__name"><?php echo esc_html($term->name); ?></span>
+                                <span class="shop-sidebar__count"><?php echo (int) $term->count; ?></span>
+                            </button>
+                            <a href="<?php echo esc_url(get_term_link($term)); ?>"
+                               class="shop-sidebar__goto <?php echo $is_current ? 'is-active' : ''; ?>"
+                               aria-label="Перейти в раздел «<?php echo esc_attr($term->name); ?>»">
+                                <?php echo $goto_icon; ?>
+                            </a>
+                        <?php else: ?>
+                            <a href="<?php echo esc_url(get_term_link($term)); ?>"
+                               class="shop-sidebar__link <?php echo $is_current ? 'is-active' : ''; ?>">
+                                <span class="shop-sidebar__name"><?php echo esc_html($term->name); ?></span>
+                                <span class="shop-sidebar__count"><?php echo (int) $term->count; ?></span>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                    <?php if ($has_children): ?>
                         <ul class="shop-sidebar__sublist">
                             <?php foreach ($children as $child): ?>
-                                <li>
-                                    <a href="<?php echo esc_url(get_term_link($child)); ?>"
-                                       class="<?php echo ($current && $current->term_id === $child->term_id) ? 'is-active' : ''; ?>">
-                                        <?php echo esc_html($child->name); ?>
-                                        <span class="shop-sidebar__count"><?php echo (int) $child->count; ?></span>
-                                    </a>
+                                <li class="shop-sidebar__item">
+                                    <div class="shop-sidebar__row shop-sidebar__row--leaf">
+                                        <a href="<?php echo esc_url(get_term_link($child)); ?>"
+                                           class="shop-sidebar__link <?php echo ($current && $current->term_id === $child->term_id) ? 'is-active' : ''; ?>">
+                                            <span class="shop-sidebar__name"><?php echo esc_html($child->name); ?></span>
+                                            <span class="shop-sidebar__count"><?php echo (int) $child->count; ?></span>
+                                        </a>
+                                    </div>
                                 </li>
                             <?php endforeach; ?>
                         </ul>

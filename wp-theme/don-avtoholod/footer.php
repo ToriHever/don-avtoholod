@@ -142,6 +142,15 @@
     });
   })();
 
+  document.querySelectorAll('.shop-sidebar__toggle').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var item = button.closest('.shop-sidebar__item');
+      if (!item) return;
+      var isOpen = item.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
   (function () {
     var noReviews = document.querySelector('.woocommerce-noreviews');
     if (!noReviews) return;
