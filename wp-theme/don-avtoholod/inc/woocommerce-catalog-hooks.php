@@ -172,6 +172,15 @@ add_action('comment_form_before', function (): void {
 // Свои хлебные крошки вместо стандартных, с нашей вёрсткой.
 remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 add_action('woocommerce_before_main_content', 'dah_wc_breadcrumb', 20);
+// Крошка "Страница N" на пагинированных страницах каталога не нужна.
+add_filter('woocommerce_get_breadcrumb', function (array $crumbs): array {
+    $last = end($crumbs);
+    if ($last && isset($last[0]) && preg_match('/^(Страница|Page)\s+\d+$/u', trim($last[0]))) {
+        array_pop($crumbs);
+    }
+    return $crumbs;
+});
+
 function dah_wc_breadcrumb(): void {
     woocommerce_breadcrumb([
         'delimiter' => ' / ',
