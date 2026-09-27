@@ -356,7 +356,12 @@
 .dah-breadcrumb {
   color: var(--color-text-muted);
   font-size: 14px;
-  margin-bottom: 20px;
+  margin: 20px;
+}
+
+/* Страница магазина/каталога начинается сразу под шапкой, без верхнего отступа секции. */
+.section:has(.dah-shop-page) {
+  padding-top: 0;
 }
 
 .dah-breadcrumb a {
@@ -380,6 +385,27 @@
   max-height: calc(100vh - 48px);
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-blue-light) transparent;
+}
+
+.shop-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.shop-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.shop-sidebar::-webkit-scrollbar-thumb {
+  background-color: var(--color-blue-light);
+  border-radius: 999px;
+}
+
+.shop-sidebar::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .shop-sidebar__title {
