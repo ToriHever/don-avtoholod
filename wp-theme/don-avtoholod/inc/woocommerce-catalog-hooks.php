@@ -43,7 +43,10 @@ add_action('pre_get_posts', function (WP_Query $query): void {
     if (!$slug) {
         return;
     }
-    $tax_query = (array) $query->get('tax_query');
+    $tax_query = $query->get('tax_query');
+    if (!is_array($tax_query)) {
+        $tax_query = [];
+    }
     $tax_query[] = [
         'taxonomy' => 'pa_marka',
         'field' => 'slug',
