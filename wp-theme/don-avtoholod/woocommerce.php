@@ -1,7 +1,18 @@
 <?php
 /**
- * Обёртка WooCommerce (каталог, карточка товара, корзина, оформление заявки).
+ * Обёртка WooCommerce (карточка товара, корзина, оформление заявки).
+ *
+ * Главная страница магазина — это статическая WP-страница (а не архив
+ * таксономии), поэтому WordPress подхватывает именно этот файл, минуя
+ * woocommerce/archive-product.php. Чтобы там тоже показывалась наша сетка
+ * разделов, а не встроенный классический цикл woocommerce_content(),
+ * делегируем рендер в archive-product.php напрямую.
  */
+if (is_shop()) {
+    require get_theme_file_path('/woocommerce/archive-product.php');
+    return;
+}
+
 get_header();
 ?>
 
