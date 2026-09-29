@@ -24,7 +24,7 @@ $dah_back_label = $dah_parent_id ? '← ' . get_the_title($dah_parent_id) : '←
 
 <main>
   <section class="section">
-    <div class="container page-content">
+    <div class="container page-content<?php echo $dah_parent_id ? ' dah-page-content--wide' : ''; ?>">
       <a href="<?php echo esc_url($dah_back_url); ?>" class="page-content__back"><?php echo esc_html($dah_back_label); ?></a>
       <?php while (have_posts()): the_post(); ?>
         <h1><?php the_title(); ?></h1>

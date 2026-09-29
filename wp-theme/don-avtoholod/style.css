@@ -1364,6 +1364,12 @@ h4 {
   max-width: 780px;
 }
 
+/* Подстраницы с родителем (например, разделы "Обучения") — на всю ширину
+   основного контейнера сайта, а не в узкую текстовую колонку. */
+.page-content.dah-page-content--wide {
+  max-width: var(--container-width);
+}
+
 .page-content__back {
   display: inline-block;
   margin-bottom: 24px;
@@ -1547,3 +1553,97 @@ main {
 .dah-modal__close:hover {
   color: var(--color-text);
 }
+
+/* ==== хаб-страница "Обучение" ==== */
+.dah-training-hero {
+  background: var(--color-blue-light);
+}
+
+.dah-training-hero__content {
+  max-width: 720px;
+}
+
+.dah-training-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.dah-training-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.dah-training-benefit {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.dah-training-benefit__value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-blue);
+  margin-bottom: 4px;
+}
+
+.dah-training-benefit__title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.dah-training-benefit__text {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin: 0;
+}
+
+.dah-training-content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: 32px;
+}
+
+.dah-training-content h3 {
+  margin: 24px 0 8px;
+  font-size: 18px;
+}
+
+.dah-training-content p {
+  margin: 0 0 12px;
+}
+
+.dah-training-cta {
+  background: linear-gradient(135deg, var(--color-blue), var(--color-blue-dark));
+  color: var(--color-white);
+}
+
+.dah-training-cta__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.dah-training-cta__title {
+  font-size: 26px;
+  margin: 0 0 8px;
+  color: var(--color-white);
+}
+
+.dah-training-cta__text {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.dah-training-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
