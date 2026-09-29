@@ -19,9 +19,42 @@ $dah_benefits = [
     ['До 5 человек', 'Размер группы', 'Небольшие группы — больше практики и внимания каждому ученику.'],
     ['8 модулей', 'Программа', 'От физических основ работы кондиционера до заправки и промывки системы.'],
 ];
+
+while (have_posts()): the_post();
+    $dah_content = apply_filters('the_content', get_the_content());
+endwhile;
+
+// Разбиваем контент на: вступление / список модулей / текст после модулей.
+$dah_intro = $dah_content;
+$dah_after = '';
+if (($dah_pos = mb_strpos($dah_content, '<h3>Программа курса</h3>')) !== false) {
+    $dah_intro = mb_substr($dah_content, 0, $dah_pos);
+    $dah_after = mb_substr($dah_content, $dah_pos + mb_strlen('<h3>Программа курса</h3>'));
+}
+
+$dah_modules = [];
+if (preg_match_all('/<p><strong>Модуль\s*(\d+)\.<\/strong>\s*(.*?)<\/p>/is', $dah_after, $dah_matches, PREG_SET_ORDER)) {
+    foreach ($dah_matches as $dah_match) {
+        $dah_text = trim(wp_strip_all_tags($dah_match[2]));
+        $dah_parts = preg_split('/(?<=[.!?])\s+/u', $dah_text, 2);
+        $dah_modules[] = [
+            'number' => $dah_match[1],
+            'title' => $dah_parts[0] ?? $dah_text,
+            'text' => $dah_parts[1] ?? '',
+        ];
+    }
+}
+
+$dah_outro = trim(preg_replace('/<p><strong>Модуль\s*\d+\.<\/strong>.*?<\/p>/is', '', $dah_after));
 ?>
 
 <main>
+
+<div class="container dah-shop-page">
+  <nav class="dah-breadcrumb woocommerce-breadcrumb">
+    <a href="<?php echo esc_url(home_url('/')); ?>">Главная</a> / Обучение
+  </nav>
+</div>
 
 <section class="section dah-training-hero">
   <div class="container dah-training-hero__inner">
@@ -54,17 +87,43 @@ $dah_benefits = [
 </section>
 
 <section class="section" id="obuchenie-nav">
-  <div class="container dah-shop-page">
-    <nav class="dah-breadcrumb woocommerce-breadcrumb">
-      <a href="<?php echo esc_url(home_url('/')); ?>">Главная</a> / Обучение
-    </nav>
+  <div class="container">
+    <?php echo $dah_intro; ?>
 
-    <h2 class="dah-shop-section-title">Программа курса</h2>
-    <div class="dah-training-content">
-      <?php while (have_posts()): the_post(); ?>
-        <?php the_content(); ?>
-      <?php endwhile; ?>
-    </div>
+    <?php if (!empty($dah_modules)): ?>
+      <h2 class="dah-shop-section-title">Программа курса</h2>
+      <div class="dah-modules" data-dah-modules>
+        <ul class="dah-modules__list">
+          <?php foreach ($dah_modules as $dah_i => $dah_module): ?>
+            <li>
+              <button type="button" class="dah-modules__item<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-btn="<?php echo esc_attr($dah_module['number']); ?>">
+                <span class="dah-modules__num"><?php echo esc_html(str_pad($dah_module['number'], 2, '0', STR_PAD_LEFT)); ?></span>
+                <span class="dah-modules__item-body">
+                  <span class="dah-modules__item-title"><?php echo esc_html($dah_module['title']); ?></span>
+                </span>
+                <span class="dah-modules__arrow">→</span>
+              </button>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+
+        <div class="dah-modules__detail-wrap">
+          <?php foreach ($dah_modules as $dah_i => $dah_module): ?>
+            <div class="dah-modules__detail<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-detail="<?php echo esc_attr($dah_module['number']); ?>"<?php echo $dah_i === 0 ? '' : ' hidden'; ?>>
+              <span class="dah-modules__detail-eyebrow">Модуль <?php echo esc_html($dah_module['number']); ?></span>
+              <h3 class="dah-modules__detail-title"><?php echo esc_html($dah_module['title']); ?></h3>
+              <?php if ($dah_module['text']): ?>
+                <p class="dah-modules__detail-text"><?php echo esc_html($dah_module['text']); ?></p>
+              <?php endif; ?>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($dah_outro): ?>
+      <div class="dah-training-content dah-training-content--outro"><?php echo $dah_outro; ?></div>
+    <?php endif; ?>
 
     <?php if (!empty($dah_children)): ?>
       <h2 class="dah-shop-section-title">Разделы обучения</h2>
@@ -99,5 +158,25 @@ $dah_benefits = [
 </section>
 
 </main>
+
+<script>
+(function () {
+  var root = document.querySelector('[data-dah-modules]');
+  if (!root) { return; }
+  var buttons = root.querySelectorAll('[data-dah-module-btn]');
+  var details = root.querySelectorAll('[data-dah-module-detail]');
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-dah-module-btn');
+      buttons.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      details.forEach(function (d) {
+        var active = d.getAttribute('data-dah-module-detail') === id;
+        d.classList.toggle('is-active', active);
+        if (active) { d.removeAttribute('hidden'); } else { d.setAttribute('hidden', ''); }
+      });
+    });
+  });
+})();
+</script>
 
 <?php get_footer(); ?>
