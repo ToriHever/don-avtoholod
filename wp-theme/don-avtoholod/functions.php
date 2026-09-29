@@ -22,6 +22,36 @@ function dah_enqueue_assets(): void {
 add_action('wp_enqueue_scripts', 'dah_enqueue_assets');
 
 /**
+ * Транслитерация кириллицы для ЧПУ (адреса не должны содержать кириллицу
+ * и прочие не латинские символы).
+ */
+function dah_translit(string $text): string {
+    $map = [
+        'а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'zh','з'=>'z','и'=>'i',
+        'й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t',
+        'у'=>'u','ф'=>'f','х'=>'h','ц'=>'ts','ч'=>'ch','ш'=>'sh','щ'=>'sch','ъ'=>'','ы'=>'y','ь'=>'',
+        'э'=>'e','ю'=>'yu','я'=>'ya',
+    ];
+    $text = mb_strtolower($text);
+    $result = '';
+    foreach (preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY) as $char) {
+        $result .= $map[$char] ?? $char;
+    }
+    return $result;
+}
+
+/**
+ * Глобально: любой ЧПУ (записи, страницы, товары, категории и т.д.)
+ * автоматически транслитерируется из кириллицы, а не превращается
+ * в проценто-кодированную абракадабру вида %d0%b0%d0%b1... — так было
+ * до этого правила и приводило к путанице в ссылках и фильтрах.
+ * Приоритет 5, чтобы отработать до стандартного sanitize_title_with_dashes (10).
+ */
+add_filter('sanitize_title', function ($title) {
+    return dah_translit($title);
+}, 5);
+
+/**
  * Оценка времени чтения записи (используется в списке и в статье).
  */
 function dah_reading_time(string $content): string {

@@ -358,25 +358,8 @@ function dah_wc_single_ask_question_button(): void {
     echo '<button type="button" class="btn btn--secondary dah-product-ask" data-modal-open="dah-question-modal">Задать вопрос</button>';
 }
 
-/**
- * Транслитерация кириллицы для ЧПУ (адреса категорий не должны содержать кириллицу).
- */
-function dah_translit(string $text): string {
-    $map = [
-        'а'=>'a','б'=>'b','в'=>'v','г'=>'g','д'=>'d','е'=>'e','ё'=>'e','ж'=>'zh','з'=>'z','и'=>'i',
-        'й'=>'y','к'=>'k','л'=>'l','м'=>'m','н'=>'n','о'=>'o','п'=>'p','р'=>'r','с'=>'s','т'=>'t',
-        'у'=>'u','ф'=>'f','х'=>'h','ц'=>'ts','ч'=>'ch','ш'=>'sh','щ'=>'sch','ъ'=>'','ы'=>'y','ь'=>'',
-        'э'=>'e','ю'=>'yu','я'=>'ya',
-    ];
-    $text = mb_strtolower($text);
-    $result = '';
-    foreach (preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY) as $char) {
-        $result .= $map[$char] ?? $char;
-    }
-    return $result;
-}
-
 // Slug нового товара = его артикул (SKU), без кириллицы.
+// (dah_translit() теперь объявлена в functions.php и используется глобально.)
 add_action('save_post_product', 'dah_wc_slug_from_sku', 20, 3);
 function dah_wc_slug_from_sku(int $post_id, WP_Post $post, bool $update): void {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {

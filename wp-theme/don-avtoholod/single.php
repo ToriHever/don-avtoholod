@@ -1,6 +1,7 @@
 <?php
 /**
- * Отдельная новость: обложка 16:9, автор и дата, содержание слева (стики).
+ * Отдельная новость: обложка 16:9, автор и дата, содержание справа
+ * от обложки (той же высоты, чтобы не растягивалось на всю статью).
  */
 
 defined('ABSPATH') || exit;
@@ -78,33 +79,35 @@ function dah_news_toc(string $content): array {
                 <span class="dah-news-meta__dot">•</span>
                 <span><?php echo esc_html(dah_reading_time(get_the_content())); ?></span>
             </div>
-
-            <?php if (has_post_thumbnail()): ?>
-                <span class="dah-news-single__cover"><?php the_post_thumbnail('large'); ?></span>
-            <?php endif; ?>
         </header>
 
         <?php
         [$dah_content, $dah_headings] = dah_news_toc(apply_filters('the_content', get_the_content()));
         ?>
 
-        <div class="dah-news-single">
-            <?php if (!empty($dah_headings)): ?>
-                <aside class="dah-news-single__toc">
-                    <p class="dah-news-single__toc-title">Содержание</p>
-                    <ul class="dah-news-single__toc-list">
-                        <?php foreach ($dah_headings as $dah_heading): ?>
-                            <li<?php echo $dah_heading['level'] === 3 ? ' class="dah-news-single__toc-sublist"' : ''; ?>>
-                                <a href="#<?php echo esc_attr($dah_heading['id']); ?>"><?php echo esc_html($dah_heading['text']); ?></a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </aside>
-            <?php endif; ?>
+        <?php if (has_post_thumbnail() || !empty($dah_headings)): ?>
+            <div class="dah-news-single__top<?php echo empty($dah_headings) ? ' dah-news-single__top--no-toc' : ''; ?>">
+                <?php if (has_post_thumbnail()): ?>
+                    <span class="dah-news-single__cover"><?php the_post_thumbnail('large'); ?></span>
+                <?php endif; ?>
 
-            <div class="dah-news-single__content">
-                <?php echo $dah_content; ?>
+                <?php if (!empty($dah_headings)): ?>
+                    <aside class="dah-news-single__toc">
+                        <p class="dah-news-single__toc-title">Содержание</p>
+                        <ul class="dah-news-single__toc-list">
+                            <?php foreach ($dah_headings as $dah_heading): ?>
+                                <li<?php echo $dah_heading['level'] === 3 ? ' class="dah-news-single__toc-sublist"' : ''; ?>>
+                                    <a href="#<?php echo esc_attr($dah_heading['id']); ?>"><?php echo esc_html($dah_heading['text']); ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </aside>
+                <?php endif; ?>
             </div>
+        <?php endif; ?>
+
+        <div class="dah-news-single__content">
+            <?php echo $dah_content; ?>
         </div>
     <?php endwhile; ?>
 </div>
