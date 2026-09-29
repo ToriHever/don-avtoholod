@@ -2,6 +2,8 @@
 /**
  * Template Name: Обучение — раздел
  * Хаб-страница "Обучение": вступление/программа курса + ссылки на подстраницы.
+ * Всё содержимое редактируется полями ACF (см. inc/acf-fields.php),
+ * как и на главной странице — без блока произвольного текста.
  */
 
 defined('ABSPATH') || exit;
@@ -13,39 +15,15 @@ $dah_children = get_pages([
     'sort_column' => 'menu_order',
 ]);
 
-$dah_benefits = [
-    ['20 часов', 'Программа курса', 'Полный практический курс по ремонту и заправке автокондиционеров.'],
-    ['12 дней', 'Формат занятий', 'Обучение в удобном для вас темпе, время согласовывается индивидуально.'],
-    ['До 5 человек', 'Размер группы', 'Небольшие группы — больше практики и внимания каждому ученику.'],
-    ['8 модулей', 'Программа', 'От физических основ работы кондиционера до заправки и промывки системы.'],
-];
+$dah_benefits = array_map(
+    fn ($line) => dah_split_line($line, 3),
+    dah_split_lines(get_field('training_benefits'))
+);
 
-while (have_posts()): the_post();
-    $dah_content = apply_filters('the_content', get_the_content());
-endwhile;
-
-// Разбиваем контент на: вступление / список модулей / текст после модулей.
-$dah_intro = $dah_content;
-$dah_after = '';
-if (($dah_pos = mb_strpos($dah_content, '<h3>Программа курса</h3>')) !== false) {
-    $dah_intro = mb_substr($dah_content, 0, $dah_pos);
-    $dah_after = mb_substr($dah_content, $dah_pos + mb_strlen('<h3>Программа курса</h3>'));
-}
-
-$dah_modules = [];
-if (preg_match_all('/<p><strong>Модуль\s*(\d+)\.<\/strong>\s*(.*?)<\/p>/is', $dah_after, $dah_matches, PREG_SET_ORDER)) {
-    foreach ($dah_matches as $dah_match) {
-        $dah_text = trim(wp_strip_all_tags($dah_match[2]));
-        $dah_parts = preg_split('/(?<=[.!?])\s+/u', $dah_text, 2);
-        $dah_modules[] = [
-            'number' => $dah_match[1],
-            'title' => $dah_parts[0] ?? $dah_text,
-            'text' => $dah_parts[1] ?? '',
-        ];
-    }
-}
-
-$dah_outro = trim(preg_replace('/<p><strong>Модуль\s*\d+\.<\/strong>.*?<\/p>/is', '', $dah_after));
+$dah_modules = array_map(
+    fn ($line) => dah_split_line($line, 2),
+    dah_split_lines(get_field('training_modules'))
+);
 ?>
 
 <main>
@@ -59,11 +37,13 @@ $dah_outro = trim(preg_replace('/<p><strong>Модуль\s*\d+\.<\/strong>.*?<\/
 <section class="section dah-training-hero">
   <div class="container dah-training-hero__inner">
     <div class="dah-training-hero__content">
-      <span class="section__eyebrow">Обучение</span>
+      <?php if ($dah_eyebrow = get_field('training_eyebrow')): ?>
+        <span class="section__eyebrow"><?php echo esc_html($dah_eyebrow); ?></span>
+      <?php endif; ?>
       <h1 class="section__title"><?php the_title(); ?></h1>
-      <p class="section__lead">
-        Готовим специалистов по ремонту и заправке автокондиционеров — от физических основ работы систем климат-контроля до практики диагностики, заправки и промывки.
-      </p>
+      <?php if ($dah_lead = get_field('training_lead')): ?>
+        <p class="section__lead"><?php echo esc_html($dah_lead); ?></p>
+      <?php endif; ?>
       <div class="dah-training-hero__actions">
         <button type="button" class="btn btn--primary" data-modal-open="dah-question-modal">Записаться на обучение</button>
         <a class="btn btn--secondary" href="tel:+79287753852">Позвонить нам</a>
@@ -72,34 +52,34 @@ $dah_outro = trim(preg_replace('/<p><strong>Модуль\s*\d+\.<\/strong>.*?<\/
   </div>
 </section>
 
-<section class="section dah-training-benefits">
-  <div class="container">
-    <div class="dah-training-benefits__grid">
-      <?php foreach ($dah_benefits as [$value, $title, $text]): ?>
-        <div class="dah-training-benefit">
-          <div class="dah-training-benefit__value"><?php echo esc_html($value); ?></div>
-          <div class="dah-training-benefit__title"><?php echo esc_html($title); ?></div>
-          <p class="dah-training-benefit__text"><?php echo esc_html($text); ?></p>
-        </div>
-      <?php endforeach; ?>
+<?php if (!empty($dah_benefits)): ?>
+  <section class="section dah-training-benefits">
+    <div class="container">
+      <div class="dah-training-benefits__grid">
+        <?php foreach ($dah_benefits as [$value, $title, $text]): ?>
+          <div class="dah-training-benefit">
+            <div class="dah-training-benefit__value"><?php echo esc_html($value); ?></div>
+            <div class="dah-training-benefit__title"><?php echo esc_html($title); ?></div>
+            <p class="dah-training-benefit__text"><?php echo esc_html($text); ?></p>
+          </div>
+        <?php endforeach; ?>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+<?php endif; ?>
 
 <section class="section" id="obuchenie-nav">
   <div class="container">
-    <?php echo $dah_intro; ?>
-
     <?php if (!empty($dah_modules)): ?>
       <h2 class="dah-shop-section-title">Программа курса</h2>
       <div class="dah-modules" data-dah-modules>
         <ul class="dah-modules__list">
-          <?php foreach ($dah_modules as $dah_i => $dah_module): ?>
+          <?php foreach ($dah_modules as $dah_i => [$dah_title, $dah_text]): $dah_num = $dah_i + 1; ?>
             <li>
-              <button type="button" class="dah-modules__item<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-btn="<?php echo esc_attr($dah_module['number']); ?>">
-                <span class="dah-modules__num"><?php echo esc_html(str_pad($dah_module['number'], 2, '0', STR_PAD_LEFT)); ?></span>
+              <button type="button" class="dah-modules__item<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-btn="<?php echo esc_attr($dah_num); ?>">
+                <span class="dah-modules__num"><?php echo esc_html(str_pad((string) $dah_num, 2, '0', STR_PAD_LEFT)); ?></span>
                 <span class="dah-modules__item-body">
-                  <span class="dah-modules__item-title"><?php echo esc_html($dah_module['title']); ?></span>
+                  <span class="dah-modules__item-title"><?php echo esc_html($dah_title); ?></span>
                 </span>
                 <span class="dah-modules__arrow">→</span>
               </button>
@@ -108,21 +88,17 @@ $dah_outro = trim(preg_replace('/<p><strong>Модуль\s*\d+\.<\/strong>.*?<\/
         </ul>
 
         <div class="dah-modules__detail-wrap">
-          <?php foreach ($dah_modules as $dah_i => $dah_module): ?>
-            <div class="dah-modules__detail<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-detail="<?php echo esc_attr($dah_module['number']); ?>"<?php echo $dah_i === 0 ? '' : ' hidden'; ?>>
-              <span class="dah-modules__detail-eyebrow">Модуль <?php echo esc_html($dah_module['number']); ?></span>
-              <h3 class="dah-modules__detail-title"><?php echo esc_html($dah_module['title']); ?></h3>
-              <?php if ($dah_module['text']): ?>
-                <p class="dah-modules__detail-text"><?php echo esc_html($dah_module['text']); ?></p>
+          <?php foreach ($dah_modules as $dah_i => [$dah_title, $dah_text]): $dah_num = $dah_i + 1; ?>
+            <div class="dah-modules__detail<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-detail="<?php echo esc_attr($dah_num); ?>"<?php echo $dah_i === 0 ? '' : ' hidden'; ?>>
+              <span class="dah-modules__detail-eyebrow">Модуль <?php echo esc_html($dah_num); ?></span>
+              <h3 class="dah-modules__detail-title"><?php echo esc_html($dah_title); ?></h3>
+              <?php if ($dah_text): ?>
+                <p class="dah-modules__detail-text"><?php echo esc_html($dah_text); ?></p>
               <?php endif; ?>
             </div>
           <?php endforeach; ?>
         </div>
       </div>
-    <?php endif; ?>
-
-    <?php if ($dah_outro): ?>
-      <div class="dah-training-content dah-training-content--outro"><?php echo $dah_outro; ?></div>
     <?php endif; ?>
 
     <?php if (!empty($dah_children)): ?>

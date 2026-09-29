@@ -1832,6 +1832,34 @@ main {
   margin-top: 8px;
 }
 
+/* Карточки не растягиваются по высоте текста — заголовок и описание
+   обрезаются в несколько строк (иначе более длинные тексты давали
+   заметно более высокие карточки, чем у соседей). */
+.dah-news-rest-grid .dah-service-card__image img {
+  height: 130px;
+}
+
+.dah-news-rest-grid .dah-service-card__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dah-news-rest-grid .dah-service-card__excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dah-news-card--medium .dah-news-card__excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 @media (max-width: 860px) {
   .dah-news-hero-grid {
     grid-template-columns: 1fr;
@@ -1854,26 +1882,23 @@ main {
 }
 
 /* ==== Новости: страница одной статьи ==== */
-/* Обложка + содержание — один ряд одинаковой высоты; содержание справа
-   и оттого компактнее, а не тянется на всю статью. */
-.dah-news-single__top {
+/* Основной текст + прилипающее (floating) содержание справа от него. */
+.dah-news-single {
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 24px;
-  align-items: stretch;
-  margin-bottom: 32px;
-}
-
-.dah-news-single__top--no-toc {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 260px;
+  gap: 40px;
+  align-items: start;
 }
 
 .dah-news-single__toc {
-  height: 100%;
-  overflow-y: auto;
+  position: sticky;
+  top: 160px;
+  align-self: start;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 18px 20px;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 }
 
 .dah-news-single__toc-title {
@@ -1984,10 +2009,10 @@ main {
 
 .dah-news-single__cover {
   display: block;
+  margin: 0 0 32px;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 16 / 9;
-  height: 100%;
+  aspect-ratio: 21 / 9;
 }
 
 .dah-news-single__cover img {
@@ -2040,13 +2065,20 @@ main {
   margin: 8px 0 18px;
 }
 
-@media (max-width: 700px) {
-  .dah-news-single__top {
+@media (max-width: 900px) {
+  .dah-news-single {
     grid-template-columns: 1fr;
   }
   .dah-news-single__toc {
-    height: auto;
-    max-height: 260px;
+    position: static;
+    max-height: none;
+    margin-top: 32px;
+  }
+}
+
+@media (max-width: 700px) {
+  .dah-news-single__cover {
+    aspect-ratio: 16 / 9;
   }
   .dah-news-single__title {
     font-size: 26px;

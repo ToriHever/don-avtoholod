@@ -144,6 +144,32 @@ add_action('acf/init', function () {
             ],
         ],
     ]);
+
+    acf_add_local_field_group([
+        'key' => 'group_dah_training',
+        'title' => 'Обучение — содержимое',
+        'location' => [
+            [
+                [
+                    'param' => 'page_template',
+                    'operator' => '==',
+                    'value' => 'page-obuchenie.php',
+                ],
+            ],
+        ],
+        'fields' => [
+            ['key' => 'f_training_eyebrow', 'label' => 'Надпись над заголовком', 'name' => 'training_eyebrow', 'type' => 'text'],
+            ['key' => 'f_training_lead', 'label' => 'Подзаголовок (под заголовком H1)', 'name' => 'training_lead', 'type' => 'textarea'],
+            [
+                'key' => 'f_training_benefits', 'label' => 'Карточки-показатели (4 шт.)', 'name' => 'training_benefits', 'type' => 'textarea', 'rows' => 6,
+                'instructions' => 'По одной строке на карточку. Формат: Значение :: Заголовок :: Текст',
+            ],
+            [
+                'key' => 'f_training_modules', 'label' => 'Модули программы курса', 'name' => 'training_modules', 'type' => 'textarea', 'rows' => 16,
+                'instructions' => 'По одной строке на модуль (нумеруются автоматически по порядку). Формат: Заголовок модуля :: Описание',
+            ],
+        ],
+    ]);
 });
 
 /**
