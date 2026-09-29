@@ -55,6 +55,13 @@ add_action('acf/init', function () {
                 'key' => 'f_services_groups', 'label' => 'Услуги: группы', 'name' => 'services_groups', 'type' => 'textarea', 'rows' => 14,
                 'instructions' => 'Группы разделяйте пустой строкой. Первая строка группы — её название, остальные строки — пункты списка.',
             ],
+            ['key' => 'f_services_button', 'label' => 'Услуги: текст кнопки со ссылкой на каталог услуг', 'name' => 'services_button', 'type' => 'text'],
+
+            // Shop
+            ['key' => 'f_shop_eyebrow', 'label' => 'Магазин: надпись над заголовком', 'name' => 'shop_eyebrow', 'type' => 'text'],
+            ['key' => 'f_shop_title', 'label' => 'Магазин: заголовок', 'name' => 'shop_title', 'type' => 'textarea', 'rows' => 2],
+            ['key' => 'f_shop_lead', 'label' => 'Магазин: подзаголовок', 'name' => 'shop_lead', 'type' => 'textarea'],
+            ['key' => 'f_shop_button', 'label' => 'Магазин: текст кнопки со ссылкой на каталог товаров', 'name' => 'shop_button', 'type' => 'text'],
 
             // Cooling issues
             ['key' => 'f_cooling_eyebrow', 'label' => 'Диагностика: надпись над заголовком', 'name' => 'cooling_eyebrow', 'type' => 'text'],

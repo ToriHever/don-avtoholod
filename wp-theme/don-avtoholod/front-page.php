@@ -94,6 +94,30 @@ $question_sent = isset($_GET['question_sent']);
         </div>
       <?php endforeach; ?>
     </div>
+
+    <?php if (get_field('services_button') && function_exists('get_post_type_archive_link')): ?>
+      <div class="section__cta">
+        <a class="btn btn--primary" href="<?php echo esc_url(get_post_type_archive_link('service')); ?>">
+          <?php echo esc_html(get_field('services_button')); ?>
+        </a>
+      </div>
+    <?php endif; ?>
+  </div>
+</section>
+
+<section class="section" id="shop">
+  <div class="container">
+    <span class="section__eyebrow"><?php echo esc_html(get_field('shop_eyebrow')); ?></span>
+    <h2 class="section__title"><?php echo esc_html(get_field('shop_title')); ?></h2>
+    <p class="section__lead"><?php echo esc_html(get_field('shop_lead')); ?></p>
+
+    <?php if (get_field('shop_button') && function_exists('wc_get_page_id')): ?>
+      <div class="section__cta">
+        <a class="btn btn--primary" href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>">
+          <?php echo esc_html(get_field('shop_button')); ?>
+        </a>
+      </div>
+    <?php endif; ?>
   </div>
 </section>
 
