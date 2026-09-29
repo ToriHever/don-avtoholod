@@ -759,6 +759,8 @@ h4 {
 }
 
 .cooling-issues__content {
+  position: sticky;
+  top: 160px;
   align-self: start;
 }
 
@@ -877,6 +879,8 @@ h4 {
 }
 
 .faq-layout__questions {
+  position: sticky;
+  top: 160px;
   align-self: start;
 }
 
