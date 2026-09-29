@@ -1372,6 +1372,113 @@ h4 {
   font-size: 16px;
 }
 
+/* ==== каталог услуг ==== */
+.dah-service-archive-lead {
+  color: var(--color-text-muted);
+  font-size: 16px;
+  margin: 0 0 24px;
+}
+
+.dah-service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.dah-service-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.dah-service-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.dah-service-card__link {
+  display: block;
+  padding: 20px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.dah-service-card__image {
+  display: block;
+  margin: -20px -20px 16px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+}
+
+.dah-service-card__image img {
+  display: block;
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.dah-service-card__title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--color-text);
+}
+
+.dah-service-card__excerpt {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0 0 12px;
+}
+
+.dah-service-card__more {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-blue);
+}
+
+/* -- страница одной услуги -- */
+.dah-service-single__category {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.dah-service-single__category a {
+  color: var(--color-blue);
+}
+
+.dah-service-single__image {
+  margin-bottom: 24px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.dah-service-single__image img {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.dah-service-single__content {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.dah-service-single__content p {
+  margin: 0 0 16px;
+}
+
+.dah-service-single__actions {
+  margin-top: 12px;
+}
+
 /* ==== app ==== */
 main {
   display: block;
