@@ -22,6 +22,27 @@ function dah_enqueue_assets(): void {
 add_action('wp_enqueue_scripts', 'dah_enqueue_assets');
 
 /**
+ * Оценка времени чтения записи (используется в списке и в статье).
+ */
+function dah_reading_time(string $content): string {
+    $words = str_word_count(wp_strip_all_tags($content));
+    $minutes = max(1, (int) ceil($words / 180));
+    return $minutes . ' мин чтения';
+}
+
+function dah_news_card_meta(): void {
+    ?>
+    <span class="dah-news-meta">
+        <?php echo esc_html(get_the_author()); ?>
+        <span class="dah-news-meta__dot">•</span>
+        <?php echo esc_html(get_the_date()); ?>
+        <span class="dah-news-meta__dot">•</span>
+        <?php echo esc_html(dah_reading_time(get_the_content())); ?>
+    </span>
+    <?php
+}
+
+/**
  * Вопрос с сайта отправляется на email через стандартную форму (без JS-модалки).
  * Обрабатываем POST от формы "Задать вопрос" и отправляем письмо администратору.
  */
