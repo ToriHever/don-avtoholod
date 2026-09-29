@@ -1715,8 +1715,12 @@ main {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 28px 24px 22px;
-  background: linear-gradient(180deg, rgba(10, 20, 30, 0) 0%, rgba(10, 20, 30, 0.82) 78%);
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px 24px 36px;
+  background: linear-gradient(180deg, rgba(10, 20, 30, 0) 0%, rgba(10, 20, 30, 0.5) 45%, rgba(10, 20, 30, 0.88) 100%);
 }
 
 .dah-news-card__title {
@@ -1764,7 +1768,8 @@ main {
 
 .dah-news-card--small .dah-news-card__thumb {
   display: block;
-  height: 120px;
+  flex: 1 1 auto;
+  min-height: 90px;
   overflow: hidden;
 }
 
