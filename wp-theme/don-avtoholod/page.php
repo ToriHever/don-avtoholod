@@ -16,10 +16,16 @@ if (function_exists('is_cart') && (is_cart() || is_checkout() || is_account_page
 get_header();
 ?>
 
+<?php
+$dah_parent_id = wp_get_post_parent_id(get_queried_object_id());
+$dah_back_url = $dah_parent_id ? get_permalink($dah_parent_id) : home_url('/');
+$dah_back_label = $dah_parent_id ? '← ' . get_the_title($dah_parent_id) : '← На главную';
+?>
+
 <main>
   <section class="section">
     <div class="container page-content">
-      <a href="/" class="page-content__back">← На главную</a>
+      <a href="<?php echo esc_url($dah_back_url); ?>" class="page-content__back"><?php echo esc_html($dah_back_label); ?></a>
       <?php while (have_posts()): the_post(); ?>
         <h1><?php the_title(); ?></h1>
         <div class="page-content__body"><?php the_content(); ?></div>

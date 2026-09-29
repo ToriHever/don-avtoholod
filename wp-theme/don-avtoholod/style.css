@@ -1425,6 +1425,13 @@ h4 {
   object-fit: cover;
 }
 
+.dah-news-card__date {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0 0 6px;
+}
+
 .dah-service-card__title {
   font-size: 17px;
   font-weight: 600;

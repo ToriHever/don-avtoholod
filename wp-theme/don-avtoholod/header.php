@@ -69,6 +69,12 @@
           <li><a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>">Магазин</a></li>
         <?php endif; ?>
         <li><a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>">Услуги</a></li>
+        <?php $dah_obuchenie = get_page_by_path('obuchenie'); if ($dah_obuchenie): ?>
+          <li><a href="<?php echo esc_url(get_permalink($dah_obuchenie)); ?>">Обучение</a></li>
+        <?php endif; ?>
+        <?php if (get_option('page_for_posts')): ?>
+          <li><a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>">Новости</a></li>
+        <?php endif; ?>
         <li><a href="<?php echo esc_url(home_url('/#heaters')); ?>">Автономные отопители</a></li>
         <li><a href="<?php echo esc_url(home_url('/#about')); ?>">О компании</a></li>
         <li><a href="<?php echo esc_url(home_url('/#faq')); ?>">FAQ</a></li>
