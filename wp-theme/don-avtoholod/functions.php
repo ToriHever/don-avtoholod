@@ -105,6 +105,45 @@ function dah_handle_question_form(): void {
 }
 add_action('init', 'dah_handle_question_form');
 
+/**
+ * Ссылки на новости должны лежать в разделе /новости/, а не в корне сайта
+ * (по умолчанию WordPress ставит записи в корень, даже если назначена
+ * отдельная "страница записей" — это не влияет на структуру ссылок).
+ */
+function dah_news_base_slug(): string {
+    $page_id = (int) get_option('page_for_posts');
+    if ($page_id) {
+        $slug = get_post_field('post_name', $page_id);
+        if ($slug) {
+            return $slug;
+        }
+    }
+    return 'novosti';
+}
+
+add_filter('post_link', function (string $url, WP_Post $post): string {
+    if ($post->post_type !== 'post') {
+        return $url;
+    }
+    return home_url('/' . dah_news_base_slug() . '/' . $post->post_name . '/');
+}, 10, 2);
+
+add_action('init', function (): void {
+    add_rewrite_rule(
+        '^' . dah_news_base_slug() . '/([^/]+)/?$',
+        'index.php?post_type=post&name=$matches[1]',
+        'top'
+    );
+});
+
+// Одноразовый сброс правил ЧПУ, чтобы новое правило заработало без похода в Настройки → Постоянные ссылки.
+add_action('init', function (): void {
+    if (get_option('dah_news_rewrite_flushed_v1') !== '1') {
+        update_option('dah_news_rewrite_flushed_v1', '1');
+        add_action('shutdown', 'flush_rewrite_rules');
+    }
+}, 20);
+
 require_once get_template_directory() . '/inc/acf-fields.php';
 require_once get_template_directory() . '/inc/services.php';
 require_once get_template_directory() . '/inc/woocommerce.php';
