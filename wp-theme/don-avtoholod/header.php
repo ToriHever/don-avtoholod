@@ -75,9 +75,7 @@
         <?php if (get_option('page_for_posts')): ?>
           <li><a href="<?php echo esc_url(get_permalink(get_option('page_for_posts'))); ?>">Новости</a></li>
         <?php endif; ?>
-        <li><a href="<?php echo esc_url(home_url('/#heaters')); ?>">Автономные отопители</a></li>
         <li><a href="<?php echo esc_url(home_url('/#about')); ?>">О компании</a></li>
-        <li><a href="<?php echo esc_url(home_url('/#faq')); ?>">FAQ</a></li>
         <li><a href="<?php echo esc_url(home_url('/#contacts')); ?>">Контакты</a></li>
       </ul>
       <a
