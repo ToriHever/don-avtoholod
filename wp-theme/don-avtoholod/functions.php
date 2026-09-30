@@ -60,17 +60,6 @@ function dah_reading_time(string $content): string {
     return $minutes . ' мин чтения';
 }
 
-function dah_news_card_meta(): void {
-    ?>
-    <span class="dah-news-meta">
-        <?php echo esc_html(get_the_author()); ?>
-        <span class="dah-news-meta__dot">•</span>
-        <?php echo esc_html(get_the_date()); ?>
-        <span class="dah-news-meta__dot">•</span>
-        <?php echo esc_html(dah_reading_time(get_the_content())); ?>
-    </span>
-    <?php
-}
 
 /**
  * Вопрос с сайта отправляется на email через стандартную форму (без JS-модалки).
