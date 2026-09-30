@@ -2216,6 +2216,47 @@ main {
   margin: 0;
 }
 
+/* -- "Что узнаете" / "Результат": выделенные блоки, чтобы цеплялся взгляд -- */
+.dah-modules__callout {
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-top: 14px;
+}
+
+.dah-modules__callout p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--color-text);
+}
+
+.dah-modules__callout-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.dah-modules__callout--learn {
+  background: var(--color-blue-light);
+  border-left: 3px solid var(--color-blue);
+}
+
+.dah-modules__callout--learn .dah-modules__callout-label {
+  color: var(--color-blue);
+}
+
+.dah-modules__callout--result {
+  background: #fbf3e6;
+  border-left: 3px solid var(--color-yellow-dark);
+}
+
+.dah-modules__callout--result .dah-modules__callout-label {
+  color: var(--color-yellow-dark);
+}
+
 @media (max-width: 780px) {
   .dah-modules {
     grid-template-columns: 1fr;

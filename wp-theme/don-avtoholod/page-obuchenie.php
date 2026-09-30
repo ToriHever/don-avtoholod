@@ -21,7 +21,7 @@ $dah_benefits = array_map(
 );
 
 $dah_modules = array_map(
-    fn ($line) => dah_split_line($line, 2),
+    fn ($line) => dah_split_line($line, 4),
     dah_split_lines(get_field('training_modules'))
 );
 ?>
@@ -74,7 +74,7 @@ $dah_modules = array_map(
       <h2 class="dah-shop-section-title">Программа курса</h2>
       <div class="dah-modules" data-dah-modules>
         <ul class="dah-modules__list">
-          <?php foreach ($dah_modules as $dah_i => [$dah_title, $dah_text]): $dah_num = $dah_i + 1; ?>
+          <?php foreach ($dah_modules as $dah_i => [$dah_title, $dah_intro, $dah_learn, $dah_result]): $dah_num = $dah_i + 1; ?>
             <li>
               <button type="button" class="dah-modules__item<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-btn="<?php echo esc_attr($dah_num); ?>">
                 <span class="dah-modules__num"><?php echo esc_html(str_pad((string) $dah_num, 2, '0', STR_PAD_LEFT)); ?></span>
@@ -88,12 +88,24 @@ $dah_modules = array_map(
         </ul>
 
         <div class="dah-modules__detail-wrap">
-          <?php foreach ($dah_modules as $dah_i => [$dah_title, $dah_text]): $dah_num = $dah_i + 1; ?>
+          <?php foreach ($dah_modules as $dah_i => [$dah_title, $dah_intro, $dah_learn, $dah_result]): $dah_num = $dah_i + 1; ?>
             <div class="dah-modules__detail<?php echo $dah_i === 0 ? ' is-active' : ''; ?>" data-dah-module-detail="<?php echo esc_attr($dah_num); ?>"<?php echo $dah_i === 0 ? '' : ' hidden'; ?>>
               <span class="dah-modules__detail-eyebrow">Модуль <?php echo esc_html($dah_num); ?></span>
               <h3 class="dah-modules__detail-title"><?php echo esc_html($dah_title); ?></h3>
-              <?php if ($dah_text): ?>
-                <p class="dah-modules__detail-text"><?php echo esc_html($dah_text); ?></p>
+              <?php if ($dah_intro): ?>
+                <p class="dah-modules__detail-text"><?php echo esc_html($dah_intro); ?></p>
+              <?php endif; ?>
+              <?php if ($dah_learn): ?>
+                <div class="dah-modules__callout dah-modules__callout--learn">
+                  <span class="dah-modules__callout-label">Что узнаете</span>
+                  <p><?php echo esc_html($dah_learn); ?></p>
+                </div>
+              <?php endif; ?>
+              <?php if ($dah_result): ?>
+                <div class="dah-modules__callout dah-modules__callout--result">
+                  <span class="dah-modules__callout-label">Результат</span>
+                  <p><?php echo esc_html($dah_result); ?></p>
+                </div>
               <?php endif; ?>
             </div>
           <?php endforeach; ?>
