@@ -62,7 +62,13 @@ function dah_news_toc(string $content): array {
 <section class="section">
 <div class="container page-content dah-shop-page">
     <?php while (have_posts()): the_post(); ?>
-        <a href="<?php echo esc_url(get_option('page_for_posts') ? get_permalink(get_option('page_for_posts')) : home_url('/')); ?>" class="page-content__back">← Все новости</a>
+        <nav class="dah-breadcrumb woocommerce-breadcrumb">
+            <a href="<?php echo esc_url(home_url('/')); ?>">Главная</a> /
+            <?php if ($dah_news_page_id = get_option('page_for_posts')): ?>
+                <a href="<?php echo esc_url(get_permalink($dah_news_page_id)); ?>">Новости</a> /
+            <?php endif; ?>
+            <?php the_title(); ?>
+        </nav>
 
         <header class="dah-news-single__header">
             <?php $dah_cats = get_the_category(); if (!empty($dah_cats)): ?>

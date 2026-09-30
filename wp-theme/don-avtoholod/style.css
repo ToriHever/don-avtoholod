@@ -1555,8 +1555,23 @@ main {
 }
 
 /* ==== хаб-страница "Обучение" ==== */
+/* Отступы уже, чем стандартные 72px секции — иначе между блоками
+   хаб-страницы накапливались очень большие пустые промежутки. */
 .dah-training-hero {
   background: var(--color-blue-light);
+  padding: 40px 0 32px;
+}
+
+.dah-training-benefits {
+  padding: 32px 0;
+}
+
+#obuchenie-nav {
+  padding: 32px 0 56px;
+}
+
+.dah-training-cta {
+  padding: 48px 0;
 }
 
 .dah-training-hero__content {
@@ -1718,9 +1733,10 @@ main {
   top: 30%;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: flex-end;
-  padding: 28px 24px 36px;
-  background: linear-gradient(180deg, rgba(10, 20, 30, 0) 0%, rgba(10, 20, 30, 0.5) 45%, rgba(10, 20, 30, 0.88) 100%);
+  padding: 28px 24px 84px;
+  background: linear-gradient(180deg, rgba(10, 20, 30, 0) 0%, rgba(10, 20, 30, 0.5) 16%, rgba(10, 20, 30, 0.88) 100%);
 }
 
 .dah-news-card__title {
@@ -2211,5 +2227,50 @@ main {
   .dah-modules__detail-wrap {
     padding: 24px 20px;
   }
+}
+
+/* ==== Пагинация — общий стиль для всего сайта ====
+   WordPress (the_posts_pagination/paginate_links) и WooCommerce оба
+   помечают ссылки/текущую страницу классом .page-numbers — стилизуем
+   один раз здесь, а не в каждом разделе отдельно. */
+.pagination,
+.navigation.pagination {
+  margin-top: 32px;
+}
+
+.pagination .nav-links,
+.navigation.pagination .nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a.page-numbers:hover {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+.page-numbers.current {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+.page-numbers.dots {
+  border-color: transparent;
 }
 
