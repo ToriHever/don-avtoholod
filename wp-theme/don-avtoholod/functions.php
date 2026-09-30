@@ -22,6 +22,42 @@ function dah_enqueue_assets(): void {
 add_action('wp_enqueue_scripts', 'dah_enqueue_assets');
 
 /**
+ * Записи (post) на сайте — это новости, переименовываем пункт меню,
+ * чтобы это было понятно в админке.
+ */
+add_action('init', function (): void {
+    global $wp_post_types;
+    if (!isset($wp_post_types['post'])) {
+        return;
+    }
+    $wp_post_types['post']->labels->name = 'Новости/Статьи';
+    $wp_post_types['post']->labels->menu_name = 'Новости/Статьи';
+    $wp_post_types['post']->labels->all_items = 'Все новости/статьи';
+    $wp_post_types['post']->labels->add_new_item = 'Добавить новость/статью';
+    $wp_post_types['post']->labels->edit_item = 'Редактировать новость/статью';
+}, 20);
+
+/**
+ * Порядок пунктов в главном меню админки: Товары, Услуги, Записи,
+ * Комментарии, Страницы — затем всё остальное в прежнем порядке.
+ */
+add_filter('custom_menu_order', '__return_true');
+add_filter('menu_order', function (array $menu_order): array {
+    $desired = [
+        'edit.php?post_type=product',
+        'edit.php?post_type=service',
+        'edit.php',
+        'edit-comments.php',
+        'edit.php?post_type=page',
+    ];
+
+    $head = in_array('index.php', $menu_order, true) ? ['index.php'] : [];
+    $rest = array_values(array_diff($menu_order, array_merge($head, $desired)));
+
+    return array_merge($head, $desired, $rest);
+});
+
+/**
  * Транслитерация кириллицы для ЧПУ (адреса не должны содержать кириллицу
  * и прочие не латинские символы).
  */
