@@ -44,7 +44,8 @@ add_action('wp_head', function (): void {
 function dah_register_service_post_type(): void {
     register_post_type('service', [
         'labels' => [
-            'name' => 'Услуги (архив, не используется публично)',
+            'name' => 'Услуги',
+            'menu_name' => 'Услуги',
             'singular_name' => 'Услуга',
             'add_new_item' => 'Добавить услугу',
             'edit_item' => 'Редактировать услугу',
@@ -62,6 +63,16 @@ function dah_register_service_post_type(): void {
     ]);
 }
 add_action('init', 'dah_register_service_post_type');
+
+/**
+ * В меню "Услуги" оставляем только категории (посадочные страницы) —
+ * пункты "Все услуги" и "Добавить услугу" ведут на отдельные записи,
+ * которые публично больше не используются.
+ */
+add_action('admin_menu', function (): void {
+    remove_submenu_page('edit.php?post_type=service', 'edit.php?post_type=service');
+    remove_submenu_page('edit.php?post_type=service', 'post-new.php?post_type=service');
+}, 999);
 
 /**
  * Категория услуг — теперь это и есть посадочная страница. Отдельное
