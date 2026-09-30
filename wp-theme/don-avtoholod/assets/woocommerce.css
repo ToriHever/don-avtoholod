@@ -401,14 +401,22 @@
  * зависит от этого поведения.
  */
 .dah-breadcrumb {
-  position: sticky;
-  top: var(--dah-header-h, 90px);
-  z-index: 10;
+  position: relative;
   background: var(--color-white);
   color: var(--color-text-muted);
   font-size: 14px;
   margin: 0;
   padding: 20px;
+}
+
+/* Прилипающими (sticky) крошки остаются только в разделе магазина —
+   там под ними длинный список товаров и фильтр, и удобно всегда видеть
+   путь назад. На остальных страницах это было лишним. */
+body.woocommerce .dah-breadcrumb,
+body.woocommerce-page .dah-breadcrumb {
+  position: sticky;
+  top: var(--dah-header-h, 90px);
+  z-index: 10;
 }
 
 /* Отступ от контента только на хабе новостей и странице статьи — на
