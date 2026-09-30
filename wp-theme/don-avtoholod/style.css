@@ -1722,7 +1722,6 @@ main {
 .dah-news-tablecard__thumb {
   display: block;
   margin-top: auto;
-  border-radius: var(--radius);
   overflow: hidden;
   aspect-ratio: 4 / 3;
   max-height: 160px;
@@ -1877,21 +1876,6 @@ main {
   font-weight: 600;
 }
 
-.dah-news-single__cover {
-  display: block;
-  margin: 0 0 32px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  aspect-ratio: 21 / 9;
-}
-
-.dah-news-single__cover img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .dah-news-single__content {
   font-size: 16px;
   line-height: 1.75;
@@ -1947,9 +1931,6 @@ main {
 }
 
 @media (max-width: 700px) {
-  .dah-news-single__cover {
-    aspect-ratio: 16 / 9;
-  }
   .dah-news-single__title {
     font-size: 26px;
   }
