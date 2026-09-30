@@ -2498,3 +2498,123 @@ a.page-numbers:hover {
   gap: 16px;
 }
 
+/* ==== Обучение: заправочные объёмы (поиск + раскрывающийся список по маркам) ==== */
+.dah-refill-hint {
+  color: var(--color-text-muted);
+  font-size: 15px;
+  margin: 0 0 20px;
+}
+
+.dah-refill__search {
+  display: block;
+  width: 100%;
+  padding: 14px 18px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.dah-refill__search:focus {
+  outline: none;
+  border-color: var(--color-blue);
+}
+
+.dah-refill__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dah-refill__empty {
+  color: var(--color-text-muted);
+  padding: 16px 0;
+}
+
+.dah-refill-brand {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.dah-refill-brand summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-text);
+  list-style: none;
+}
+
+.dah-refill-brand summary::-webkit-details-marker {
+  display: none;
+}
+
+.dah-refill-brand summary::after {
+  content: '+';
+  font-weight: 400;
+  color: var(--color-text-muted);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.dah-refill-brand[open] summary::after {
+  content: '−';
+}
+
+.dah-refill-brand:hover summary {
+  background: var(--color-blue-light);
+}
+
+.dah-refill-brand__count {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+.dah-refill-brand__body {
+  border-top: 1px solid var(--color-border);
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.dah-refill-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dah-refill-table th {
+  position: sticky;
+  top: 0;
+  background: var(--color-white);
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dah-refill-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.dah-refill-table tr:last-child td {
+  border-bottom: none;
+}
+
+.dah-refill-note {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
