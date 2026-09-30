@@ -33,8 +33,8 @@ get_header();
 
                     <span class="dah-news-tablecard__date"><?php echo esc_html(get_the_date('d.m')); ?></span>
 
-                    <?php if (has_post_thumbnail()): ?>
-                        <span class="dah-news-tablecard__thumb"><?php the_post_thumbnail('medium'); ?></span>
+                    <?php if (dah_has_post_thumbnail_or_placeholder()): ?>
+                        <span class="dah-news-tablecard__thumb"><?php dah_the_post_thumbnail_or_placeholder('medium'); ?></span>
                     <?php endif; ?>
                 </a>
             <?php endwhile; ?>

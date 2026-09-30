@@ -60,6 +60,35 @@ function dah_reading_time(string $content): string {
     return $minutes . ' мин чтения';
 }
 
+/**
+ * Заглушки для новостей без своей обложки: пул картинок из медиабиблиотеки
+ * (id хранятся в опции, заполняется одноразовым скриптом). Картинка
+ * выбирается по ID записи — выглядит случайно, но закреплена за
+ * конкретной новостью (не "мигает" другой при каждом обновлении страницы).
+ */
+function dah_news_placeholder_ids(): array {
+    return array_values(array_filter(array_map('intval', (array) get_option('dah_news_placeholder_ids', []))));
+}
+
+function dah_has_post_thumbnail_or_placeholder(int $post_id = 0): bool {
+    $post_id = $post_id ?: get_the_ID();
+    return has_post_thumbnail($post_id) || !empty(dah_news_placeholder_ids());
+}
+
+function dah_the_post_thumbnail_or_placeholder(string $size = 'medium', int $post_id = 0): void {
+    $post_id = $post_id ?: get_the_ID();
+    if (has_post_thumbnail($post_id)) {
+        the_post_thumbnail($size);
+        return;
+    }
+    $ids = dah_news_placeholder_ids();
+    if (empty($ids)) {
+        return;
+    }
+    $id = $ids[$post_id % count($ids)];
+    echo wp_get_attachment_image($id, $size);
+}
+
 
 /**
  * Вопрос с сайта отправляется на email через стандартную форму (без JS-модалки).

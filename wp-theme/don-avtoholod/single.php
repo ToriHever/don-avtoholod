@@ -91,8 +91,8 @@ function dah_news_toc(string $content): array {
         [$dah_content, $dah_headings] = dah_news_toc(apply_filters('the_content', get_the_content()));
         ?>
 
-        <?php if (has_post_thumbnail()): ?>
-            <span class="dah-news-single__cover"><?php the_post_thumbnail('large'); ?></span>
+        <?php if (dah_has_post_thumbnail_or_placeholder()): ?>
+            <span class="dah-news-single__cover"><?php dah_the_post_thumbnail_or_placeholder('large'); ?></span>
         <?php endif; ?>
 
         <div class="dah-news-single">
