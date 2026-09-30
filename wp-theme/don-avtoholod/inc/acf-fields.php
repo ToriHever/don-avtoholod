@@ -170,6 +170,49 @@ add_action('acf/init', function () {
             ],
         ],
     ]);
+
+    acf_add_local_field_group([
+        'key' => 'group_dah_service',
+        'title' => 'Услуга — содержимое страницы',
+        'location' => [
+            [
+                [
+                    'param' => 'post_type',
+                    'operator' => '==',
+                    'value' => 'service',
+                ],
+            ],
+        ],
+        'fields' => [
+            ['key' => 'f_service_hero_note', 'label' => 'Первый экран: короткая строка (сроки / гарантия / опыт)', 'name' => 'service_hero_note', 'type' => 'text'],
+            ['key' => 'f_service_price_from', 'label' => 'Цена «от» (например: от 1 500 ₽)', 'name' => 'service_price_from', 'type' => 'text'],
+            [
+                'key' => 'f_service_symptoms', 'label' => 'Симптомы и проблемы', 'name' => 'service_symptoms', 'type' => 'textarea', 'rows' => 8,
+                'instructions' => 'По одному признаку на строку — с чем обращаются клиенты.',
+            ],
+            [
+                'key' => 'f_service_price_items', 'label' => 'Перечень работ и цены', 'name' => 'service_price_items', 'type' => 'textarea', 'rows' => 10,
+                'instructions' => 'По одной строке на позицию. Формат: Работа :: Цена',
+            ],
+            [
+                'key' => 'f_service_steps', 'label' => 'Как проходит работа', 'name' => 'service_steps', 'type' => 'textarea', 'rows' => 8,
+                'instructions' => 'По одной строке на шаг (нумеруются по порядку). Формат: Шаг :: Текст',
+            ],
+            [
+                'key' => 'f_service_advantages', 'label' => 'Преимущества и гарантия', 'name' => 'service_advantages', 'type' => 'textarea', 'rows' => 8,
+                'instructions' => 'По одному конкретному факту на строку (срок гарантии, наличие запчастей, оборудование и т. п.).',
+            ],
+            [
+                'key' => 'f_service_examples', 'label' => 'Примеры выполненных ремонтов', 'name' => 'service_examples', 'type' => 'textarea', 'rows' => 6,
+                'instructions' => 'По одной строке на пример. Формат: Марка автомобиля :: Заметка',
+            ],
+            ['key' => 'f_service_reviews_url', 'label' => 'Ссылка на отзывы (Яндекс.Карты / 2ГИС)', 'name' => 'service_reviews_url', 'type' => 'url'],
+            [
+                'key' => 'f_service_faq', 'label' => 'FAQ', 'name' => 'service_faq', 'type' => 'textarea', 'rows' => 12,
+                'instructions' => 'По одной строке на вопрос. Формат: Вопрос :: Ответ',
+            ],
+        ],
+    ]);
 });
 
 /**
