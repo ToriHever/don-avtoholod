@@ -173,13 +173,13 @@ add_action('acf/init', function () {
 
     acf_add_local_field_group([
         'key' => 'group_dah_service',
-        'title' => 'Услуга — содержимое страницы',
+        'title' => 'Категория услуг — содержимое посадочной страницы',
         'location' => [
             [
                 [
-                    'param' => 'post_type',
+                    'param' => 'taxonomy',
                     'operator' => '==',
-                    'value' => 'service',
+                    'value' => 'service_category',
                 ],
             ],
         ],

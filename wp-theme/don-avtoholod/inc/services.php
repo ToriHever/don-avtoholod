@@ -1,6 +1,15 @@
 <?php
 /**
- * Каталог услуг: свой тип записи + категория, отдельно от товаров WooCommerce.
+ * Каталог услуг: 3 посадочные страницы — по одной на категорию
+ * ("Диагностика и ремонт систем климата", "Установка оборудования и
+ * дополнительные услуги", "Автономные отопители"). Раньше на каждую
+ * отдельную работу заводилась своя страница (19 штук) — это раздувало
+ * структуру без пользы; конкретные работы теперь строки в таблице цен
+ * (блок "Перечень работ и цены") внутри страницы своей категории.
+ *
+ * Тип записи "service" оставлен зарегистрированным (на случай, если
+ * когда-то понадобится отдельная страница под одну услугу), но публично
+ * не используется — контент/поля живут на самой таксономии.
  */
 
 if (!defined('ABSPATH')) {
@@ -8,33 +17,34 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * SEO: title и description страницы услуги должны включать город.
+ * SEO: title и description страницы категории услуг должны включать город.
  */
 add_filter('document_title_parts', function (array $parts): array {
-    if (is_singular('service') && stripos($parts['title'] ?? '', 'ростов') === false) {
+    if (is_tax('service_category') && stripos($parts['title'] ?? '', 'ростов') === false) {
         $parts['title'] .= ' в Ростове-на-Дону';
     }
     return $parts;
 });
 
 add_action('wp_head', function (): void {
-    if (!is_singular('service')) {
+    if (!is_tax('service_category')) {
         return;
     }
-    $post_id = get_the_ID();
-    $desc = get_field('service_hero_note', $post_id) ?: get_the_excerpt($post_id);
+    $term = get_queried_object();
+    $desc = get_field('service_hero_note', $term) ?: ($term instanceof WP_Term ? $term->description : '');
     if ($desc) {
         echo '<meta name="description" content="' . esc_attr(wp_strip_all_tags($desc)) . '">' . "\n";
     }
 }, 1);
 
 /**
- * Тип записи "Услуга". Архив на /uslugi/, отдельная услуга на /uslugi/{slug}/.
+ * Тип записи "Услуга" — зарегистрирован для гибкости на будущее,
+ * публично не используется (нет ссылок на отдельные услуги на сайте).
  */
 function dah_register_service_post_type(): void {
     register_post_type('service', [
         'labels' => [
-            'name' => 'Услуги',
+            'name' => 'Услуги (архив, не используется публично)',
             'singular_name' => 'Услуга',
             'add_new_item' => 'Добавить услугу',
             'edit_item' => 'Редактировать услугу',
@@ -54,13 +64,14 @@ function dah_register_service_post_type(): void {
 add_action('init', 'dah_register_service_post_type');
 
 /**
- * Категория услуг. Отдельное слово в базе ЧПУ ("uslugi-razdel"), чтобы не
- * повторить историю с совпадением баз категорий и товаров в магазине.
+ * Категория услуг — теперь это и есть посадочная страница. Отдельное
+ * слово в базе ЧПУ ("uslugi-razdel"), чтобы не повторить историю с
+ * совпадением баз категорий и товаров в магазине.
  */
 function dah_register_service_category_taxonomy(): void {
     register_taxonomy('service_category', 'service', [
         'labels' => [
-            'name' => 'Категории услуг',
+            'name' => 'Категории услуг (посадочные страницы)',
             'singular_name' => 'Категория услуги',
             'add_new_item' => 'Добавить категорию',
             'edit_item' => 'Редактировать категорию',
@@ -76,20 +87,13 @@ function dah_register_service_category_taxonomy(): void {
 add_action('init', 'dah_register_service_category_taxonomy');
 
 /**
- * Цепочка хлебных крошек для текущей страницы услуг — используется и для
- * вывода нав-меню, и для микроразметки BreadcrumbList.
+ * Цепочка хлебных крошек — используется и для нав-меню, и для
+ * микроразметки BreadcrumbList.
  */
 function dah_service_breadcrumb_items(): array {
     $crumbs = [['label' => 'Главная', 'url' => home_url('/')]];
 
-    if (is_singular('service')) {
-        $crumbs[] = ['label' => 'Услуги', 'url' => get_post_type_archive_link('service')];
-        $terms = get_the_terms(get_the_ID(), 'service_category');
-        if (!empty($terms) && !is_wp_error($terms)) {
-            $crumbs[] = ['label' => $terms[0]->name, 'url' => get_term_link($terms[0])];
-        }
-        $crumbs[] = ['label' => get_the_title()];
-    } elseif (is_tax('service_category')) {
+    if (is_tax('service_category')) {
         $crumbs[] = ['label' => 'Услуги', 'url' => get_post_type_archive_link('service')];
         $crumbs[] = ['label' => single_term_title('', false)];
     } elseif (is_post_type_archive('service')) {
@@ -120,55 +124,20 @@ function dah_service_breadcrumb(): void {
 }
 
 /**
- * Категории услуг для бокового меню на страницах каталога услуг —
- * та же вёрстка, что и в сайдбаре магазина (shop-sidebar).
- */
-function dah_service_category_sidebar(): void {
-    $terms = get_terms(['taxonomy' => 'service_category', 'hide_empty' => false]);
-    if (empty($terms) || is_wp_error($terms)) {
-        return;
-    }
-
-    $current = is_tax('service_category') ? get_queried_object() : null;
-    ?>
-    <nav class="shop-sidebar">
-        <h3 class="shop-sidebar__title">Категории услуг</h3>
-        <ul class="shop-sidebar__list">
-            <li class="shop-sidebar__item">
-                <div class="shop-sidebar__row shop-sidebar__row--leaf">
-                    <a href="<?php echo esc_url(get_post_type_archive_link('service')); ?>"
-                       class="shop-sidebar__link <?php echo (!$current) ? 'is-active' : ''; ?>">
-                        <span class="shop-sidebar__name">Все услуги</span>
-                    </a>
-                </div>
-            </li>
-            <?php foreach ($terms as $term): ?>
-                <li class="shop-sidebar__item">
-                    <div class="shop-sidebar__row shop-sidebar__row--leaf">
-                        <a href="<?php echo esc_url(get_term_link($term)); ?>"
-                           class="shop-sidebar__link <?php echo ($current && $current->term_id === $term->term_id) ? 'is-active' : ''; ?>">
-                            <span class="shop-sidebar__name"><?php echo esc_html($term->name); ?></span>
-                            <span class="shop-sidebar__count"><?php echo (int) $term->count; ?></span>
-                        </a>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </nav>
-    <?php
-}
-
-/**
- * Микроразметка Schema.org для страницы услуги: BreadcrumbList всегда,
- * Service/Offer — если указана цена «от», FAQPage — если заполнен FAQ.
- * Вызывается из single-service.php.
+ * Микроразметка Schema.org для посадочной страницы категории услуг:
+ * BreadcrumbList всегда, Service/Offer — если указана цена «от»,
+ * FAQPage — если заполнен FAQ. Вызывается из taxonomy-service_category.php.
  */
 function dah_service_schema(): void {
-    if (!is_singular('service')) {
+    if (!is_tax('service_category')) {
         return;
     }
 
-    $post_id = get_the_ID();
+    $term = get_queried_object();
+    if (!($term instanceof WP_Term)) {
+        return;
+    }
+
     $graph = [];
 
     $crumbs = dah_service_breadcrumb_items();
@@ -189,11 +158,12 @@ function dah_service_schema(): void {
         'itemListElement' => $item_list,
     ];
 
+    $term_link = get_term_link($term);
     $service = [
         '@type' => 'Service',
-        'serviceType' => get_the_title($post_id),
-        'name' => get_the_title($post_id),
-        'url' => get_permalink($post_id),
+        'serviceType' => $term->name,
+        'name' => $term->name,
+        'url' => is_string($term_link) ? $term_link : home_url('/'),
         'areaServed' => 'Ростов-на-Дону',
         'provider' => [
             '@type' => 'AutoRepair',
@@ -202,7 +172,7 @@ function dah_service_schema(): void {
         ],
     ];
 
-    $price_from = get_field('service_price_from', $post_id);
+    $price_from = get_field('service_price_from', $term);
     if ($price_from && preg_match('/[\d\s]+/', $price_from, $m)) {
         $price = (int) preg_replace('/\D/', '', $m[0]);
         if ($price > 0) {
@@ -210,13 +180,13 @@ function dah_service_schema(): void {
                 '@type' => 'Offer',
                 'price' => $price,
                 'priceCurrency' => 'RUB',
-                'url' => get_permalink($post_id),
+                'url' => $service['url'],
             ];
         }
     }
     $graph[] = $service;
 
-    $faq_items = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('service_faq', $post_id)));
+    $faq_items = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('service_faq', $term)));
     if (!empty($faq_items)) {
         $questions = [];
         foreach ($faq_items as [$question, $answer]) {
