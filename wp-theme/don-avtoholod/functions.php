@@ -42,6 +42,8 @@ add_action('init', function (): void {
  * Комментарии, Страницы — затем всё остальное в прежнем порядке.
  */
 add_filter('custom_menu_order', '__return_true');
+// Высокий приоритет — чтобы порядок не переопределялся другими фильтрами
+// (WooCommerce и его модули тоже трогают меню админки).
 add_filter('menu_order', function (array $menu_order): array {
     $desired = [
         'edit.php?post_type=product',
@@ -55,7 +57,7 @@ add_filter('menu_order', function (array $menu_order): array {
     $rest = array_values(array_diff($menu_order, array_merge($head, $desired)));
 
     return array_merge($head, $desired, $rest);
-});
+}, PHP_INT_MAX);
 
 /**
  * Транслитерация кириллицы для ЧПУ (адреса не должны содержать кириллицу
