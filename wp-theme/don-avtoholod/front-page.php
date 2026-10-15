@@ -277,28 +277,47 @@ $question_sent = isset($_GET['question_sent']);
     <div class="cta-layout__media">
       <div class="cta-layout__map">
         <a
-          href="https://yandex.ru/maps/org/atp_3/186384265217/?utm_medium=mapframe&utm_source=maps"
+          href="https://yandex.ru/maps/org/donavtokholod/1002514805/?utm_medium=mapframe&utm_source=maps"
           class="cta-layout__map-attribution"
           style="top: 0"
           target="_blank"
           rel="noopener"
-        >АТП № 3</a>
+        >Донавтохолод</a>
         <a
-          href="https://yandex.ru/maps/39/rostov-na-donu/category/garage_cooperative/184107575/?utm_medium=mapframe&utm_source=maps"
+          href="https://yandex.ru/maps/39/rostov-na-donu/category/automobile_air_conditioning/184105292/?utm_medium=mapframe&utm_source=maps"
           class="cta-layout__map-attribution"
           style="top: 14px"
           target="_blank"
           rel="noopener"
-        >Гаражный кооператив в Ростове‑на‑Дону</a>
+        >Автокондиционеры в Ростове‑на‑Дону</a>
+        <a
+          href="https://yandex.ru/maps/39/rostov-na-donu/category/car_heaters/184105300/?utm_medium=mapframe&utm_source=maps"
+          class="cta-layout__map-attribution"
+          style="top: 28px"
+          target="_blank"
+          rel="noopener"
+        >Автомобильные отопители в Ростове‑на‑Дону</a>
         <iframe
-          src="https://yandex.ru/map-widget/v1/org/atp_3/186384265217/?ll=39.684581%2C47.269509&z=17.4"
-          width="560"
-          height="400"
+          src="https://yandex.ru/map-widget/v1/org/donavtokholod/1002514805/?ll=39.685876%2C47.269527&z=14"
           frameborder="1"
           allowfullscreen="true"
           loading="lazy"
           title="Дон Авто Холод на карте"
         ></iframe>
+      </div>
+
+      <div class="cta-layout__reviews">
+        <iframe
+          src="https://yandex.ru/maps-reviews-widget/1002514805?comments"
+          loading="lazy"
+          title="Отзывы о Дон Авто Холод"
+        ></iframe>
+        <a
+          href="https://yandex.ru/maps/org/donavtokholod/1002514805/"
+          class="cta-layout__reviews-attribution"
+          target="_blank"
+          rel="noopener"
+        >Донавтохолод на карте Ростова‑на‑Дону — Яндекс Карты</a>
       </div>
     </div>
   </div>
