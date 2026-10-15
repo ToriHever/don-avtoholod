@@ -1980,7 +1980,8 @@ main {
 }
 
 .dah-modules__item.is-active {
-  background: var(--color-blue-light);
+  background: var(--color-blue-dark);
+  color: var(--color-white);
 }
 
 .dah-modules__num {
@@ -1991,7 +1992,7 @@ main {
 }
 
 .dah-modules__item.is-active .dah-modules__num {
-  color: var(--color-blue);
+  color: var(--color-white);
 }
 
 .dah-modules__item-body {
@@ -2014,7 +2015,7 @@ main {
 }
 
 .dah-modules__item.is-active .dah-modules__arrow {
-  color: var(--color-blue);
+  color: var(--color-white);
   opacity: 1;
 }
 
@@ -2128,12 +2129,6 @@ a.page-numbers:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
-}
-
-.dah-service-hero__price {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-blue);
 }
 
 .dah-service-block {

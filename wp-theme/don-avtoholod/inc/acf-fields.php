@@ -185,14 +185,13 @@ add_action('acf/init', function () {
         ],
         'fields' => [
             ['key' => 'f_service_hero_note', 'label' => 'Первый экран: короткая строка (сроки / гарантия / опыт)', 'name' => 'service_hero_note', 'type' => 'text'],
-            ['key' => 'f_service_price_from', 'label' => 'Цена «от» (например: от 1 500 ₽)', 'name' => 'service_price_from', 'type' => 'text'],
             [
                 'key' => 'f_service_symptoms', 'label' => 'Симптомы и проблемы', 'name' => 'service_symptoms', 'type' => 'textarea', 'rows' => 8,
                 'instructions' => 'По одному признаку на строку — с чем обращаются клиенты.',
             ],
             [
-                'key' => 'f_service_price_items', 'label' => 'Перечень работ и цены', 'name' => 'service_price_items', 'type' => 'textarea', 'rows' => 10,
-                'instructions' => 'По одной строке на позицию. Формат: Работа :: Цена',
+                'key' => 'f_service_price_items', 'label' => 'Перечень работ', 'name' => 'service_price_items', 'type' => 'textarea', 'rows' => 10,
+                'instructions' => 'По одной позиции на строку, без цен — цены на услуги на сайте не публикуются.',
             ],
             [
                 'key' => 'f_service_steps', 'label' => 'Как проходит работа', 'name' => 'service_steps', 'type' => 'textarea', 'rows' => 8,

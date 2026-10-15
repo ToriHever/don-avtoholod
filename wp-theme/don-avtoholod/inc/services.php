@@ -136,8 +136,9 @@ function dah_service_breadcrumb(): void {
 
 /**
  * Микроразметка Schema.org для посадочной страницы категории услуг:
- * BreadcrumbList всегда, Service/Offer — если указана цена «от»,
- * FAQPage — если заполнен FAQ. Вызывается из taxonomy-service_category.php.
+ * BreadcrumbList и Service всегда, FAQPage — если заполнен FAQ. Цены на
+ * услуги на сайте не публикуются, поэтому Offer не формируется.
+ * Вызывается из taxonomy-service_category.php.
  */
 function dah_service_schema(): void {
     if (!is_tax('service_category')) {
@@ -183,18 +184,6 @@ function dah_service_schema(): void {
         ],
     ];
 
-    $price_from = get_field('service_price_from', $term);
-    if ($price_from && preg_match('/[\d\s]+/', $price_from, $m)) {
-        $price = (int) preg_replace('/\D/', '', $m[0]);
-        if ($price > 0) {
-            $service['offers'] = [
-                '@type' => 'Offer',
-                'price' => $price,
-                'priceCurrency' => 'RUB',
-                'url' => $service['url'],
-            ];
-        }
-    }
     $graph[] = $service;
 
     $faq_items = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('service_faq', $term)));

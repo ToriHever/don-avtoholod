@@ -14,9 +14,8 @@ get_header();
 $dah_term = get_queried_object();
 
 $dah_hero_note = get_field('service_hero_note', $dah_term);
-$dah_price_from = get_field('service_price_from', $dah_term);
 $dah_symptoms = dah_split_lines(get_field('service_symptoms', $dah_term));
-$dah_price_items = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('service_price_items', $dah_term)));
+$dah_price_items = dah_split_lines(get_field('service_price_items', $dah_term));
 $dah_steps = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('service_steps', $dah_term)));
 $dah_advantages = dah_split_lines(get_field('service_advantages', $dah_term));
 $dah_examples = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('service_examples', $dah_term)));
@@ -47,9 +46,6 @@ $dah_contacts_map_url = get_field('contacts_map_url', $dah_front_id) ?: 'https:/
             <p class="dah-service-hero__note"><?php echo esc_html($dah_hero_note); ?></p>
         <?php endif; ?>
         <div class="dah-service-hero__actions">
-            <?php if ($dah_price_from): ?>
-                <span class="dah-service-hero__price"><?php echo esc_html($dah_price_from); ?></span>
-            <?php endif; ?>
             <button type="button" class="btn btn--primary" data-modal-open="dah-question-modal">Задать вопрос</button>
             <?php if ($dah_contacts_phone1): ?>
                 <a class="btn btn--secondary" href="tel:<?php echo esc_attr($dah_contacts_phone1); ?>"><?php echo esc_html($dah_contacts_phone1); ?></a>
@@ -77,18 +73,15 @@ $dah_contacts_map_url = get_field('contacts_map_url', $dah_front_id) ?: 'https:/
             </div>
         <?php endif; ?>
 
-        <!-- 3. Перечень работ и цены -->
+        <!-- 3. Перечень работ -->
         <?php if (!empty($dah_price_items)): ?>
             <div class="dah-service-block">
-                <h2 class="dah-shop-section-title">Перечень работ и цены</h2>
-                <table class="dah-service-price-table">
-                    <?php foreach ($dah_price_items as [$dah_work, $dah_price]): ?>
-                        <tr>
-                            <td class="dah-service-price-table__work"><?php echo esc_html($dah_work); ?></td>
-                            <td class="dah-service-price-table__price"><?php echo esc_html($dah_price); ?></td>
-                        </tr>
+                <h2 class="dah-shop-section-title">Перечень работ</h2>
+                <ul class="dah-service-symptoms">
+                    <?php foreach ($dah_price_items as $dah_work): ?>
+                        <li><?php echo esc_html($dah_work); ?></li>
                     <?php endforeach; ?>
-                </table>
+                </ul>
             </div>
         <?php endif; ?>
 
