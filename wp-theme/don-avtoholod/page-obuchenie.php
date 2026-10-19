@@ -128,7 +128,7 @@ $dah_modules = array_map(
     </div>
     <div class="dah-training-cta__actions">
       <button type="button" class="btn btn--outline" data-modal-open="dah-question-modal">Записаться на обучение</button>
-      <a class="btn btn--outline" href="tel:+79287753852">8-928-775-38-52</a>
+      <a class="btn btn--outline" href="tel:+79287753852">+7-928-775-38-52</a>
     </div>
   </div>
 </section>

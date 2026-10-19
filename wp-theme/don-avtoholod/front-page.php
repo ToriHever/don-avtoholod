@@ -18,7 +18,7 @@ $about_stats = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_f
 $facts_items = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('facts_items')));
 $faq_items = array_map(fn ($l) => dah_split_line($l, 2), dah_split_lines(get_field('faq_items')));
 
-$map_url = get_field('contacts_map_url') ?: 'https://yandex.ru/maps/-/CTxSIHkb';
+$map_url = get_field('contacts_map_url') ?: 'https://yandex.ru/maps/-/CXBfqRI~';
 $question_sent = isset($_GET['question_sent']);
 ?>
 

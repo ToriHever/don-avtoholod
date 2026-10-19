@@ -27,7 +27,7 @@ $dah_contacts_address = get_field('contacts_address', $dah_front_id);
 $dah_contacts_hours = get_field('contacts_hours', $dah_front_id);
 $dah_contacts_phone1 = get_field('contacts_phone1', $dah_front_id);
 $dah_contacts_phone2 = get_field('contacts_phone2', $dah_front_id);
-$dah_contacts_map_url = get_field('contacts_map_url', $dah_front_id) ?: 'https://yandex.ru/maps/-/CTxSIHkb';
+$dah_contacts_map_url = get_field('contacts_map_url', $dah_front_id) ?: 'https://yandex.ru/maps/-/CXBfqRI~';
 ?>
 
 <main>

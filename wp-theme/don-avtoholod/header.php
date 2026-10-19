@@ -27,9 +27,9 @@
       </a>
 
       <div class="header__contacts">
-        <a class="header__phone" href="tel:+78632265846">8 (863) 226-58-46</a>
-        <a class="header__phone" href="tel:+79287753852">8-928-775-38-52</a>
-        <a class="header__email" href="mailto:info@donavtoholod.ru">info&#64;donavtoholod.ru</a>
+        <a class="header__phone" href="tel:+79282265846">+7-928-226-58-46</a>
+        <a class="header__phone" href="tel:+79287753852">+7-928-775-38-52</a>
+        <a class="header__email" href="mailto:don-avto-holod@mail.ru">don-avto-holod&#64;mail.ru</a>
       </div>
 
       <?php if (function_exists('WC')): ?>
@@ -80,10 +80,10 @@
       </ul>
       <a
         class="header__nav-address"
-        href="https://yandex.ru/maps/-/CTxSIHkb"
+        href="https://yandex.ru/maps/-/CXBfqRI~"
         target="_blank"
         rel="noopener"
-      >г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3</a>
+      >г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3, Бокс №2</a>
       <button type="button" class="btn btn--primary header__nav-question" data-modal-open="dah-question-modal">Задать вопрос</button>
     </div>
   </nav>

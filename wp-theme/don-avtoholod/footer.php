@@ -38,13 +38,13 @@
       <h4>Контакты</h4>
       <ul class="footer__links">
         <li>
-          <a href="https://yandex.ru/maps/-/CTxSIHkb" target="_blank" rel="noopener">
-            г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3
+          <a href="https://yandex.ru/maps/-/CXBfqRI~" target="_blank" rel="noopener">
+            г. Ростов-на-Дону, ул. Вавилова, 58, АТП-3, Бокс №2
           </a>
         </li>
-        <li><a href="tel:+79287753852">8-928-775-38-52</a></li>
-        <li><a href="tel:+79282265846">8-928-226-58-46</a></li>
-        <li><a href="mailto:info@donavtoholod.ru">info&#64;donavtoholod.ru</a></li>
+        <li><a href="tel:+79287753852">+7-928-775-38-52</a></li>
+        <li><a href="tel:+79282265846">+7-928-226-58-46</a></li>
+        <li><a href="mailto:don-avto-holod@mail.ru">don-avto-holod&#64;mail.ru</a></li>
         <li>Пн–Пт: 8:00–17:00, Сб: 9:00–15:00, Вс: выходной</li>
       </ul>
     </div>
