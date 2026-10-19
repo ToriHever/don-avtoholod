@@ -38,6 +38,18 @@ add_action('wp_head', function (): void {
 }, 1);
 
 /**
+ * Категории услуг — это полноценные посадочные страницы, но у их терминов
+ * 0 прикреплённых записей (записи-услуги намеренно удалены) — без этого
+ * фильтра WordPress считает их "пустыми" и не включает в XML-карту сайта.
+ */
+add_filter('wp_sitemaps_taxonomies_query_args', function (array $args, string $taxonomy): array {
+    if ($taxonomy === 'service_category') {
+        $args['hide_empty'] = false;
+    }
+    return $args;
+}, 10, 2);
+
+/**
  * Тип записи "Услуга" — зарегистрирован для гибкости на будущее,
  * публично не используется (нет ссылок на отдельные услуги на сайте).
  */
